@@ -1,0 +1,500 @@
+<title>Score Run</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500&display=swap">
+<style>
+  /* ── GrammarMetric design system ─────────────────────────────────
+     Dark mode is the default. Light mode is the override.
+     Palette locked to the seven brand hexes; no new hues introduced.
+     Lead accent for this document: cyan (progress / informational).
+     Yellow is spent in exactly two places: the target score and the
+     one thing we ask of home. Orange marks the honesty section.
+     ───────────────────────────────────────────────────────────── */
+  :root{
+    /* brand */
+    --gm-yellow:#FFFC00;   --gm-yellow-text:#736f00;
+    --gm-cyan:#00FFFF;     --gm-cyan-text:#004d4d;
+    --gm-orange:#FF3503;   --gm-orange-text:#3d0f00;
+    --gm-magenta:#FF00FF;  --gm-magenta-text:#5c005c;
+    --gm-error:#ff5252;    --gm-error-text:#4a0d0d;
+
+    /* mode-dependent (dark = default) */
+    --bg:#050505;
+    --text:#ffffff;
+    --muted:rgba(255,255,255,0.55);
+    --e1-fill:rgba(255,255,255,0.04);
+    --e1-border:rgba(255,255,255,0.08);
+    --e2-fill:rgba(255,255,255,0.08);
+    --e2-border:rgba(255,255,255,0.12);
+    /* accents safe as text against --bg */
+    --lead-text:#00FFFF;
+    --gold-text:#FFFC00;
+    --warm-text:#FF3503;
+
+    --gm-radius-card:14px;
+    --gm-radius-control:10px;
+    --gm-radius-pill:20px;
+    --gm-font:'Lexend','Segoe UI Variable Text','Avenir Next','Nunito Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+
+    --dur-instant:90ms; --dur-fast:120ms; --dur-base:200ms; --dur-slow:320ms;
+    --ease-standard:cubic-bezier(0.2,0,0,1);
+    --ease-decelerate:cubic-bezier(0,0,0.2,1);
+  }
+  @media (prefers-color-scheme:light){
+    :root:not([data-theme="dark"]){
+      --bg:#ffffff;
+      --text:#050505;
+      --muted:rgba(5,5,5,0.60);
+      --e1-fill:rgba(5,5,5,0.03);
+      --e1-border:rgba(5,5,5,0.08);
+      --e2-fill:rgba(5,5,5,0.06);
+      --e2-border:rgba(5,5,5,0.12);
+      --lead-text:#006666;
+      --gold-text:#736f00;
+      --warm-text:#3d0f00;
+    }
+  }
+  :root[data-theme="light"]{
+    --bg:#ffffff;
+    --text:#050505;
+    --muted:rgba(5,5,5,0.60);
+    --e1-fill:rgba(5,5,5,0.03);
+    --e1-border:rgba(5,5,5,0.08);
+    --e2-fill:rgba(5,5,5,0.06);
+    --e2-border:rgba(5,5,5,0.12);
+    --lead-text:#006666;
+    --gold-text:#736f00;
+    --warm-text:#3d0f00;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--gm-font);
+    font-weight:400;
+    font-size:17px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1060px;margin:0 auto;padding:clamp(28px,6vw,72px) clamp(18px,5vw,44px) 96px}
+
+  h1,h2,h3,h4{font-weight:500;line-height:1.2;text-wrap:balance}
+  p{max-width:64ch}
+  strong{font-weight:500}
+
+  /* ── masthead ───────────────────────────────────────────── */
+  .mast{display:flex;flex-direction:column;gap:26px}
+  .kicker{
+    display:inline-flex;align-items:center;gap:9px;align-self:flex-start;
+    border:1px solid var(--lead-text);color:var(--lead-text);
+    border-radius:var(--gm-radius-pill);padding:5px 15px;font-size:14px;
+  }
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--gm-cyan);flex:none}
+  h1{font-size:clamp(44px,9vw,86px);letter-spacing:-.02em;line-height:1.02}
+  .lede{font-size:clamp(19px,2.3vw,23px);color:var(--muted);max-width:56ch}
+
+  .figures{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin-top:8px}
+  .fig{
+    background:var(--e1-fill);border:1px solid var(--e1-border);
+    border-radius:var(--gm-radius-card);padding:22px 24px;
+    display:flex;flex-direction:column;gap:3px;
+  }
+  .fig-n{font-size:52px;line-height:1;font-weight:500;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+  .fig-l{font-size:15px;color:var(--muted)}
+  .fig.target{border-color:var(--gm-yellow)}
+  .fig.target .fig-n{color:var(--gold-text)}
+
+  /* ── sections ───────────────────────────────────────────── */
+  section{margin-top:clamp(56px,9vw,104px)}
+  .s-head{display:flex;flex-direction:column;gap:12px;margin-bottom:32px}
+  .s-tag{font-size:14px;color:var(--lead-text)}
+  h2{font-size:clamp(28px,4.4vw,42px);letter-spacing:-.015em}
+  .s-head p{font-size:18px;color:var(--muted)}
+
+  h3{font-size:21px;margin-bottom:8px}
+  h4{font-size:17px}
+
+  /* ── cards ──────────────────────────────────────────────── */
+  .card{
+    background:var(--e1-fill);border:1px solid var(--e1-border);
+    border-radius:var(--gm-radius-card);padding:26px;
+    display:flex;flex-direction:column;gap:12px;
+  }
+  .card p,.card li{color:var(--muted);font-size:16px}
+  .card h3,.card h4{color:var(--text)}
+  .grid{display:grid;gap:14px}
+  .g2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+  .g3{grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+
+  ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+  .card ul li{padding-left:19px;position:relative}
+  .card ul li::before{
+    content:"";position:absolute;left:0;top:.62em;
+    width:7px;height:1px;background:var(--lead-text);
+  }
+
+  /* ── ranked needs ───────────────────────────────────────── */
+  .needs{display:flex;flex-direction:column;gap:10px}
+  .need{
+    background:var(--e1-fill);border:1px solid var(--e1-border);
+    border-radius:var(--gm-radius-card);padding:18px 22px;
+    display:grid;grid-template-columns:42px 1fr 150px;gap:20px;align-items:center;
+  }
+  .need-r{font-size:15px;color:var(--muted);font-variant-numeric:tabular-nums}
+  .need-name{font-weight:500;font-size:17px}
+  .need-d{font-size:15px;color:var(--muted);display:block;font-weight:400}
+  .meter{display:flex;flex-direction:column;gap:7px}
+  .track{height:8px;border-radius:var(--gm-radius-pill);background:var(--e2-fill);border:1px solid var(--e1-border);overflow:hidden}
+  .bar{height:100%;background:var(--gm-cyan);border-radius:var(--gm-radius-pill)}
+  .meter span{font-size:14px;color:var(--muted);font-variant-numeric:tabular-nums}
+
+  /* ── lesson timeline ────────────────────────────────────── */
+  .phases{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+  .phase{
+    background:var(--e1-fill);border:1px solid var(--e1-border);
+    border-radius:var(--gm-radius-card);padding:24px;
+    display:flex;flex-direction:column;gap:11px;
+  }
+  .clock{
+    align-self:flex-start;font-size:14px;color:var(--gm-cyan-text);
+    background:var(--gm-cyan);border-radius:var(--gm-radius-pill);padding:3px 13px;
+    font-variant-numeric:tabular-nums;
+  }
+  .phase p,.phase li{color:var(--muted);font-size:16px}
+  .phase ul li{padding-left:19px;position:relative}
+  .phase ul li::before{content:"";position:absolute;left:0;top:.62em;width:7px;height:1px;background:var(--lead-text)}
+
+  /* ── mechanics table ────────────────────────────────────── */
+  .tscroll{overflow-x:auto;border:1px solid var(--e1-border);border-radius:var(--gm-radius-card);background:var(--e1-fill)}
+  table{border-collapse:collapse;width:100%;min-width:600px;font-size:16px}
+  th,td{text-align:left;padding:15px 20px;border-bottom:1px solid var(--e1-border);vertical-align:top}
+  thead th{font-weight:500;color:var(--muted);font-size:15px;background:var(--e2-fill)}
+  tbody tr:last-child td{border-bottom:0}
+  td:first-child{color:var(--muted)}
+  .keeps{color:var(--lead-text);font-size:15px;white-space:nowrap}
+  .drops{color:var(--warm-text);font-size:15px;white-space:nowrap}
+
+  /* ── weeks ──────────────────────────────────────────────── */
+  .stage{display:flex;flex-direction:column;gap:14px}
+  .stage-h{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-top:12px}
+  .stage-w{font-size:15px;color:var(--lead-text);font-variant-numeric:tabular-nums}
+  .stage-h h3{margin:0}
+  .wgrid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(215px,1fr))}
+  .w{
+    background:var(--e1-fill);border:1px solid var(--e1-border);
+    border-radius:var(--gm-radius-card);padding:18px 20px;
+    display:flex;flex-direction:column;gap:6px;
+  }
+  .w-n{font-size:14px;color:var(--muted);font-variant-numeric:tabular-nums}
+  .w-t{font-size:16px;font-weight:500}
+  .w-d{font-size:15px;color:var(--muted)}
+  /* highlighted card = 14% tint of the lead accent, never a raw fill */
+  .w.check{background:rgba(0,255,255,0.14);border-color:var(--gm-cyan)}
+  .w.check .w-n{color:var(--lead-text)}
+
+  /* ── ask ────────────────────────────────────────────────── */
+  .ask{
+    background:var(--e1-fill);border:1px solid var(--gm-yellow);
+    border-radius:var(--gm-radius-card);padding:30px;
+    display:flex;flex-direction:column;gap:16px;
+  }
+  .ask h3{color:var(--gold-text)}
+  .ask p,.ask li{color:var(--muted);font-size:16px}
+  .ask ul li{padding-left:19px;position:relative}
+  .ask ul li::before{content:"";position:absolute;left:0;top:.62em;width:7px;height:1px;background:var(--gm-yellow)}
+
+  .honest{border-color:var(--gm-orange)}
+  .honest h3{color:var(--warm-text)}
+  .honest ul li::before{background:var(--gm-orange)}
+
+  footer{margin-top:88px;padding-top:26px;border-top:1px solid var(--e1-border)}
+  footer p{font-size:15px;color:var(--muted)}
+
+  a{color:var(--lead-text)}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--gm-cyan);outline-offset:2px}
+  :root[data-theme="light"] a:focus-visible,
+  :root[data-theme="light"] button:focus-visible{outline-color:#006666}
+
+  @media (max-width:640px){
+    .need{grid-template-columns:32px 1fr;gap:8px 14px}
+    .meter{grid-column:2}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation-duration:.01ms !important;transition-duration:.01ms !important}
+  }
+</style>
+
+<div class="wrap">
+
+  <header class="mast">
+    <span class="kicker"><span class="dot"></span>A 12-week SAT programme</span>
+    <h1>Score run</h1>
+    <p class="lede">Twelve weeks, twenty-four two-hour lessons, built around one diagnostic result and a set of game mechanics chosen for a sixteen-plus student sitting a high-stakes exam — not for a child collecting stickers.</p>
+
+    <div class="figures">
+      <div class="fig">
+        <span class="fig-n">710</span>
+        <span class="fig-l">Score today, out of 1600</span>
+      </div>
+      <div class="fig">
+        <span class="fig-n">24</span>
+        <span class="fig-l">Lessons, two hours each</span>
+      </div>
+      <div class="fig target">
+        <span class="fig-n">950</span>
+        <span class="fig-l">Target by week 12, give or take 50</span>
+      </div>
+    </div>
+  </header>
+
+  <section>
+    <div class="s-head">
+      <span class="s-tag">Where things stand</span>
+      <h2>What the diagnostic told us</h2>
+      <p>Your child answered every single question and got roughly a third of them right. On a four-choice test, pure guessing scores a quarter. That gap is the honest starting point, and it changes what this course has to be: a rebuild of the underlying skills, not a course in exam tricks.</p>
+    </div>
+
+    <div class="needs">
+      <div class="need">
+        <span class="need-r">1st</span>
+        <span><span class="need-name">Reading</span><span class="need-d">The largest part of the test, and the furthest behind. It also holds back the maths score, because so many maths questions are word problems.</span></span>
+        <span class="meter"><span class="track"><span class="bar" style="width:38%"></span></span><span>38% correct</span></span>
+      </div>
+      <div class="need">
+        <span class="need-r">2nd</span>
+        <span><span class="need-name">Grammar and punctuation</span><span class="need-d">The weakest area on the paper — but also the most fixable. These are a finite set of rules that can be taught in weeks, which makes this the fastest available gain.</span></span>
+        <span class="meter"><span class="track"><span class="bar" style="width:20%"></span></span><span>20% correct</span></span>
+      </div>
+      <div class="need">
+        <span class="need-r">3rd</span>
+        <span><span class="need-name">Algebra</span><span class="need-d">The one genuine strength, and still a dozen questions missed simply because algebra is the biggest maths section. Strengths convert quickest, so this is where confidence gets rebuilt early.</span></span>
+        <span class="meter"><span class="track"><span class="bar" style="width:52%"></span></span><span>52% correct</span></span>
+      </div>
+      <div class="need">
+        <span class="need-r">4th</span>
+        <span><span class="need-name">Data and problem solving</span><span class="need-d">The lowest score anywhere on the paper. It is also the most reading-heavy part of the maths section, which tells us the reading problem is spilling into maths.</span></span>
+        <span class="meter"><span class="track"><span class="bar" style="width:14%"></span></span><span>14% correct</span></span>
+      </div>
+      <div class="need">
+        <span class="need-r">5th</span>
+        <span><span class="need-name">Writing and structure</span><span class="need-d">Transitions and sentence purpose. Very learnable, but it sits on top of reading comprehension, so it improves after the first two areas rather than alongside them.</span></span>
+        <span class="meter"><span class="track"><span class="bar" style="width:30%"></span></span><span>30% correct</span></span>
+      </div>
+      <div class="need">
+        <span class="need-r">6th</span>
+        <span><span class="need-name">Geometry and trigonometry</span><span class="need-d">A real weakness, but a small section and mostly formula-driven — a contained fix late in the course, with a ready-built interactive lesson already prepared for it.</span></span>
+        <span class="meter"><span class="track"><span class="bar" style="width:38%"></span></span><span>38% correct</span></span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="s-head">
+      <span class="s-tag">The approach</span>
+      <h2>Why there are game mechanics at all</h2>
+      <p>Because they are aimed at a specific problem, and because none of them involve cartoon avatars or points that mean nothing. Every mechanic in this course maps onto something the SAT actually scores.</p>
+    </div>
+
+    <div class="grid g3">
+      <div class="card">
+        <h3>The problem they solve</h3>
+        <p>Your child answered all 54 reading questions and left nothing blank — but got 17 right. That means they currently cannot tell which questions they know and which they are guessing at. That single blind spot is worth more points than any content gap.</p>
+      </div>
+      <div class="card">
+        <h3>How the mechanics answer it</h3>
+        <p>Before answering a practice question, they choose whether they are confident. Confident and correct counts double. Confident and wrong triggers a review of what went wrong. Guessing quietly stops being free — which is exactly the habit the real exam punishes.</p>
+      </div>
+      <div class="card">
+        <h3>What we deliberately avoid</h3>
+        <p>No badges for turning up, no streak that breaks if they miss a day, no leaderboard against strangers. Sixteen-plus students preparing for a real deadline find those patronising, and the research on adult learners agrees.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="s-head">
+      <span class="s-tag">Inside a lesson</span>
+      <h2>What two hours actually looks like</h2>
+      <p>Every lesson runs the same three-part shape. The structure stays fixed on purpose — a student who is currently guessing needs the lesson itself to be the predictable thing in the room.</p>
+    </div>
+
+    <div class="phases">
+      <div class="phase">
+        <span class="clock">0:00 – 0:30</span>
+        <h3>Trap forensics</h3>
+        <p>Real exam questions are taken apart before any are answered. The job is not to find the right answer — it is to work out why each wrong answer was designed to be tempting.</p>
+        <ul>
+          <li>Spotting the word that makes an answer too strong or too narrow</li>
+          <li>Recognising a rephrased sentence versus a genuine trap</li>
+          <li>Reading the examiner's intention, not just the text</li>
+        </ul>
+      </div>
+      <div class="phase">
+        <span class="clock">0:30 – 1:15</span>
+        <h3>Speed lab</h3>
+        <p>Short timed sets at genuine exam pace — 71 seconds a question in reading, 95 in maths. This is where the confidence choice lives, and where a run of correct answers builds a multiplier.</p>
+        <ul>
+          <li>Timer calibrated to real exam speed, not an arbitrary one</li>
+          <li>A wrong answer stops the clock and asks what kind of mistake it was</li>
+          <li>Personal-best tracking, so the competition is with last week</li>
+        </ul>
+      </div>
+      <div class="phase">
+        <span class="clock">1:15 – 2:00</span>
+        <h3>Simulation and teach-back</h3>
+        <p>A full section under exam conditions, then the part that does the most work: your child explains their reasoning back to the tutor, out loud, including on the questions they got right.</p>
+        <ul>
+          <li>Builds the stamina a three-hour exam demands</li>
+          <li>Exposes right answers reached for wrong reasons</li>
+          <li>Every mistake written into a running error log</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="s-head">
+      <span class="s-tag">Honesty about the design</span>
+      <h2>What we adapted, and what we threw out</h2>
+      <p>This course is built on a gamification blueprint originally written for IELTS classes of twenty-plus students on a purpose-built platform. A good deal of it does not survive contact with one student, two hours, and a laptop. Here is exactly what carried over and what did not.</p>
+    </div>
+
+    <div class="tscroll">
+      <table>
+        <thead>
+          <tr><th>Original mechanic</th><th>In this course</th><th>Reason</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Predicted band score, updating live</td>
+            <td><span class="keeps">Kept</span> — a running SAT score estimate with a range, shown against the target rather than a bare number</td>
+            <td>The single most motivating thing you can show a student is the distance left to travel, stated honestly</td>
+          </tr>
+          <tr>
+            <td>Confidence wagers before answering</td>
+            <td><span class="keeps">Kept</span>, and made central</td>
+            <td>It targets this student's exact weakness — answering everything with no sense of which answers are sound</td>
+          </tr>
+          <tr>
+            <td>Skill tree with locked advanced nodes</td>
+            <td><span class="keeps">Kept</span> — four branches: reading, grammar, maths reasoning, exam craft</td>
+            <td>Stops us teaching transitions before sentence boundaries; the order genuinely matters</td>
+          </tr>
+          <tr>
+            <td>Tokens earned to unlock mock exams</td>
+            <td><span class="keeps">Kept</span> — and the scarcity is real, not invented</td>
+            <td>Only four practice tests match the current exam format. They genuinely cannot be spent casually</td>
+          </tr>
+          <tr>
+            <td>Focus mode that hides all game layers</td>
+            <td><span class="keeps">Kept</span></td>
+            <td>By week 10 the exam interface should feel plain and familiar, with nothing decorative on screen</td>
+          </tr>
+          <tr>
+            <td>AI marking of essays against band criteria</td>
+            <td><span class="drops">Dropped</span></td>
+            <td>The SAT has had no essay since 2021. There is nothing for it to mark</td>
+          </tr>
+          <tr>
+            <td>Speaking debates and rebuttal rounds</td>
+            <td><span class="drops">Dropped</span></td>
+            <td>The SAT has no speaking component at all</td>
+          </tr>
+          <tr>
+            <td>Team relays, breakout pods, peer marking</td>
+            <td><span class="drops">Dropped</span>, replaced by personal bests and teach-back</td>
+            <td>All of it needs a class of students. This is one-to-one tuition</td>
+          </tr>
+          <tr>
+            <td>Live class leaderboards and heatmaps</td>
+            <td><span class="drops">Dropped</span></td>
+            <td>Nobody to rank against, and ranking a struggling student against peers would do harm here anyway</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="grid g2" style="margin-top:14px">
+      <div class="card">
+        <h4>How it is actually built</h4>
+        <p>The original blueprint proposed live servers, databases and AI marking services. What your child will actually use is a set of single web pages that open in a browser — no account, no app to install, no login, and nothing sent anywhere. Their work stays on the device in front of them.</p>
+      </div>
+      <div class="card">
+        <h4>Guarding against burnout</h4>
+        <p>Two hours is a long time to concentrate. Each lesson is broken into 25 to 30 minute bursts with a genuine break between them, and the game layer can be switched off entirely at any point. If your child asks to turn it off, that is a sign it is working, not failing.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="s-head">
+      <span class="s-tag">The route</span>
+      <h2>Twelve weeks, three checkpoints</h2>
+      <p>Three full practice exams sit at weeks 4, 8 and 12. They are the honest measure of whether this is working — and each one is sat under real exam timing, split across that week's two lessons.</p>
+    </div>
+
+    <div class="stage">
+      <div class="stage-h"><span class="stage-w">Weeks 1 – 4</span><h3>Foundations</h3></div>
+      <div class="wgrid">
+        <div class="w"><span class="w-n">Week 1</span><span class="w-t">Getting oriented</span><span class="w-d">How the exam works, and the sentence skills everything else depends on. Algebra restarts from the ground up.</span></div>
+        <div class="w"><span class="w-n">Week 2</span><span class="w-t">Agreement</span><span class="w-d">Making verbs and subjects match — the single most common grammar error on the paper. Turning worded problems into equations.</span></div>
+        <div class="w"><span class="w-n">Week 3</span><span class="w-t">Where sentences end</span><span class="w-d">The highest-scoring grammar topic there is. Plus ratios, rates and percentages.</span></div>
+        <div class="w check"><span class="w-n">Week 4</span><span class="w-t">Checkpoint one</span><span class="w-d">First full practice exam. This is the first real read on whether the approach is landing.</span></div>
+      </div>
+
+      <div class="stage-h"><span class="stage-w">Weeks 5 – 8</span><h3>Building</h3></div>
+      <div class="wgrid">
+        <div class="w"><span class="w-n">Week 5</span><span class="w-t">Punctuation and data</span><span class="w-d">Commas, dashes and colons — the most-tested rules on the exam. Reading tables and graphs.</span></div>
+        <div class="w"><span class="w-n">Week 6</span><span class="w-t">Shapes and angles</span><span class="w-d">Apostrophes and pronouns, then geometry through a purpose-built interactive lesson.</span></div>
+        <div class="w"><span class="w-n">Week 7</span><span class="w-t">The untested ground</span><span class="w-d">Verbs and modifiers, then quadratics and functions — a whole maths topic the diagnostic never measured.</span></div>
+        <div class="w check"><span class="w-n">Week 8</span><span class="w-t">Checkpoint two</span><span class="w-d">Second full exam. Grammar should have moved most by now; if it has not, we change the plan.</span></div>
+      </div>
+
+      <div class="stage-h"><span class="stage-w">Weeks 9 – 12</span><h3>Putting it together</h3></div>
+      <div class="wgrid">
+        <div class="w"><span class="w-n">Week 9</span><span class="w-t">Joining ideas</span><span class="w-d">Transitions and connecting sentences, plus focused repair work on whatever checkpoint two exposed.</span></div>
+        <div class="w"><span class="w-n">Week 10</span><span class="w-t">Exam craft</span><span class="w-d">Purpose and structure questions. Working backwards from answer choices, using the built-in calculator, and never leaving a blank.</span></div>
+        <div class="w"><span class="w-n">Week 11</span><span class="w-t">Pacing</span><span class="w-d">Timed sections with full review. Learning when to fight a question and when to move on.</span></div>
+        <div class="w check"><span class="w-n">Week 12</span><span class="w-t">Final exam</span><span class="w-d">Full dress rehearsal, then the exam-day plan: what to do when a section opens badly.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="s-head">
+      <span class="s-tag">What we need from you</span>
+      <h2>The part that decides the outcome</h2>
+    </div>
+
+    <div class="grid g2">
+      <div class="ask">
+        <h3>Three to five hours a week, at home</h3>
+        <p>Forty-eight hours of lessons will not reach 950 on their own. Homework is the larger half of this plan, and it is the single biggest variable in where the final number lands.</p>
+        <ul>
+          <li><strong>Grammar exercises</strong> on whatever was taught that week — this is where the fastest gains are actually won</li>
+          <li><strong>One reading passage</strong>, annotated rather than just answered</li>
+          <li><strong>A vocabulary log</strong> — every unfamiliar word, written in the sentence it appeared in</li>
+        </ul>
+        <p>You do not need to mark any of it or understand the content. What helps is protecting the time and asking to see the error log once a week.</p>
+      </div>
+
+      <div class="card honest">
+        <h3>Three things you should know now</h3>
+        <ul>
+          <li><strong>The target is ambitious.</strong> 950 is roughly a 240-point rise. It is achievable precisely because the current misses are so basic — there is more ground to recover at this level than at a higher one. On lesson time alone, expect closer to 800 to 850.</li>
+          <li><strong>Reading will look flat first.</strong> Grammar and algebra move quickly; reading comprehension typically shows little change until around week 8 and then moves. Checkpoint one may look disappointing on reading. That is expected, not a warning sign.</li>
+          <li><strong>The practice exam was not an official one.</strong> It was a third-party mock, and it left out an entire maths topic worth roughly a third of the maths paper. We teach that topic in week 7 regardless, and checkpoint two will tell us more than the original result did.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:14px">
+      <h4>One thing to arrange</h4>
+      <p>The real exam is taken on a computer, in the official Bluebook app. Everything we practise on is paper. Two or three practice sittings in the app at home — it is free, and takes an evening — will remove the last surprise on exam day. We will tell you when the timing is right.</p>
+    </div>
+  </section>
+
+  <footer>
+    <p>Prepared from the week 0 diagnostic result — 710 overall, 320 in reading and writing, 390 in maths. Progress is reviewed with you after each of the three checkpoints, and the plan is adjusted rather than defended if the results ask for it.</p>
+  </footer>
+
+</div>
