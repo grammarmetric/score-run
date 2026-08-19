@@ -8,6 +8,33 @@ window.LESSON = {
  "title": "Reading tables and graphs",
  "sub": "The interpretation half of problem solving and data — where the reading weakness meets the maths paper most directly.",
  "stampSet": "math",
+ "present": {
+  "rule": "Read the chart before you read the question: title, axes, units. Then find what the question restricts you to.",
+  "steps": [
+   "Read the title and both axis labels first",
+   "Check whether the axis starts at zero — if not, differences look bigger than they are",
+   "In a two-way table, the words \"of the …\" tell you the denominator",
+   "For a median, order the list before taking the middle"
+  ],
+  "worked": {
+   "text": "Of the Year 11 students, how many walk? (Year 11 row: bus 25, walk 15, total 40)",
+   "lines": [
+    "The phrase \"of the Year 11 students\" fixes the group.",
+    "So the denominator is that row's total: 40 — not the grand total of 80.",
+    "The number who walk in that row is 15.",
+    "The answer is <em>15 out of 40</em>. Using 80 or 37 means you read the wrong total."
+   ]
+  },
+  "check": {
+   "stem": "Values 12, 4, 9. What is the median?",
+   "options": [
+    "12",
+    "9"
+   ],
+   "answer": 1,
+   "explain": "Order them first: 4, 9, 12. The middle is 9."
+  }
+ },
  "forensics": {
   "intro": "Before any chart question: read the title, the axes and the units. Then read the question. For each wrong option, name what was misread.",
   "watch": [

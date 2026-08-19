@@ -8,6 +8,33 @@ window.LESSON = {
  "title": "Exam craft",
  "sub": "The techniques that only pay once the content is there — which, by week 10, it is. Mixed questions with no topic labels.",
  "stampSet": "math",
+ "present": {
+  "rule": "Recognise the question type before solving. If the answers are numbers, work backwards; if they are expressions, pick a value.",
+  "steps": [
+   "Numbers as answers? Substitute one in and check — start from the middle",
+   "Expressions as answers? Choose an easy value and test every option",
+   "Avoid 0 and 1 as test values — they make too many options look correct",
+   "No route after 30 seconds? Mark it, guess, move on. Never leave a blank"
+  ],
+  "worked": {
+   "text": "If n is an even integer, which expression is always odd?",
+   "lines": [
+    "The answers are expressions, so pick a value: let n = 4.",
+    "Test each: 2n = 8 (even), n ÷ 2 = 2 (even), n + 2 = 6 (even), n + 1 = 5 (odd).",
+    "Confirm with a second value, n = 10: n + 1 = 11, still odd.",
+    "So <em>n + 1</em> is the answer — found without any algebra at all."
+   ]
+  },
+  "check": {
+   "stem": "Time is nearly up and you have no route into a question. Do what?",
+   "options": [
+    "Leave it blank",
+    "Guess and move on"
+   ],
+   "answer": 1,
+   "explain": "There is no penalty for a wrong answer, so a guess is strictly better than a blank."
+  }
+ },
  "forensics": {
   "intro": "No topic labels from here on. The first job on every question is recognising what kind of question it is. Name the fault in each wrong option.",
   "watch": [

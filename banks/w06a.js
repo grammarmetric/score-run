@@ -8,6 +8,33 @@ window.LESSON = {
  "title": "Apostrophes and pronouns",
  "sub": "Possession, contraction, and making a pronoun point at exactly one thing.",
  "stampSet": "rw",
+ "present": {
+  "rule": "An apostrophe means possession or a contraction. It never makes a plural. And a pronoun must point at exactly one noun.",
+  "steps": [
+   "Test its/it's by expanding: if \"it is\" fits, use it's",
+   "For plural possessives, make the noun plural FIRST, then add the apostrophe",
+   "For any pronoun, ask: how many nouns could this point at?",
+   "If the answer is more than one, the sentence is wrong — even if you can guess the meaning"
+  ],
+  "worked": {
+   "text": "The two inspectors' reports contradicted each other.",
+   "lines": [
+    "More than one inspector, so start with the plural: \"inspectors\".",
+    "The reports belong to them, so it needs a possessive.",
+    "A plural already ending in -s takes only the apostrophe: <em>inspectors'</em>.",
+    "Never \"inspectors's\", and never \"inspector's\" when there is more than one."
+   ]
+  },
+  "check": {
+   "stem": "The company revised ______ safety policy.",
+   "options": [
+    "it's",
+    "its"
+   ],
+   "answer": 1,
+   "explain": "\"It is safety policy\" makes no sense, so it is the possessive \"its\"."
+  }
+ },
  "forensics": {
   "intro": "Two topics that look easy and are tested constantly. Name the fault in each wrong option.",
   "watch": [

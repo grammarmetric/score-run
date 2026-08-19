@@ -8,6 +8,33 @@ window.LESSON = {
  "title": "Repair session",
  "sub": "Deliberately unallocated. Whatever checkpoint 2 exposed is what gets taught here — this page carries mixed advanced-maths work as the default.",
  "stampSet": "math",
+ "present": {
+  "rule": "Exponent rules apply to multiplication and division, never to addition. Graph shifts inside the bracket go the opposite way to the sign.",
+  "steps": [
+   "Multiplying powers of the same base: ADD the exponents",
+   "Dividing: subtract. A power of a power: multiply",
+   "A change inside f( ) moves the graph horizontally, opposite to the sign",
+   "A change outside f( ) moves it vertically, in the direction of the sign"
+  ],
+  "worked": {
+   "text": "The graph of y = f(x) becomes y = f(x − 3). Describe the shift.",
+   "lines": [
+    "The change is INSIDE the bracket, so the movement is horizontal.",
+    "Inside changes always move the graph opposite to the sign.",
+    "The sign is minus, so the graph moves in the positive direction.",
+    "It shifts <em>3 units right</em>. This one feels backwards, which is exactly why it is tested."
+   ]
+  },
+  "check": {
+   "stem": "Simplify x³ × x⁴.",
+   "options": [
+    "x¹²",
+    "x⁷"
+   ],
+   "answer": 1,
+   "explain": "Multiplying powers of the same base adds the exponents: 3 + 4 = 7."
+  }
+ },
  "forensics": {
   "intro": "Mixed advanced material — the default set for the repair session. Substitute whatever checkpoint 2 exposed if something more urgent came up.",
   "watch": [

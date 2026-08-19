@@ -8,6 +8,33 @@ window.LESSON = {
  "title": "Quadratics and functions",
  "sub": "The topic the diagnostic never measured — and roughly a third of the real maths section. Teach it assuming nothing.",
  "stampSet": "math",
+ "present": {
+  "rule": "f(x) is an instruction: put this number wherever x appears. And a quadratic usually has two solutions.",
+  "steps": [
+   "f(3) means substitute 3 for every x — it is not multiplication",
+   "To factorise, find two numbers that multiply to the last term and add to the middle one",
+   "Set each bracket to zero to get the roots",
+   "In y = (x − h)² + k the vertex is (h, k) — the sign inside the bracket flips"
+  ],
+  "worked": {
+   "text": "Solve x² − 5x + 6 = 0.",
+   "lines": [
+    "Find two numbers multiplying to +6 and adding to −5: that is −2 and −3.",
+    "So it factorises to (x − 2)(x − 3) = 0.",
+    "Set each bracket to zero in turn: x − 2 = 0 and x − 3 = 0.",
+    "The solutions are <em>x = 2 and x = 3</em>. Giving only one of them loses the mark."
+   ]
+  },
+  "check": {
+   "stem": "If f(x) = 2x + 1, what is f(3)?",
+   "options": [
+    "6x + 3",
+    "7"
+   ],
+   "answer": 1,
+   "explain": "Substitute 3 for x: 2(3) + 1 = 7."
+  }
+ },
  "forensics": {
   "intro": "The diagnostic never tested this topic, so nothing is assumed. Name the fault in each wrong option.",
   "watch": [

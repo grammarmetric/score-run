@@ -8,6 +8,33 @@ window.LESSON = {
  "title": "Purpose and synthesis",
  "sub": "Why a sentence is there, and the notes-to-sentence question type — which is more formulaic than it looks.",
  "stampSet": "rw",
+ "present": {
+  "rule": "On these questions most wrong answers are completely true. They just fail to do the job the prompt asked for.",
+  "steps": [
+   "Find the goal — it is always in the final sentence of the prompt",
+   "Underline the exact words of that goal",
+   "Ask of each option: does this do THAT specific job?",
+   "Being true is not enough; it has to serve the stated goal"
+  ],
+  "worked": {
+   "text": "Notes about the Antikythera mechanism. Goal: emphasise its COMPLEXITY.",
+   "lines": [
+    "The goal word is \"complexity\" — underline it.",
+    "\"Recovered from a shipwreck in 1901\" is true, but that is history, not complexity.",
+    "\"Dates from roughly 100 BCE\" is true, but that is age, not complexity.",
+    "\"Contains at least 30 bronze gears\" is the only detail that evidences <em>complexity</em>."
+   ]
+  },
+  "check": {
+   "stem": "Goal: stress how unlikely her survival was. Which does that job?",
+   "options": [
+    "She took part in a 1921 expedition.",
+    "With no training, she survived alone for two years."
+   ],
+   "answer": 1,
+   "explain": "Unlikelihood needs the lack of training set against the length of survival."
+  }
+ },
  "forensics": {
   "intro": "On these questions the wrong answers are usually true. They just do not do the job the question asked for. Label each one with what it gets wrong.",
   "watch": [

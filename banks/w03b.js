@@ -8,6 +8,33 @@ window.LESSON = {
  "title": "Ratios, rates and percentages",
  "sub": "The mechanical half of the weakest area on the diagnostic — 1 correct out of 7. Start here, because these can be made reliable quickly.",
  "stampSet": "math",
+ "present": {
+  "rule": "Percentage change is always measured against the ORIGINAL amount — and decide whether you want the change or the new total.",
+  "steps": [
+   "Identify the original amount; that is the denominator",
+   "Work out the change itself",
+   "Divide the change by the original, not by the new value",
+   "Re-read: does the question want the change, or the value after the change?"
+  ],
+  "worked": {
+   "text": "A price rises from $80 to $100. What is the percentage increase?",
+   "lines": [
+    "Original = 80. That is what everything is measured against.",
+    "Change = 100 − 80 = 20.",
+    "Divide by the ORIGINAL: 20 ÷ 80 = 0.25.",
+    "So the increase is <em>25%</em>. Dividing by 100 instead gives 20%, which is the classic trap."
+   ]
+  },
+  "check": {
+   "stem": "A price falls from $50 to $40. Percentage decrease?",
+   "options": [
+    "20%",
+    "25%"
+   ],
+   "answer": 0,
+   "explain": "Change is 10, original is 50: 10 ÷ 50 = 20%."
+  }
+ },
  "forensics": {
   "intro": "This was the weakest area on the diagnostic — one correct out of seven. Every wrong option below is a specific, nameable slip.",
   "watch": [

@@ -8,6 +8,33 @@ window.LESSON = {
  "title": "Commas, dashes and colons",
  "sub": "The longest chapter in the book and the most-tested convention on the exam. Two sessions are budgeted for it.",
  "stampSet": "rw",
+ "present": {
+  "rule": "Punctuation is decided by what sits on each side of the mark — never by where you would pause.",
+  "steps": [
+   "A colon needs a complete sentence on its LEFT",
+   "Non-essential information takes a matching pair — two commas or two dashes, never one of each",
+   "Never put a single comma between a subject and its verb",
+   "A semicolon needs a complete sentence on BOTH sides"
+  ],
+  "worked": {
+   "text": "The expedition carried only what was necessary ______ rope, food and a compass.",
+   "lines": [
+    "Look left: \"The expedition carried only what was necessary\" — a complete sentence.",
+    "Look right: a list, not a sentence.",
+    "Complete sentence, then a list, is exactly what a colon is for.",
+    "So the answer is <em>:</em> — a semicolon would be wrong because the right side cannot stand alone."
+   ]
+  },
+  "check": {
+   "stem": "She had one ambition ______ to sail around the world.",
+   "options": [
+    ", ",
+    ": "
+   ],
+   "answer": 1,
+   "explain": "Complete sentence on the left, explanation on the right."
+  }
+ },
  "forensics": {
   "intro": "Punctuation is decided by structure, never by where you would pause when speaking. For each wrong option, name what it actually breaks.",
   "watch": [

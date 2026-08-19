@@ -92,11 +92,11 @@ for (const p of pages) {
 
   const { result } = await send('Runtime.evaluate', {
     expression: `(() => {
-      /* Pages with a #lesson host are script-built and must be populated.
-         index.html is static, so it only has to have rendered content.  */
-      const host = document.querySelector('#lesson');
-      const cards = document.querySelectorAll('.card, .hubrow, .fig, .need').length;
-      const opts  = document.querySelectorAll('.opt, .sbtn, .tstep, .hublink').length;
+      /* Pages with a #lesson or #run host are script-built and must be
+         populated. index.html is static — it only has to have rendered. */
+      const host = document.querySelector('#lesson') || document.querySelector('#run');
+      const cards = document.querySelectorAll('.card, .hubrow, .fig, .need, .panel').length;
+      const opts  = document.querySelectorAll('.opt, .sbtn, .tstep, .hublink, .act, .btn').length;
       return JSON.stringify({ scripted: !!host, kids: host ? host.children.length : -1, cards, opts });
     })()`, returnByValue: true
   }, sessionId);

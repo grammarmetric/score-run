@@ -8,6 +8,33 @@ window.LESSON = {
  "title": "Joining ideas",
  "sub": "Transitions are heavily tested and entirely learnable — the highest-return topic left in the reading and writing section.",
  "stampSet": "rw",
+ "present": {
+  "rule": "Name the relationship between the two sentences BEFORE you look at a single answer choice.",
+  "steps": [
+   "Cover the choices completely",
+   "Read both sentences and say the link out loud",
+   "It will be one of five: same direction, opposite, cause, example, or sequence",
+   "Only then uncover, and pick the word that matches what you already said"
+  ],
+  "worked": {
+   "text": "The filtration system removed 98% in the lab. ______ , its field performance was far poorer.",
+   "lines": [
+    "First sentence: the result was excellent.",
+    "Second sentence: the result was poor.",
+    "Good then poor — the relationship is opposite.",
+    "So the transition is <em>However</em>. \"Therefore\" would claim the good result caused the bad one."
+   ]
+  },
+  "check": {
+   "stem": "The soil is very rich. ______ , farms there get two harvests a year.",
+   "options": [
+    "However",
+    "Consequently"
+   ],
+   "answer": 1,
+   "explain": "Rich soil causes the double harvest — that is cause, not contrast."
+  }
+ },
  "forensics": {
   "intro": "Cover the choices. Read the two sentences. Say the relationship out loud first. Then label why each wrong option misreads it.",
   "watch": [

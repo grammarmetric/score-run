@@ -8,6 +8,33 @@ window.LESSON = {
  "title": "Angles, triangles and the unit circle",
  "sub": "Geometry is a small section and largely formula-driven — a contained fix. There is a purpose-built interactive lesson for the second half.",
  "stampSet": "math",
+ "present": {
+  "rule": "Geometry runs on a short list of exact facts. Know them cold and never assume what the picture merely looks like.",
+  "steps": [
+   "Angles on a straight line total 180°; around a point, 360°; in a triangle, 180°",
+   "Pythagoras: square the two legs, add, then square-root",
+   "The formula sheet is provided in the real exam — use it",
+   "Never assume a right angle or equal sides from the drawing alone"
+  ],
+  "worked": {
+   "text": "A right-angled triangle has legs 6 and 8. Find the hypotenuse.",
+   "lines": [
+    "Square each leg: 6² = 36 and 8² = 64.",
+    "Add them: 36 + 64 = 100.",
+    "That gives the SQUARE of the hypotenuse, not the hypotenuse itself.",
+    "Square-root it: <em>10</em>. Stopping at 100 is the most common miss here."
+   ]
+  },
+  "check": {
+   "stem": "Legs 3 and 4. Hypotenuse?",
+   "options": [
+    "7",
+    "5"
+   ],
+   "answer": 1,
+   "explain": "9 + 16 = 25, and √25 = 5. Adding the legs gives 7, which is wrong."
+  }
+ },
  "forensics": {
   "intro": "Geometry rewards knowing a small number of facts exactly. Name the fault in each wrong option.",
   "watch": [

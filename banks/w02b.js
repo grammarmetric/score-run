@@ -8,6 +8,33 @@ window.LESSON = {
  "title": "Turning words into equations",
  "sub": "Systems and inequalities, but the real target is translation — the point where the reading weakness starts costing maths marks.",
  "stampSet": "math",
+ "present": {
+  "rule": "Translate the sentence into an equation one clause at a time, then check the direction with a real number.",
+  "steps": [
+   "\"Twice as many A as B\" means A = 2B — the bigger group gets the multiplier",
+   "Test the direction with easy numbers before solving",
+   "\"At least\" is ≥ and \"at most\" is ≤; \"more than\" is > and excludes the value",
+   "After solving, check which variable was actually asked for"
+  ],
+  "worked": {
+   "text": "Three times as many chose biology as chemistry. If c is chemistry, what is biology?",
+   "lines": [
+    "Biology is the larger group — it is three times the other.",
+    "Candidate answer: b = 3c.",
+    "Test it: if c = 4 then b = 12. Is 12 three times as many as 4? Yes.",
+    "So <em>3c</em> is right. Writing c ÷ 3 would make biology the smaller group."
+   ]
+  },
+  "check": {
+   "stem": "Four times as many chairs as tables. If t is tables, chairs = ?",
+   "options": [
+    "t ÷ 4",
+    "4t"
+   ],
+   "answer": 1,
+   "explain": "Chairs are the larger quantity, so they take the multiplier."
+  }
+ },
  "forensics": {
   "intro": "The setup is where these are won or lost. For each wrong option, name which part of the translation went wrong.",
   "watch": [

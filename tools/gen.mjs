@@ -1,7 +1,13 @@
 /* Build script for Score run.
-   Run once with `node tools/gen.mjs`; it writes plain static files that
-   need no build step to serve. Regenerate after editing the manifest
-   or the content banks.                                               */
+   Run with `node tools/gen.mjs`; it writes plain static files that need
+   no build step to serve. Regenerate after editing the manifest or the
+   content banks.
+
+   Each teaching session produces THREE files:
+     lessons/<id>.html         the roguelike run  (run.js — the default)
+     lessons/<id>-plain.html   the quiet drill    (lesson.js — exam-ish)
+     teacher/<id>.html         the run-sheet
+   Checkpoints produce the proctor page and a run-sheet.               */
 
 import { writeFileSync, mkdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
@@ -9,6 +15,7 @@ import { dirname, join } from 'node:path';
 import { sessions } from './manifest.mjs';
 import { rw } from './content-rw.mjs';
 import { math } from './content-math.mjs';
+import { present } from './content-present.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const content = { ...rw, ...math };
@@ -22,7 +29,7 @@ const FONT = '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?fam
 function page({ title, lead, css, body, scripts = [], depth = 1 }) {
   const up = '../'.repeat(depth);
   return `<!doctype html>
-<html lang="en" data-lead="${lead}">
+<html lang="en"${lead ? ` data-lead="${lead}"` : ''}>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -43,30 +50,43 @@ mkdirSync(join(ROOT, 'banks'), { recursive: true });
 mkdirSync(join(ROOT, 'lessons'), { recursive: true });
 mkdirSync(join(ROOT, 'teacher'), { recursive: true });
 
-let lessonCount = 0;
-let proctorCount = 0;
-let itemCount = 0;
+let lessonCount = 0, proctorCount = 0, itemCount = 0;
 
 for (const s of sessions) {
-  /* ── student page ─────────────────────────────────────── */
   if (s.type === 'lesson') {
     const c = content[s.id];
+    const p = present[s.id];
     if (!c) { throw new Error(`No content bank for ${s.id}`); }
+    if (!p) { throw new Error(`No presentation block for ${s.id} — PPP needs all three phases`); }
 
-    itemCount += c.forensics.items.length + c.speed.items.length + c.sim.items.length;
+    itemCount += 1 + c.forensics.items.length + c.speed.items.length + c.sim.items.length;
 
     const bank = {
       id: s.id, week: s.week, session: s.session, lead: s.lead,
       domain: s.domain, title: s.title, sub: s.sub,
       stampSet: c.stampSet,
-      forensics: c.forensics, speed: c.speed, sim: c.sim
+      present: p,                    // PRESENTATION
+      forensics: c.forensics,        // PRACTICE — recon
+      speed: c.speed,                // PRACTICE — waves
+      sim: c.sim                     // PRODUCTION — boss
     };
     writeFileSync(
       join(ROOT, 'banks', `${s.id}.js`),
       `/* ${s.id} — ${s.title}. Generated from tools/content-*.mjs */\nwindow.LESSON = ${JSON.stringify(bank, null, 1)};\n`
     );
+
+    /* the game — this is the lesson */
     writeFileSync(join(ROOT, 'lessons', `${s.id}.html`), page({
-      title: `${s.title} · Score run`,
+      title: `${s.title} · Signal lost`,
+      css: 'run.css',
+      body: `<canvas id="fx"></canvas>
+<div id="shake"><main class="wrap" id="run"></main></div>`,
+      scripts: [`banks/${s.id}.js`, 'assets/run.js']
+    }));
+
+    /* the quiet version — same content, no game layer */
+    writeFileSync(join(ROOT, 'lessons', `${s.id}-plain.html`), page({
+      title: `${s.title} · plain drill`,
       lead: s.lead, css: 'lesson.css',
       body: '<main class="wrap" id="lesson"></main>',
       scripts: [`banks/${s.id}.js`, 'assets/lesson.js']
@@ -96,12 +116,36 @@ for (const s of sessions) {
 
   const list = (arr) => arr.map((x) => `<li>${esc(x)}</li>`).join('');
   const mats = s.materials.map((m) => `<div class="mat">${esc(m)}</div>`).join('');
-
   const blocks = [];
+
   blocks.push(`<div class="card brief">
       <h3>Goal for this session</h3>
       <p class="plain">${esc(s.goal)}</p>
     </div>`);
+
+  if (s.type === 'lesson') {
+    const p = present[s.id];
+    const c = content[s.id];
+    blocks.push(`<div class="card">
+      <h3>PPP — how the lesson page is structured</h3>
+      <div class="trun">
+        <div class="tstep">
+          <span class="tt">Present</span>
+          <span><span class="tw">Briefing</span><span class="td">The rule is taught and one worked example is walked through line by line, then a free question that costs nothing. No timer, no HP at risk. Rule as the student sees it: “${esc(p.rule)}”</span></span>
+        </div>
+        <div class="tstep">
+          <span class="tt">Practice</span>
+          <span><span class="tw">Recon, then waves</span><span class="td">${c.forensics.items.length} recon questions where they label why each wrong option is wrong, then ${c.speed.items.length} timed questions at ${c.speed.seconds}s each. Scaffolded: hints, a scanner perk, and shields from streaks.</span></span>
+        </div>
+        <div class="tstep">
+          <span class="tt">Produce</span>
+          <span><span class="tw">Boss</span><span class="td">${c.sim.items.length} questions, no hints and no scaffolding, with HP carried over from practice. This is the independent-application stage — do not coach through it.</span></span>
+        </div>
+      </div>
+      <p>If they lose all HP the run ends and restarts from the briefing. That is deliberate: a failed run costs about four minutes and they will usually go again without being asked.</p>
+    </div>`);
+  }
+
   blocks.push(`<div class="card">
       <h3>What you need open</h3>
       ${mats}
@@ -127,6 +171,11 @@ for (const s of sessions) {
       <ul class="ticks">${list(s.homework)}</ul>
     </div>`);
 
+  const links = s.type === 'lesson'
+    ? `<a class="back" href="../lessons/${s.id}.html">Open the run</a>
+    <a class="back" href="../lessons/${s.id}-plain.html">Plain drill</a>`
+    : `<a class="back" href="../lessons/${s.id}.html">Open the timer</a>`;
+
   writeFileSync(join(ROOT, 'teacher', `${s.id}.html`), page({
     title: `Teacher · ${s.title} · Score run`,
     lead: s.lead, css: 'lesson.css',
@@ -134,7 +183,7 @@ for (const s of sessions) {
   <div class="bar">
     <a class="back" href="../lessons.html">← All lessons</a>
     <div class="bar-sp"></div>
-    <a class="back" href="../lessons/${s.id}.html">Open the student page</a>
+    ${links}
   </div>
   <div class="head">
     <span class="eyebrow">Teacher sheet · week ${s.week} · session ${s.session} · ${esc(s.domain)}</span>
@@ -169,6 +218,9 @@ for (const [week, list] of [...byWeek.entries()].sort((a, b) => a[0] - b[0])) {
       <span class="hw">${list.length} sessions</span>
     </div>`;
   for (const s of list) {
+    const extra = s.type === 'lesson'
+      ? `<a class="hublink" href="lessons/${s.id}-plain.html">Plain drill</a>`
+      : '';
     hub += `
     <div class="hubrow ${s.lead}">
       <span>
@@ -176,7 +228,8 @@ for (const [week, list] of [...byWeek.entries()].sort((a, b) => a[0] - b[0])) {
         <span class="hs">${esc(s.domain)} — ${esc(s.goal)}</span>
       </span>
       <span class="hublinks">
-        <a class="hublink go" href="lessons/${s.id}.html">${s.type === 'proctor' ? 'Open the timer' : 'Open the lesson'}</a>
+        <a class="hublink go" href="lessons/${s.id}.html">${s.type === 'proctor' ? 'Open the timer' : 'Play the run'}</a>
+        ${extra}
         <a class="hublink" href="teacher/${s.id}.html">Teacher sheet</a>
       </span>
     </div>`;
@@ -193,14 +246,15 @@ writeFileSync(join(ROOT, 'lessons.html'), page({
   <div class="head">
     <span class="eyebrow">24 sessions · 12 weeks · two hours each</span>
     <h1>All lessons</h1>
-    <p class="sub">Every session has a page for the student and a run-sheet for the teacher. Sessions marked with a yellow edge are timed checkpoints, where the game layer is switched off entirely.</p>
+    <p class="sub">Each teaching session is a roguelike run built on the PPP shape — briefing teaches the rule, recon and waves practise it, the boss makes them apply it alone. Lose all your health and the run restarts. A plain drill version of the same content sits alongside each one for exam-condition work, and the yellow sessions are timed checkpoints with no game layer at all.</p>
   </div>
   <div class="hub">${hub}
   </div>
 </main>`
 }));
 
-console.log(`lessons  ${lessonCount}`);
-console.log(`proctors ${proctorCount}`);
-console.log(`teacher  ${sessions.length}`);
-console.log(`items    ${itemCount}`);
+console.log(`runs      ${lessonCount}`);
+console.log(`plain     ${lessonCount}`);
+console.log(`proctors  ${proctorCount}`);
+console.log(`teacher   ${sessions.length}`);
+console.log(`items     ${itemCount}`);

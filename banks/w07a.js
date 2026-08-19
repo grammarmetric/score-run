@@ -8,6 +8,33 @@ window.LESSON = {
  "title": "Tenses and misplaced descriptions",
  "sub": "Keeping time consistent across a passage, and making sure a describing phrase is next to the thing it describes.",
  "stampSet": "rw",
+ "present": {
+  "rule": "Tense is settled by evidence elsewhere in the passage. A describing phrase must sit next to the thing it describes.",
+  "steps": [
+   "For tense: find another verb or a time marker that fixes the timeline",
+   "Two past events? The earlier one takes had + past participle",
+   "\"Since\" or \"ever since\" reaching now? Present perfect",
+   "After an opening phrase, ask WHO is doing it — the answer must be the very next noun"
+  ],
+  "worked": {
+   "text": "Walking through the abandoned station, ______",
+   "lines": [
+    "Ask the question: who is walking?",
+    "A person is walking — not a poster, not \"it\", not \"there\".",
+    "So the noun immediately after the comma must be that person.",
+    "\"…, <em>she</em> noticed the peeling posters.\" Anything else leaves the phrase dangling."
+   ]
+  },
+  "check": {
+   "stem": "Exhausted after the climb, ______",
+   "options": [
+    "the tent was welcome.",
+    "they set up camp."
+   ],
+   "answer": 1,
+   "explain": "Who was exhausted? They were — so \"they\" must come next."
+  }
+ },
  "forensics": {
   "intro": "Tense is settled by evidence elsewhere in the passage, never by taste. A modifier must sit next to the thing it describes. Label each fault.",
   "watch": [

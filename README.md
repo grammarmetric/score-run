@@ -3,9 +3,10 @@
 Live: **https://grammarmetric.github.io/score-run/**
 All lessons: **https://grammarmetric.github.io/score-run/lessons.html**
 
-A parent-facing programme overview plus 24 self-contained lesson pages — one
-per class — each with a matching run-sheet for the teacher. No build step is
-needed to serve any of it; no account, no backend, no network calls.
+A parent-facing programme overview, 16 playable lesson runs, 8 checkpoint
+proctor pages, and a teacher run-sheet for every one of the 24 sessions. No
+build step is needed to serve any of it; no account, no backend, no network
+calls, no third-party libraries.
 
 > **No student's name lives in this repository.** Same convention as
 > star-quest-course: diagnostic scores are committed, personal data never is.
@@ -13,105 +14,135 @@ needed to serve any of it; no account, no backend, no network calls.
 ## Layout
 
 ```
-index.html          parent-facing programme overview
-lessons.html        hub — all 24 sessions, student page + teacher sheet
+index.html            parent-facing programme overview   (on-guide)
+lessons.html          hub — every session, all three links
 assets/
-  lesson.css        the whole design system, shared by every page
-  lesson.js         PPP engine: trap forensics, speed lab, simulation
-  proctor.js        checkpoint engine: exam timing, answer sheet, scoring
-banks/  w01a.js …   question content, one file per teaching session
-lessons/w01a.html … student page per session   (24)
-teacher/w01a.html … teacher run-sheet per session (24)
-tools/              manifest, content source and the build + verify scripts
+  run.css  run.js     SIGNAL LOST — the roguelike lesson engine
+  lesson.css          the GrammarMetric design system
+  lesson.js           the plain drill engine (same content, no game)
+  proctor.js          checkpoint engine: timing, answer sheet, scoring
+banks/  w01a.js …     lesson content, one file per teaching session (16)
+lessons/w01a.html …   the run           (16)
+lessons/w01a-plain…   the quiet twin    (16)
+lessons/w04a.html …   checkpoint timers  (8)
+teacher/w01a.html …   run-sheets        (24)
+tools/                manifest, content source, build and test scripts
 ```
 
-`lessons/` and `teacher/` and `banks/` are **generated**. Edit
-`tools/manifest.mjs` (session metadata, run-sheets) or `tools/content-*.mjs`
-(questions), then:
+`banks/`, `lessons/` and `teacher/` are **generated**. Edit `tools/manifest.mjs`
+(session metadata and run-sheets) or `tools/content-*.mjs` (the questions and
+the presentation blocks), then:
 
 ```
-node tools/gen.mjs        # rebuild all pages
-node tools/verify.mjs     # load all 50 pages headless, fail on any console error
-node tools/interact.mjs   # drive the mechanics and assert they work
+node tools/gen.mjs        # rebuild every page
+node tools/verify.mjs     # load all 66 pages headless, fail on any console error
+node tools/playtest.mjs   # play a run to death and assert the game rules
+node tools/interact.mjs   # assert the plain drill mechanics
 ```
 
-## Session types
+## Signal lost — the game layer
 
-**16 teaching sessions** run the three-phase shape, driven by `lesson.js`:
+Each teaching session is a **roguelike run**. Lose all your health and the run
+ends and restarts from the briefing. A failed run costs about four minutes,
+which is the point: it is cheap enough to go again without being asked.
 
-| Phase | What happens | Mechanic |
+PPP is the spine of the run, not a label stuck on it:
+
+| Phase | In the run | What it does |
 | --- | --- | --- |
-| Trap forensics | No answering. Every wrong option gets labelled with *why* it is wrong | Diagnostic stamps; naming the trap is the transferable skill |
-| Speed lab | Timed at real exam pace — 71 s a question in reading, 95 s in maths | Confidence wager, streak multiplier, Socratic loop on any miss |
-| Simulation | One block, exam conditions, no feedback until the end | Teach-back prompts, including on correct answers |
+| **Presentation** | Briefing | The rule is taught, one worked example is decrypted line by line, then a free shot that costs no HP. No timer, no risk. |
+| **Practice** | Recon → waves | Name *why* each wrong option is wrong, then timed combat. Scaffolded: a scanner that removes an option, shields earned from streaks. |
+| **Production** | Boss | No hints, no scaffolding, HP carried over from practice. Independent application. |
 
-**8 checkpoint sessions** (weeks 4, 8, 11, 12) run `proctor.js` instead: real
-module timing, a digital answer sheet, and scoring against the key from the
-official PDF. The game layer is absent by design — that is the point of a
-checkpoint.
+Roguelike systems: HP and max-HP, shields from streaks, a combo multiplier, a
+three-card perk draft between stages, procedurally drawn enemies, a persisted
+personal best, and permadeath per run.
 
-## The mechanics, and why these ones
+The **confidence wager** became the attack choice — *Strike* or *Overcharge*.
+Overcharge multiplies the score and costs 2 HP instead of 1 when it misses.
+A miss still cannot be skipped: naming the error is what unlocks the next
+question, and every named error lands in the damage report at the end.
 
-Adapted from an IELTS hybrid-classroom blueprint written for cohorts of 20+ on
-a bespoke platform. Most of it does not survive contact with one student and
-two hours:
+Everything is procedural — WebAudio for sound, canvas for particles and
+damage numbers, generated SVG for enemies. No image or audio files.
+
+## Why this layer breaks the style guide
+
+Deliberately, and only here. Glow, gradients, motion, screen shake and sound
+are all in play, because the student this is for does not engage with anything
+that does not look like a game — and the guide bans essentially every tool that
+creates game feel.
+
+The brand palette is kept, since those hexes were already neon and carry into an
+arcade treatment without inventing a second colour language.
+
+Everything else stays on-guide: `index.html`, `lessons.html`, the checkpoint
+proctor pages and all 24 teacher sheets. Every run also has a `-plain.html`
+twin with identical content and no game layer, for exam-condition work as the
+real test gets closer.
+
+The original adaptation stance was wrong for this student. It came from an
+IELTS blueprint written for adult professionals, which argues *against* "cartoon
+avatars, arbitrary badges and decorative experience points" — reasoning that
+does not transfer to a sixteen-year-old who only responds to games.
+
+## Checkpoints
+
+The 8 sessions in weeks 4, 8, 11 and 12 run `proctor.js`: real module timing
+(39 or 43 minutes), a digital answer sheet, a blank counter, and scoring against
+the key typed in from the official answers PDF. **No game layer at all** — that
+is what a checkpoint is for, and by week 12 the plain interface should feel
+completely familiar.
+
+## What was kept from the blueprint, and what was cut
 
 | Kept | Cut |
 | --- | --- |
 | Score predictor with a range | AI essay marking — no SAT essay since 2021 |
-| Confidence wagers before answering | Speaking debates — the SAT has no speaking |
-| Skill tree with ordered prerequisites | Team relays, breakout pods, peer marking |
-| Mock-test tokens (scarcity is genuine) | Live leaderboards |
-| Focus mode that hides the game layer | |
+| Confidence wagers → Strike / Overcharge | Speaking debates — the SAT has no speaking |
+| Skill prerequisites → the PPP stage order | Team relays, breakout pods, peer marking |
+| Mock-test tokens — the scarcity is genuine | Live leaderboards |
+| Focus mode → the `-plain` twin pages | |
 
-The **confidence wager** is load-bearing. This student answered all 54 reading
-questions, left none blank, and got 17 right — so the deficit is not only
-knowledge but knowing which answers are sound. The options stay locked until a
-confidence level is declared, and a wrong answer cannot be skipped past: the
-Socratic loop requires the error to be classified before the page moves on.
+**Mock-test tokens** stop being invented scarcity: only four practice tests
+match the current digital exam format. Tests 1, 2 and 4 are spent at the
+checkpoints; test 3 is broken up for the week 11 drills.
 
-**Mock-test tokens** stop being invented scarcity, because only four practice
-tests actually match the current digital exam format. Tests 1, 2 and 4 are
-spent at the checkpoints; test 3 is broken up for the week 11 drills.
+## Design of the on-guide pages
 
-## Design
+- **Lexend** only, 400/500. No 600+. Sentence case everywhere.
+- Lead accent set per page via `[data-lead]` — **cyan** reading, **orange**
+  maths, **yellow** checkpoint — so colour tells you the session type.
+- Flat surfaces, elevation opacity scale levels 1–2, radii 14/10/20,
+  touch targets ≥ 44px.
+- Dark default, light override, all three viewer states handled.
+- Accent-as-text goes through `--lead-text`, swapping to the darkened pair in
+  light mode: cyan `#006666`, orange `#3d0f00`, yellow `#736f00`. Raw
+  `#00FFFF` on white is 1.25:1, a hard WCAG failure. Answer state never relies
+  on colour alone — a text mark is appended alongside the fill.
 
-Follows the GrammarMetric style guide:
-
-- **Lexend** only, weights 400/500. No 600+. Sentence case everywhere.
-- Locked palette. Lead accent is set per page via `[data-lead]` on `<html>` —
-  **cyan** for reading and writing, **orange** for maths, **yellow** for
-  checkpoints — so the accent tells you what kind of session you are in.
-- Flat surfaces only: no gradients, shadows or blur. Depth comes from the
-  elevation opacity scale, levels 1–2 only.
-- Radii 14px cards / 10px controls / 20px pills. Touch targets ≥ 44px.
-- Dark mode default, light override, and all three viewer states handled
-  (explicit dark, explicit light, unset system preference).
-
-**Contrast:** every accent-as-text use goes through `--lead-text`, which swaps
-to the darkened pair in light mode — cyan `#006666`, orange `#3d0f00`, yellow
-`#736f00`. Raw `#00FFFF` on white is 1.25:1, a hard WCAG failure. Answer state
-never relies on colour alone: a text mark is appended alongside the fill.
-
-**One deviation from the guide**, deliberate: the guide asks for a single
-self-contained HTML file per project, which exists so pages survive being
-dropped into a Google Sites iframe. These 48 pages are served from one origin
-with their own links, so they share `assets/lesson.css` and `assets/lesson.js`
-rather than duplicating the engine 48 times. There is still no build pipeline
-or bundler — the generator emits plain static files.
+The shared-assets split (rather than one self-contained file per page) is the
+other deliberate deviation: 66 pages on one origin should not each carry a copy
+of the engine. There is still no build pipeline — the generator emits plain
+static files.
 
 ## Verification
 
-`tools/verify.mjs` loads all 50 pages in headless Chrome and fails on any
-console error or uncaught exception, checking that script-built pages actually
-populated. `tools/interact.mjs` drives the speed lab and asserts the mechanics:
-the wager gate locks the options, a wrong answer opens the Socratic loop and
-cannot be skipped, the multiplier resets, focus mode hides every game element,
-and the proctor sheet counts blanks. Both pass at the time of committing.
+All three harnesses pass at the time of committing:
+
+- `verify.mjs` — loads all 66 pages in headless Chrome, fails on any console
+  error or uncaught exception, checks script-built pages actually populated.
+- `playtest.mjs` — plays a real run: asserts the briefing costs no HP, the
+  commit gate locks the options, an overcharged miss costs 2 HP less shields,
+  a miss cannot be skipped without naming it, and zero HP ends the run with a
+  damage report. 23 checks.
+- `interact.mjs` — the same assertions against the plain drill engine, plus
+  the proctor answer sheet and blank counter. 11 checks.
 
 ## Companion document
 
 A teacher-facing *course plan* — session-by-session, with exact PDF page
 numbers and verified scan offsets for the books on the Drive — is kept out of
-this repository on purpose. The per-session run-sheets in `teacher/` carry the
-page references needed to actually teach.
+this repository on purpose. The run-sheets in `teacher/` carry the page
+references needed to actually teach, plus a PPP breakdown of what each stage
+of the run is doing pedagogically.

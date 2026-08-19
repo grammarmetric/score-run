@@ -8,6 +8,33 @@ window.LESSON = {
  "title": "Linear equations, and what slope means",
  "sub": "Algebra is the one real strength on the diagnostic — 52%. This session is about converting it, and about finding out exactly which 48% is failing.",
  "stampSet": "math",
+ "present": {
+  "rule": "Solve the equation, then read the question again. It often asks for something other than x.",
+  "steps": [
+   "Underline exactly what the question asks for before you start",
+   "Undo operations in reverse order to isolate x",
+   "Check what was underlined — is it x, or 2x, or x + 1?",
+   "For a line, slope is the rate of change and the constant is the starting amount"
+  ],
+  "worked": {
+   "text": "If 5x − 3 = 12, what is the value of 10x?",
+   "lines": [
+    "Underline the ask: <em>10x</em>, not x.",
+    "Add 3 to both sides: 5x = 15.",
+    "Divide by 5: x = 3. This is where most people stop and lose the mark.",
+    "The ask was 10x, so the answer is <em>30</em>."
+   ]
+  },
+  "check": {
+   "stem": "If 2x = 8, what is 4x?",
+   "options": [
+    "4",
+    "16"
+   ],
+   "answer": 1,
+   "explain": "x = 4, but the question asked for 4x, which is 16."
+  }
+ },
  "forensics": {
   "intro": "Every wrong answer here is what you get by making one specific mistake. Name the mistake — that is what stops you repeating it.",
   "watch": [

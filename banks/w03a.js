@@ -8,6 +8,33 @@ window.LESSON = {
  "title": "Where one sentence ends",
  "sub": "The highest-yield grammar topic on the exam. Knowing where a sentence stops decides a large share of every conventions set.",
  "stampSet": "rw",
+ "present": {
+  "rule": "Two complete sentences can never be joined by a comma alone. There are exactly four legal joins.",
+  "steps": [
+   "Test each side: does it have a subject and a verb, and could it stand alone?",
+   "If both sides are complete, you may use: a full stop, a semicolon, or a comma plus and/but/or/so/for/nor/yet",
+   "Or make one side dependent with because, although, while, since",
+   "However, therefore and moreover are NOT conjunctions — they cannot do this job"
+  ],
+  "worked": {
+   "text": "The storm damaged power lines ______ thousands of homes lost electricity.",
+   "lines": [
+    "Left side: \"The storm damaged power lines\" — complete.",
+    "Right side: \"thousands of homes lost electricity\" — also complete.",
+    "Two complete sentences, so a comma alone would be a splice.",
+    "Legal fixes: a semicolon, or <em>, and</em>. Not a bare comma, and not \", however\"."
+   ]
+  },
+  "check": {
+   "stem": "The bridge opened in 1937 ______ it is still in use.",
+   "options": [
+    ", ",
+    "; "
+   ],
+   "answer": 1,
+   "explain": "Both sides stand alone, so a semicolon is legal and a bare comma is not."
+  }
+ },
  "forensics": {
   "intro": "One rule underneath all of this: is each side of the punctuation a complete sentence? Label each wrong option with what it actually does.",
   "watch": [

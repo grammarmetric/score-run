@@ -8,6 +8,33 @@ window.LESSON = {
  "title": "Finding the subject",
  "sub": "Before any grammar rule can be applied, you have to know what the sentence is actually about. This is the skill everything in weeks 2 and 3 is built on.",
  "stampSet": "rw",
+ "present": {
+  "rule": "Cross out the describing parts. Whatever noun is left is the subject — and the verb must match that noun.",
+  "steps": [
+   "Cross out every phrase starting of, in, with, by, from, for",
+   "Cross out any clause starting who, which or that",
+   "The noun still standing is the subject",
+   "Match the verb to it: singular subject, singular verb"
+  ],
+  "worked": {
+   "text": "The collection <s>of rare manuscripts</s> <s>donated by several professors</s> ______ housed in the basement.",
+   "lines": [
+    "\"of rare manuscripts\" is a prepositional phrase — cross it out.",
+    "\"donated by several professors\" describes the collection — cross it out too.",
+    "What survives: \"The collection ______ housed\". That is singular.",
+    "So the verb is <em>is</em>. Note that \"manuscripts\" and \"professors\" were both bait."
+   ]
+  },
+  "check": {
+   "stem": "The box <s>of old photographs</s> ______ on the shelf.",
+   "options": [
+    "sit",
+    "sits"
+   ],
+   "answer": 1,
+   "explain": "Subject is \"box\", not \"photographs\". Singular."
+  }
+ },
  "forensics": {
   "intro": "You are not picking answers yet. For each wrong option, name the reason it is wrong. Naming the trap is the skill that transfers — picking the right answer is not.",
   "watch": [

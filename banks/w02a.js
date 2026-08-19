@@ -8,6 +8,33 @@ window.LESSON = {
  "title": "Making the verb match",
  "sub": "Subject-verb agreement is the direct payoff of last week. It is also the densest chapter in the book, and worth the whole session.",
  "stampSet": "rw",
+ "present": {
+  "rule": "Some subjects look plural and are not. Each, every, neither and collective nouns all take a singular verb.",
+  "steps": [
+   "Find the true subject first, as in week 1",
+   "If it starts each, every, either or neither — singular, always",
+   "If it is a group word (team, jury, committee) — singular",
+   "In \"there is/are\", the verb matches whatever comes after it"
+  ],
+  "worked": {
+   "text": "The jury, <s>after deliberating for nine hours</s>, ______ unable to reach a verdict.",
+   "lines": [
+    "Cross out the interrupting phrase between the commas.",
+    "What survives: \"The jury ______ unable\".",
+    "\"Jury\" is a group acting as one unit, so it is singular.",
+    "The verb is <em>was</em>."
+   ]
+  },
+  "check": {
+   "stem": "Each of the students ______ a different answer.",
+   "options": [
+    "give",
+    "gives"
+   ],
+   "answer": 1,
+   "explain": "\"Each\" is singular, however plural \"students\" looks."
+  }
+ },
  "forensics": {
   "intro": "Same discipline as last week, harder cases. Label why each wrong option fails before you decide which one survives.",
   "watch": [
