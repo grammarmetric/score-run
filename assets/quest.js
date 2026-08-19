@@ -339,6 +339,7 @@
         wk.appendChild(h('div', 'answer', '🎯 ' + mod.worked.answer));
         c.appendChild(wk);
       }
+      if (mod.desmos) { c.appendChild(desmosBlock(mod.desmos, L.id + '-m' + mi)); }
       w.appendChild(c);
     });
 
@@ -351,6 +352,65 @@
     });
     row.appendChild(b);
     w.appendChild(row);
+  }
+
+  /* ── desmos ────────────────────────────────────────────────
+     The calculator is a teaching aid, not a dependency: if the
+     Desmos CDN cannot be reached the lesson still works and the
+     student is told what they are missing rather than left with
+     an empty white box.                                        */
+  var dPending = [];
+
+  function desmosBlock(cfg, id) {
+    var w = el('div', 'dwrap');
+    var hd = el('div', 'dhead');
+    hd.appendChild(h('h5', null, '🧮 ' + cfg.title));
+    hd.appendChild(el('span', 'dtag', 'Interactive'));
+    w.appendChild(hd);
+    if (cfg.hint) { w.appendChild(h('p', 'dhint', cfg.hint)); }
+    var box = el('div', 'dcalc');
+    box.id = 'd-' + id;
+    w.appendChild(box);
+    dPending.push({ node: box, cfg: cfg });
+    return w;
+  }
+
+  function initDesmos() {
+    if (!dPending.length) { return; }
+    var tries = 0;
+    (function attempt() {
+      if (window.Desmos && window.Desmos.GraphingCalculator) {
+        dPending.forEach(function (d) {
+          try {
+            var calc = Desmos.GraphingCalculator(d.node, Object.assign({
+              expressions: true, settingsMenu: false, zoomButtons: true,
+              expressionsTopbar: false, pointsOfInterest: true, border: false,
+              keypad: false, lockViewport: false
+            }, d.cfg.options || {}));
+            if (d.cfg.bounds) { calc.setMathBounds(d.cfg.bounds); }
+            (d.cfg.expressions || []).forEach(function (e) { calc.setExpression(e); });
+          } catch (err) {
+            fail(d.node, 'The calculator failed to start.');
+          }
+        });
+        dPending = [];
+        return;
+      }
+      if (++tries > 40) {
+        dPending.forEach(function (d) {
+          fail(d.node, 'The Desmos calculator could not load — you are probably offline. ' +
+            'Everything else on this page works; open the graph later, or use the calculator on the exam itself.');
+        });
+        dPending = [];
+        return;
+      }
+      setTimeout(attempt, 250);
+    })();
+  }
+
+  function fail(node, msg) {
+    node.className = 'dcalc dfail';
+    node.innerHTML = '<b>Graph unavailable</b>' + msg;
   }
 
   function box(kind, icon, title, text) {
@@ -658,7 +718,7 @@
     document.title = L.title + ' · Score run';
     hud(); hero();
     warmup(); presentation(); forensics(); practice(); boss(); victory();
-    refresh(); reveals();
+    refresh(); reveals(); initDesmos();
   }
 
   if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', boot); }

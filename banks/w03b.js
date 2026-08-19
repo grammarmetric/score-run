@@ -110,6 +110,39 @@ window.LESSON = {
       "Check the size: more distance than 100 km, so more than 6 litres. 15 is sensible."
      ],
      "answer": "15 litres."
+    },
+    "desmos": {
+     "title": "A rate is a straight line through the origin",
+     "hint": "Fuel used against distance, at 6 litres per 100 km. Drag <code>r</code> to change the rate and watch the steepness change. Every constant rate is a line through (0, 0) — which is why doubling the distance always doubles the fuel.",
+     "bounds": {
+      "left": -20,
+      "right": 320,
+      "bottom": -3,
+      "top": 26
+     },
+     "expressions": [
+      {
+       "id": "r",
+       "latex": "r=0.06",
+       "sliderBounds": {
+        "min": 0.01,
+        "max": 0.2,
+        "step": 0.01
+       }
+      },
+      {
+       "id": "fuel",
+       "latex": "y=rx",
+       "color": "#54c1e6"
+      },
+      {
+       "id": "pt",
+       "latex": "(250,250r)",
+       "color": "#fee801",
+       "showLabel": true,
+       "label": "250 km"
+      }
+     ]
     }
    },
    {

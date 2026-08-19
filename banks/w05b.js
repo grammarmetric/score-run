@@ -158,6 +158,48 @@ window.LESSON = {
       "Therefore x is whatever makes the total 30."
      ],
      "answer": "x = 10."
+    },
+    "desmos": {
+     "title": "Scatterplot and line of best fit",
+     "hint": "Change any number in the table and the line updates instantly. The regression <code>y_1 ~ mx_1 + b</code> is already typed in — click it to see the values Desmos worked out for m and b.",
+     "bounds": {
+      "left": -1,
+      "right": 8,
+      "bottom": -1,
+      "top": 14
+     },
+     "expressions": [
+      {
+       "type": "table",
+       "columns": [
+        {
+         "latex": "x_1",
+         "values": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ]
+        },
+        {
+         "latex": "y_1",
+         "values": [
+          "3",
+          "5",
+          "7",
+          "8",
+          "11"
+         ],
+         "color": "#54c1e6"
+        }
+       ]
+      },
+      {
+       "id": "reg",
+       "latex": "y_1 \\sim mx_1+b"
+      }
+     ]
     }
    }
   ],

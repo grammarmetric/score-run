@@ -85,6 +85,22 @@ ck('badges were unlocked', (await ev(`document.querySelectorAll('.ach.got').leng
 ck('no uncaught exceptions', errs.length === 0,
   errs.slice(0, 2).map((e) => (e.exception && e.exception.description || '').split('\n')[0]).join(' | '));
 
+/* maths lesson: the Desmos calculator must actually build */
+await send('Page.navigate', { url: 'http://127.0.0.1:8797/lessons/w07b.html' }, sessionId);
+await wait(4500);
+ck('maths lesson loads the Desmos API', (await ev(`typeof window.Desmos`)) === 'object');
+ck('a calculator container is rendered', (await ev(`document.querySelectorAll('.dcalc').length`)) >= 1);
+ck('the calculator built its graph',
+  (await ev(`document.querySelectorAll('.dcalc .dcg-container, .dcalc canvas, .dcalc .dcg-grapher').length`)) > 0);
+ck('no calculator fell back to the offline notice',
+  (await ev(`document.querySelectorAll('.dcalc.dfail').length`)) === 0);
+
+/* reading lesson: no Desmos script should be loaded at all */
+await send('Page.navigate', { url: 'http://127.0.0.1:8797/lessons/w01a.html' }, sessionId);
+await wait(600);
+ck('reading lessons do not load Desmos',
+  (await ev(`!!document.querySelector('script[src*="desmos"]')`)) === false);
+
 let bad = 0;
 for (const c of cks) { console.log(`${c.p ? 'ok  ' : 'FAIL'} ${c.n}${c.p ? '' : '  → ' + c.d}`); if (!c.p) { bad++; } }
 console.log(bad ? `\n${bad} of ${cks.length} checks FAILED` : `\nall ${cks.length} quest checks passed`);

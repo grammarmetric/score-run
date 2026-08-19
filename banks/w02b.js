@@ -158,6 +158,35 @@ window.LESSON = {
       "Now p = 12 − 7 = 5. The question asked for notebooks, so the answer is n, not p."
      ],
      "answer": "7 notebooks."
+    },
+    "desmos": {
+     "title": "Where two equations meet",
+     "hint": "Both equations from a system are graphed together. The solution is the single point where they cross — which is why a system with parallel lines has no solution at all.",
+     "bounds": {
+      "left": -2,
+      "right": 12,
+      "bottom": -2,
+      "top": 14
+     },
+     "expressions": [
+      {
+       "id": "l1",
+       "latex": "x+y=10",
+       "color": "#54c1e6"
+      },
+      {
+       "id": "l2",
+       "latex": "x-y=4",
+       "color": "#39c4b6"
+      },
+      {
+       "id": "sol",
+       "latex": "(7,3)",
+       "color": "#fee801",
+       "showLabel": true,
+       "label": "solution (7, 3)"
+      }
+     ]
     }
    }
   ],

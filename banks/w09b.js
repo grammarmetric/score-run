@@ -162,6 +162,47 @@ window.LESSON = {
       "Check with a point: if f(0) = 7, then f(x + 4) = 7 needs x = −4. The point moved left ✓"
      ],
      "answer": "4 units to the left."
+    },
+    "desmos": {
+     "title": "Which way does the graph move?",
+     "hint": "The dashed olive curve is the original. Drag <code>p</code> — the change <em>inside</em> the bracket — and watch it move the opposite way to its sign. Then drag <code>q</code>, the change <em>outside</em>, which moves exactly the way you would expect.",
+     "bounds": {
+      "left": -10,
+      "right": 10,
+      "bottom": -7,
+      "top": 12
+     },
+     "expressions": [
+      {
+       "id": "p",
+       "latex": "p=3",
+       "sliderBounds": {
+        "min": -6,
+        "max": 6,
+        "step": 0.5
+       }
+      },
+      {
+       "id": "q",
+       "latex": "q=0",
+       "sliderBounds": {
+        "min": -6,
+        "max": 6,
+        "step": 0.5
+       }
+      },
+      {
+       "id": "orig",
+       "latex": "y=x^2",
+       "color": "#9a9f17",
+       "lineStyle": "DASHED"
+      },
+      {
+       "id": "moved",
+       "latex": "y=(x-p)^2+q",
+       "color": "#54c1e6"
+      }
+     ]
     }
    }
   ],

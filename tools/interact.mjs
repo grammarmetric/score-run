@@ -41,7 +41,7 @@ const send = (method, params = {}, sessionId) => new Promise((res) => { const i 
 const { result: { targetId } } = await send('Target.createTarget', { url: 'about:blank' });
 const { result: { sessionId } } = await send('Target.attachToTarget', { targetId, flatten: true });
 await send('Runtime.enable', {}, sessionId);
-await send('Page.navigate', { url: `http://127.0.0.1:${PORT}/lessons/w01a.html` }, sessionId);
+await send('Page.navigate', { url: `http://127.0.0.1:${PORT}/lessons/w01a-plain.html` }, sessionId);
 await new Promise((r) => setTimeout(r, 600));
 
 const evalIn = async (expr) => {
@@ -114,9 +114,15 @@ const focus = await evalIn(`(() => {
 })()`);
 check('focus mode hides every game element', focus === true);
 
-/* 6 · proctor answer sheet records and counts blanks */
+/* 6 · proctor answer sheet records and counts blanks.
+   The sheet persists to localStorage, so wipe it first — otherwise a
+   previous run's saved answer makes this click a toggle-OFF and the
+   counter legitimately reads zero. */
 await send('Page.navigate', { url: `http://127.0.0.1:${PORT}/lessons/w04a.html` }, sessionId);
-await new Promise((r) => setTimeout(r, 600));
+await new Promise((r) => setTimeout(r, 400));
+await evalIn(`localStorage.clear()`);
+await send('Page.reload', {}, sessionId);
+await new Promise((r) => setTimeout(r, 700));
 const sheet = await evalIn(`document.querySelectorAll('.srow').length`);
 check('proctor builds a 66-question answer sheet', sheet === 66, String(sheet));
 const marked = await evalIn(`(() => {

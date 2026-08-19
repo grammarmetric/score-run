@@ -156,6 +156,48 @@ window.LESSON = {
       "Divide: 8 ÷ 4. Reversing one subtraction but not the other is what produces the negative decoy."
      ],
      "answer": "The slope is 2."
+    },
+    "desmos": {
+     "title": "Slope and intercept explorer",
+     "hint": "Drag <code>m</code> and watch the steepness change. Then drag <code>b</code> — the line slides up and down without ever changing steepness. That is the whole difference between a rate and a starting amount.",
+     "bounds": {
+      "left": -10,
+      "right": 10,
+      "bottom": -10,
+      "top": 10
+     },
+     "expressions": [
+      {
+       "id": "m",
+       "latex": "m=2",
+       "sliderBounds": {
+        "min": -5,
+        "max": 5,
+        "step": 0.1
+       }
+      },
+      {
+       "id": "b",
+       "latex": "b=3",
+       "sliderBounds": {
+        "min": -8,
+        "max": 8,
+        "step": 0.5
+       }
+      },
+      {
+       "id": "line",
+       "latex": "y=mx+b",
+       "color": "#54c1e6"
+      },
+      {
+       "id": "yint",
+       "latex": "(0,b)",
+       "color": "#fee801",
+       "showLabel": true,
+       "label": "starting amount"
+      }
+     ]
     }
    }
   ],

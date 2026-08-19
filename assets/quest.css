@@ -410,3 +410,37 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--yellow);outline-off
   *,*::before,*::after{animation-duration:.01ms !important;transition-duration:.01ms !important}
   .reveal{opacity:1;transform:none}
 }
+
+/* ── desmos ─────────────────────────────────────────────── */
+.dwrap{
+  background:rgba(0,0,0,.28);border:1px solid var(--line);
+  border-radius:var(--r-sm);padding:14px;margin:18px 0;overflow:hidden;
+}
+.dhead{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  flex-wrap:wrap;margin-bottom:11px;
+}
+.dhead h5{
+  font-size:14px;font-weight:700;color:var(--sky);
+  display:flex;align-items:center;gap:8px;
+}
+.dtag{
+  font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  background:rgba(57,196,182,.14);color:var(--teal);
+  padding:4px 11px;border-radius:100px;border:1px solid rgba(57,196,182,.3);
+}
+.dhint{font-size:13.5px;color:var(--t3);margin-bottom:11px;line-height:1.6}
+.dhint code{
+  background:rgba(254,232,1,.1);color:var(--yellow);
+  padding:2px 7px;border-radius:5px;font-family:Consolas,monospace;font-size:12.5px;
+}
+.dcalc{
+  width:100%;height:430px;border-radius:11px;overflow:hidden;
+  background:#fff;
+}
+.dfail{
+  height:auto;background:rgba(255,82,82,.06);border:1px dashed rgba(255,82,82,.3);
+  border-radius:11px;padding:18px;font-size:14px;color:var(--t2);
+}
+.dfail b{color:#ff9a9a;display:block;margin-bottom:5px}
+@media (max-width:720px){ .dcalc{height:340px} }

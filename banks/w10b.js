@@ -105,6 +105,36 @@ window.LESSON = {
       "Let n = 10: n + 1 = 11, still odd. Two confirmations is enough."
      ],
      "answer": "n + 1, found without any algebra at all."
+    },
+    "desmos": {
+     "title": "Backsolving, seen",
+     "hint": "The blue line is <code>3x − 7</code> and the dashed line is <code>14</code>. Backsolving is just asking which x makes them meet. Substituting each option is the same as checking whether that x lands on the crossing point.",
+     "bounds": {
+      "left": -2,
+      "right": 12,
+      "bottom": -12,
+      "top": 26
+     },
+     "expressions": [
+      {
+       "id": "f",
+       "latex": "y=3x-7",
+       "color": "#54c1e6"
+      },
+      {
+       "id": "target",
+       "latex": "y=14",
+       "color": "#fee801",
+       "lineStyle": "DASHED"
+      },
+      {
+       "id": "sol",
+       "latex": "(7,14)",
+       "color": "#39c4b6",
+       "showLabel": true,
+       "label": "x = 7"
+      }
+     ]
     }
    },
    {

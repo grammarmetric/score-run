@@ -90,6 +90,17 @@ w01b: {
           'Divide: 8 ÷ 4. Reversing one subtraction but not the other is what produces the negative decoy.'
         ],
         answer: 'The slope is 2.'
+      },
+      desmos: {
+        title: 'Slope and intercept explorer',
+        hint: 'Drag <code>m</code> and watch the steepness change. Then drag <code>b</code> — the line slides up and down without ever changing steepness. That is the whole difference between a rate and a starting amount.',
+        bounds: { left: -10, right: 10, bottom: -10, top: 10 },
+        expressions: [
+          { id: 'm', latex: 'm=2', sliderBounds: { min: -5, max: 5, step: 0.1 } },
+          { id: 'b', latex: 'b=3', sliderBounds: { min: -8, max: 8, step: 0.5 } },
+          { id: 'line', latex: 'y=mx+b', color: '#54c1e6' },
+          { id: 'yint', latex: '(0,b)', color: '#fee801', showLabel: true, label: 'starting amount' }
+        ]
       }
     }
   ],
@@ -185,6 +196,16 @@ w02b: {
           'Now p = 12 − 7 = 5. The question asked for notebooks, so the answer is n, not p.'
         ],
         answer: '7 notebooks.'
+      },
+      desmos: {
+        title: 'Where two equations meet',
+        hint: 'Both equations from a system are graphed together. The solution is the single point where they cross — which is why a system with parallel lines has no solution at all.',
+        bounds: { left: -2, right: 12, bottom: -2, top: 14 },
+        expressions: [
+          { id: 'l1', latex: 'x+y=10', color: '#54c1e6' },
+          { id: 'l2', latex: 'x-y=4', color: '#39c4b6' },
+          { id: 'sol', latex: '(7,3)', color: '#fee801', showLabel: true, label: 'solution (7, 3)' }
+        ]
       }
     }
   ],
@@ -254,6 +275,16 @@ w03b: {
           'Check the size: more distance than 100 km, so more than 6 litres. 15 is sensible.'
         ],
         answer: '15 litres.'
+      },
+      desmos: {
+        title: 'A rate is a straight line through the origin',
+        hint: 'Fuel used against distance, at 6 litres per 100 km. Drag <code>r</code> to change the rate and watch the steepness change. Every constant rate is a line through (0, 0) — which is why doubling the distance always doubles the fuel.',
+        bounds: { left: -20, right: 320, bottom: -3, top: 26 },
+        expressions: [
+          { id: 'r', latex: 'r=0.06', sliderBounds: { min: 0.01, max: 0.2, step: 0.01 } },
+          { id: 'fuel', latex: 'y=rx', color: '#54c1e6' },
+          { id: 'pt', latex: '(250,250r)', color: '#fee801', showLabel: true, label: '250 km' }
+        ]
       }
     },
     {
@@ -375,6 +406,18 @@ w05b: {
           'Therefore x is whatever makes the total 30.'
         ],
         answer: 'x = 10.'
+      },
+      desmos: {
+        title: 'Scatterplot and line of best fit',
+        hint: 'Change any number in the table and the line updates instantly. The regression <code>y_1 ~ mx_1 + b</code> is already typed in — click it to see the values Desmos worked out for m and b.',
+        bounds: { left: -1, right: 8, bottom: -1, top: 14 },
+        expressions: [
+          { type: 'table', columns: [
+            { latex: 'x_1', values: ['1', '2', '3', '4', '5'] },
+            { latex: 'y_1', values: ['3', '5', '7', '8', '11'], color: '#54c1e6' }
+          ] },
+          { id: 'reg', latex: 'y_1 \\sim mx_1+b' }
+        ]
       }
     }
   ],
@@ -471,6 +514,19 @@ w06b: {
           'Note the partner fact: cos 60° is also ½. The trap answer 0.866 is cos 30°.'
         ],
         answer: 'sin 30° = 0.5.'
+      },
+      desmos: {
+        title: 'The unit circle',
+        hint: 'Drag <code>t</code> around the circle. The point’s <em>height</em> is the sine and its <em>distance along</em> is the cosine. Stop at 30° and read the height — exactly 0.5. Stop at 90° and it is 1.',
+        options: { degreeMode: true },
+        bounds: { left: -1.7, right: 1.7, bottom: -1.35, top: 1.35 },
+        expressions: [
+          { id: 'circ', latex: 'x^2+y^2=1', color: '#39c4b6' },
+          { id: 't', latex: 't=30', sliderBounds: { min: 0, max: 360, step: 1 } },
+          { id: 'ray', latex: 'y=\\tan(t)x\\left\\{0\\le x\\cos(t)\\right\\}', color: '#9a9f17' },
+          { id: 'pt', latex: '(\\cos(t),\\sin(t))', color: '#fee801', showLabel: true, label: 'sin = height' },
+          { id: 'drop', latex: 'x=\\cos(t)\\left\\{0\\le y\\le\\sin(t)\\right\\}', color: '#54c1e6' }
+        ]
       }
     }
   ],
@@ -566,6 +622,18 @@ w07b: {
           'The vertex is (h, k). Note the x flipped and the y did not.'
         ],
         answer: 'The vertex is (−1, −4).'
+      },
+      desmos: {
+        title: 'Vertex form playground',
+        hint: 'Drag <code>h</code> and watch the vertex move. Increasing <code>h</code> moves the curve <strong>right</strong>, even though the formula reads <code>(x − h)</code> — that is the sign flip, and seeing it happen is easier than memorising it. Then drag <code>a</code> to flip and stretch it.',
+        bounds: { left: -10, right: 10, bottom: -10, top: 10 },
+        expressions: [
+          { id: 'a', latex: 'a=1', sliderBounds: { min: -3, max: 3, step: 0.1 } },
+          { id: 'h', latex: 'h=2', sliderBounds: { min: -6, max: 6, step: 0.5 } },
+          { id: 'k', latex: 'k=3', sliderBounds: { min: -6, max: 6, step: 0.5 } },
+          { id: 'par', latex: 'y=a(x-h)^2+k', color: '#54c1e6' },
+          { id: 'v', latex: '(h,k)', color: '#fee801', showLabel: true, label: 'vertex (h, k)' }
+        ]
       }
     }
   ],
@@ -662,6 +730,17 @@ w09b: {
           'Check with a point: if f(0) = 7, then f(x + 4) = 7 needs x = −4. The point moved left ✓'
         ],
         answer: '4 units to the left.'
+      },
+      desmos: {
+        title: 'Which way does the graph move?',
+        hint: 'The dashed olive curve is the original. Drag <code>p</code> — the change <em>inside</em> the bracket — and watch it move the opposite way to its sign. Then drag <code>q</code>, the change <em>outside</em>, which moves exactly the way you would expect.',
+        bounds: { left: -10, right: 10, bottom: -7, top: 12 },
+        expressions: [
+          { id: 'p', latex: 'p=3', sliderBounds: { min: -6, max: 6, step: 0.5 } },
+          { id: 'q', latex: 'q=0', sliderBounds: { min: -6, max: 6, step: 0.5 } },
+          { id: 'orig', latex: 'y=x^2', color: '#9a9f17', lineStyle: 'DASHED' },
+          { id: 'moved', latex: 'y=(x-p)^2+q', color: '#54c1e6' }
+        ]
       }
     }
   ],
@@ -730,6 +809,16 @@ w10b: {
           'Let n = 10: n + 1 = 11, still odd. Two confirmations is enough.'
         ],
         answer: 'n + 1, found without any algebra at all.'
+      },
+      desmos: {
+        title: 'Backsolving, seen',
+        hint: 'The blue line is <code>3x − 7</code> and the dashed line is <code>14</code>. Backsolving is just asking which x makes them meet. Substituting each option is the same as checking whether that x lands on the crossing point.',
+        bounds: { left: -2, right: 12, bottom: -12, top: 26 },
+        expressions: [
+          { id: 'f', latex: 'y=3x-7', color: '#54c1e6' },
+          { id: 'target', latex: 'y=14', color: '#fee801', lineStyle: 'DASHED' },
+          { id: 'sol', latex: '(7,14)', color: '#39c4b6', showLabel: true, label: 'x = 7' }
+        ]
       }
     },
     {

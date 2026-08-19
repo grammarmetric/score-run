@@ -28,7 +28,15 @@ const esc = (s) => String(s)
 
 const FONT = '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500&display=swap">';
 
-function page({ title, lead, css, body, scripts = [], depth = 1 }) {
+/* Desmos graphing API. The key is a client-side key by design — it ships
+   in the page source on every Desmos embed. Same key as the other builds.
+   `defer` matters: without it this blocks HTML parsing, and on a slow
+   connection the student stares at a blank lesson until Desmos arrives.
+   Deferred, the lesson renders immediately and the graph fills in after —
+   quest.js polls for window.Desmos, so the ordering is safe either way. */
+const DESMOS = '<script defer src="https://www.desmos.com/api/v1.9/calculator.js?apiKey=186f2d55ee6f4a3fa62ae79378493afd"></script>';
+
+function page({ title, lead, css, body, scripts = [], depth = 1, desmos = false }) {
   const up = '../'.repeat(depth);
   return `<!doctype html>
 <html lang="en"${lead ? ` data-lead="${lead}"` : ''}>
@@ -37,7 +45,7 @@ function page({ title, lead, css, body, scripts = [], depth = 1 }) {
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${esc(title)}</title>
 <meta name="robots" content="noindex">
-${FONT}
+${FONT}${desmos ? '\n' + DESMOS : ''}
 <link rel="stylesheet" href="${up}assets/${css}">
 </head>
 <body>
@@ -77,10 +85,13 @@ for (const s of sessions) {
       `/* ${s.id} — ${s.title}. Generated from tools/content-*.mjs */\nwindow.LESSON = ${JSON.stringify(bank, null, 1)};\n`
     );
 
-    /* the lesson — present → practice → produce, with the game layer */
+    /* the lesson — present → practice → produce, with the game layer.
+       Desmos is loaded only where a module actually uses it.          */
+    const usesDesmos = p.modules.some((m) => !!m.desmos);
     writeFileSync(join(ROOT, 'lessons', `${s.id}.html`), page({
       title: `${s.title} · Score run`,
       css: 'quest.css',
+      desmos: usesDesmos,
       body: `<canvas id="fx"></canvas>
 <div id="quest"></div>`,
       scripts: [`banks/${s.id}.js`, 'assets/quest.js']

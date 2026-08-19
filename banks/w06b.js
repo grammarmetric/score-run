@@ -160,6 +160,52 @@ window.LESSON = {
       "Note the partner fact: cos 60° is also ½. The trap answer 0.866 is cos 30°."
      ],
      "answer": "sin 30° = 0.5."
+    },
+    "desmos": {
+     "title": "The unit circle",
+     "hint": "Drag <code>t</code> around the circle. The point’s <em>height</em> is the sine and its <em>distance along</em> is the cosine. Stop at 30° and read the height — exactly 0.5. Stop at 90° and it is 1.",
+     "options": {
+      "degreeMode": true
+     },
+     "bounds": {
+      "left": -1.7,
+      "right": 1.7,
+      "bottom": -1.35,
+      "top": 1.35
+     },
+     "expressions": [
+      {
+       "id": "circ",
+       "latex": "x^2+y^2=1",
+       "color": "#39c4b6"
+      },
+      {
+       "id": "t",
+       "latex": "t=30",
+       "sliderBounds": {
+        "min": 0,
+        "max": 360,
+        "step": 1
+       }
+      },
+      {
+       "id": "ray",
+       "latex": "y=\\tan(t)x\\left\\{0\\le x\\cos(t)\\right\\}",
+       "color": "#9a9f17"
+      },
+      {
+       "id": "pt",
+       "latex": "(\\cos(t),\\sin(t))",
+       "color": "#fee801",
+       "showLabel": true,
+       "label": "sin = height"
+      },
+      {
+       "id": "drop",
+       "latex": "x=\\cos(t)\\left\\{0\\le y\\le\\sin(t)\\right\\}",
+       "color": "#54c1e6"
+      }
+     ]
     }
    }
   ],

@@ -154,6 +154,57 @@ window.LESSON = {
       "The vertex is (h, k). Note the x flipped and the y did not."
      ],
      "answer": "The vertex is (−1, −4)."
+    },
+    "desmos": {
+     "title": "Vertex form playground",
+     "hint": "Drag <code>h</code> and watch the vertex move. Increasing <code>h</code> moves the curve <strong>right</strong>, even though the formula reads <code>(x − h)</code> — that is the sign flip, and seeing it happen is easier than memorising it. Then drag <code>a</code> to flip and stretch it.",
+     "bounds": {
+      "left": -10,
+      "right": 10,
+      "bottom": -10,
+      "top": 10
+     },
+     "expressions": [
+      {
+       "id": "a",
+       "latex": "a=1",
+       "sliderBounds": {
+        "min": -3,
+        "max": 3,
+        "step": 0.1
+       }
+      },
+      {
+       "id": "h",
+       "latex": "h=2",
+       "sliderBounds": {
+        "min": -6,
+        "max": 6,
+        "step": 0.5
+       }
+      },
+      {
+       "id": "k",
+       "latex": "k=3",
+       "sliderBounds": {
+        "min": -6,
+        "max": 6,
+        "step": 0.5
+       }
+      },
+      {
+       "id": "par",
+       "latex": "y=a(x-h)^2+k",
+       "color": "#54c1e6"
+      },
+      {
+       "id": "v",
+       "latex": "(h,k)",
+       "color": "#fee801",
+       "showLabel": true,
+       "label": "vertex (h, k)"
+      }
+     ]
     }
    }
   ],

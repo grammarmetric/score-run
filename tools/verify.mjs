@@ -82,7 +82,7 @@ let failures = 0;
 for (const p of pages) {
   events.length = 0;
   await send('Page.navigate', { url: `http://127.0.0.1:${PORT}/${p}` }, sessionId);
-  await new Promise((r) => setTimeout(r, 420));
+  await new Promise((r) => setTimeout(r, 800));
 
   const bad = events.filter((e) =>
     (e.method === 'Runtime.exceptionThrown') ||
@@ -92,9 +92,9 @@ for (const p of pages) {
 
   const { result } = await send('Runtime.evaluate', {
     expression: `(() => {
-      /* Pages with a #lesson or #run host are script-built and must be
+      /* Pages with a #lesson / #quest host are script-built and must be
          populated. index.html is static — it only has to have rendered. */
-      const host = document.querySelector('#lesson') || document.querySelector('#run');
+      const host = document.querySelector('#lesson') || document.querySelector('#quest');
       const cards = document.querySelectorAll('.card, .hubrow, .fig, .need, .panel').length;
       const opts  = document.querySelectorAll('.opt, .sbtn, .tstep, .hublink, .act, .btn').length;
       return JSON.stringify({ scripted: !!host, kids: host ? host.children.length : -1, cards, opts });

@@ -47,7 +47,7 @@ to land before any drilling is worth doing.
 | Phase | What is on the page |
 | --- | --- |
 | **Warm-up** | An analogy that makes the idea concrete, then one free question. No life at risk. |
-| **Presentation** | **Three teaching modules.** Each carries a lead, 3 concept cards (with formulas where they help), a right/wrong example pair, the rule, the trap the exam builds from that rule, and a worked example broken into numbered steps with the answer called out. |
+| **Presentation** | **Three teaching modules.** Each carries a lead, 3 concept cards (with formulas where they help), a right/wrong example pair, the rule, the trap the exam builds from that rule, and a worked example broken into numbered steps with the answer called out. Every maths lesson also embeds a **live Desmos calculator** on the module it helps most. |
 | **Practice** | Trap forensics — name *why* each wrong option is wrong — then scaffolded quizzes with XP, streak bonuses and lives. |
 | **Produce** | Boss battle: no hints, no topic labels, HP bar, mixed application. |
 | **Victory** | Badges, certificate, accuracy, and the teach-back prompts. |
@@ -103,6 +103,22 @@ All three harnesses pass at the time of committing:
   answer awards XP and a wrong one costs a life; the boss HP reaches zero and
   the certificate appears.
 - `interact.mjs` — **11 checks** on the plain drill engine and the proctor sheet.
+
+## Desmos
+
+The eight maths lessons embed a live Desmos graph on the module where seeing
+it beats reading it — slope/intercept sliders, a system's intersection, rate as
+a line through the origin, a scatterplot with regression, the unit circle in
+degree mode, the vertex-form flip, transformation sliders, and backsolving as
+an intersection.
+
+The script is loaded **deferred**, and only on lessons that use it. That is not
+cosmetic: loaded synchronously it blocks HTML parsing, so a student on a slow
+connection stares at a blank lesson until Desmos arrives. Deferred, the lesson
+renders immediately and the graph fills in after — `quest.js` polls for
+`window.Desmos`, and if it never appears the calculator is replaced by a short
+notice rather than an empty white box. The API key is a client-side key by
+design; it ships in page source on every Desmos embed.
 
 ## Companion document
 
