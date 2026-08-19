@@ -9,22 +9,158 @@ window.LESSON = {
  "sub": "The interpretation half of problem solving and data — where the reading weakness meets the maths paper most directly.",
  "stampSet": "math",
  "present": {
-  "rule": "Read the chart before you read the question: title, axes, units. Then find what the question restricts you to.",
-  "steps": [
-   "Read the title and both axis labels first",
-   "Check whether the axis starts at zero — if not, differences look bigger than they are",
-   "In a two-way table, the words \"of the …\" tell you the denominator",
-   "For a median, order the list before taking the middle"
-  ],
-  "worked": {
-   "text": "Of the Year 11 students, how many walk? (Year 11 row: bus 25, walk 15, total 40)",
-   "lines": [
-    "The phrase \"of the Year 11 students\" fixes the group.",
-    "So the denominator is that row's total: 40 — not the grand total of 80.",
-    "The number who walk in that row is 15.",
-    "The answer is <em>15 out of 40</em>. Using 80 or 37 means you read the wrong total."
-   ]
+  "hook": {
+   "icon": "🔭",
+   "title": "Read the instrument before the question",
+   "text": "A chart question is really a reading question wearing a maths costume. The numbers are easy; extracting the right ones is the whole task. There is a fixed routine — title, axes, units, then the question — and students who skip it get the arithmetic right on the wrong figures."
   },
+  "modules": [
+   {
+    "title": "The four-second routine",
+    "accent": "sky",
+    "lead": "Before reading the question, read the chart. Title, both axis labels, units, and whether the scale starts at zero.",
+    "concepts": [
+     {
+      "i": "🏷️",
+      "t": "Title and axes",
+      "d": "What is being measured, and against what."
+     },
+     {
+      "i": "📏",
+      "t": "Units",
+      "d": "Thousands? Percentages? Per capita? The answer options often differ only by unit."
+     },
+     {
+      "i": "⚠️",
+      "t": "Zero check",
+      "d": "A vertical axis starting at 40 makes small differences look enormous."
+     }
+    ],
+    "examples": [
+     {
+      "ok": true,
+      "t": "Read the axes, note “figures in thousands”, then answer → <span class=\"hl-ok\">correct scale</span>",
+      "note": "The unit was carried into the answer."
+     },
+     {
+      "ok": false,
+      "t": "Read the question, grab the nearest number → <span class=\"hl-no\">answer off by 1000×</span>",
+      "note": "Right shape of reasoning, wrong magnitude."
+     }
+    ],
+    "rule": "Chart first, question second. Always.",
+    "trap": "A truncated axis exaggerates differences visually. If a question asks whether one bar is “twice” another, check the numbers, not the picture.",
+    "worked": {
+     "q": "A bar chart’s vertical axis starts at 40 rather than 0. What is the risk?",
+     "steps": [
+      "Picture two bars, one at 45 and one at 50.",
+      "With the axis starting at zero, they are nearly the same height.",
+      "With the axis starting at 40, one is 5 units tall and the other is 10 — it looks twice as big.",
+      "The numbers have not changed; only the impression has."
+     ],
+     "answer": "Differences between bars look far larger than they are."
+    }
+   },
+   {
+    "title": "Two-way tables: the words pick the denominator",
+    "accent": "teal",
+    "lead": "The hard part of a two-way table is never the reading. It is knowing which total goes on the bottom of the fraction.",
+    "concepts": [
+     {
+      "i": "📋",
+      "t": "Row and column totals",
+      "d": "The totals row and column are summaries, not data. Do not treat them as another category."
+     },
+     {
+      "i": "🔑",
+      "t": "“Of the…”",
+      "d": "The phrase “of the X” fixes your denominator to X’s total."
+     },
+     {
+      "i": "🎯",
+      "t": "Three candidates",
+      "d": "Row total, column total, grand total. Only one matches the wording."
+     }
+    ],
+    "examples": [
+     {
+      "ok": true,
+      "t": "“Of the Year 11 students, how many walk?” → <span class=\"hl-ok\">15 out of 40</span>",
+      "note": "“Of the Year 11 students” fixes the denominator to that row’s total."
+     },
+     {
+      "ok": false,
+      "t": "→ <span class=\"hl-no\">15 out of 80</span>",
+      "note": "Used the grand total. A different question entirely."
+     }
+    ],
+    "rule": "Underline the phrase beginning “of the…”. That names your denominator.",
+    "trap": "All three denominators — row total, column total and grand total — are offered as options, each with the same numerator.",
+    "worked": {
+     "q": "Year 11 row: bus 25, walk 15, total 40. Grand total 80. Of the Year 11 students, what fraction walk?",
+     "steps": [
+      "Underline the restricting phrase: “of the Year 11 students”.",
+      "That fixes the group to the Year 11 row only, so the denominator is 40.",
+      "Find the numerator inside that row: 15 walk.",
+      "So the fraction is 15 out of 40. Using 80 or 37 means the wrong total was picked up."
+     ],
+     "answer": "15 out of 40."
+    }
+   },
+   {
+    "title": "Mean, median and mode",
+    "accent": "olive",
+    "lead": "Three different averages that the exam deliberately places close together in the answer options.",
+    "concepts": [
+     {
+      "i": "➗",
+      "t": "Mean",
+      "d": "Add all values, divide by how many there are.",
+      "f": "mean = total ÷ count"
+     },
+     {
+      "i": "🎯",
+      "t": "Median",
+      "d": "Order the list first, then take the middle value. Ordering is not optional."
+     },
+     {
+      "i": "🔁",
+      "t": "Mode",
+      "d": "The value appearing most often."
+     },
+     {
+      "i": "🔙",
+      "t": "Working backwards",
+      "d": "Given a mean and a count, the total is mean × count.",
+      "f": "total = mean × count"
+     }
+    ],
+    "examples": [
+     {
+      "ok": true,
+      "t": "12, 4, 9, 21, 7 → order → 4, 7, 9, 12, 21 → median <span class=\"hl-ok\">9</span>",
+      "note": "Ordered before taking the middle."
+     },
+     {
+      "ok": false,
+      "t": "12, 4, 9, 21, 7 → middle as written = <span class=\"hl-no\">9</span>… but 5, 2, 9, 4, 7 → 9 is wrong",
+      "note": "Taking the middle of an unordered list works by luck, not method."
+     }
+    ],
+    "rule": "Order first for a median. For a missing value, use total = mean × count.",
+    "trap": "A dataset is chosen so the mean, median and mode are all different but close — and all three appear as options.",
+    "worked": {
+     "q": "The mean of 8, x and 12 is 10. What is x?",
+     "steps": [
+      "There are three values and the mean is 10.",
+      "So the total must be mean × count = 10 × 3 = 30.",
+      "The two known values sum to 8 + 12 = 20.",
+      "Therefore x is whatever makes the total 30."
+     ],
+     "answer": "x = 10."
+    }
+   }
+  ],
   "check": {
    "stem": "Values 12, 4, 9. What is the median?",
    "options": [
@@ -32,7 +168,7 @@ window.LESSON = {
     "9"
    ],
    "answer": 1,
-   "explain": "Order them first: 4, 9, 12. The middle is 9."
+   "explain": "Order them first: 4, 9, 12. The middle value is 9."
   }
  },
  "forensics": {

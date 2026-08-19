@@ -15,10 +15,12 @@ import { dirname, join } from 'node:path';
 import { sessions } from './manifest.mjs';
 import { rw } from './content-rw.mjs';
 import { math } from './content-math.mjs';
-import { present } from './content-present.mjs';
+import { presentRw } from './present-rw.mjs';
+import { presentMath } from './present-math.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const content = { ...rw, ...math };
+const present = { ...presentRw, ...presentMath };
 
 const esc = (s) => String(s)
   .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
@@ -75,13 +77,13 @@ for (const s of sessions) {
       `/* ${s.id} — ${s.title}. Generated from tools/content-*.mjs */\nwindow.LESSON = ${JSON.stringify(bank, null, 1)};\n`
     );
 
-    /* the game — this is the lesson */
+    /* the lesson — present → practice → produce, with the game layer */
     writeFileSync(join(ROOT, 'lessons', `${s.id}.html`), page({
-      title: `${s.title} · Signal lost`,
-      css: 'run.css',
+      title: `${s.title} · Score run`,
+      css: 'quest.css',
       body: `<canvas id="fx"></canvas>
-<div id="shake"><main class="wrap" id="run"></main></div>`,
-      scripts: [`banks/${s.id}.js`, 'assets/run.js']
+<div id="quest"></div>`,
+      scripts: [`banks/${s.id}.js`, 'assets/quest.js']
     }));
 
     /* the quiet version — same content, no game layer */
@@ -131,7 +133,7 @@ for (const s of sessions) {
       <div class="trun">
         <div class="tstep">
           <span class="tt">Present</span>
-          <span><span class="tw">Briefing</span><span class="td">The rule is taught and one worked example is walked through line by line, then a free question that costs nothing. No timer, no HP at risk. Rule as the student sees it: “${esc(p.rule)}”</span></span>
+          <span><span class="tw">Warm-up + ${p.modules.length} teaching modules</span><span class="td">Opens with the “${esc(p.hook.title)}” analogy, then teaches: ${p.modules.map((m) => esc(m.title)).join(' · ')}. Each module carries concept cards, a right/wrong example pair, the rule, the trap the exam builds from it, and a worked example in numbered steps. Nothing is timed and nothing costs a life.</span></span>
         </div>
         <div class="tstep">
           <span class="tt">Practice</span>

@@ -9,22 +9,156 @@ window.LESSON = {
  "sub": "Algebra is the one real strength on the diagnostic — 52%. This session is about converting it, and about finding out exactly which 48% is failing.",
  "stampSet": "math",
  "present": {
-  "rule": "Solve the equation, then read the question again. It often asks for something other than x.",
-  "steps": [
-   "Underline exactly what the question asks for before you start",
-   "Undo operations in reverse order to isolate x",
-   "Check what was underlined — is it x, or 2x, or x + 1?",
-   "For a line, slope is the rate of change and the constant is the starting amount"
-  ],
-  "worked": {
-   "text": "If 5x − 3 = 12, what is the value of 10x?",
-   "lines": [
-    "Underline the ask: <em>10x</em>, not x.",
-    "Add 3 to both sides: 5x = 15.",
-    "Divide by 5: x = 3. This is where most people stop and lose the mark.",
-    "The ask was 10x, so the answer is <em>30</em>."
-   ]
+  "hook": {
+   "icon": "🎁",
+   "title": "Solving is not finishing",
+   "text": "The most expensive mistake in SAT maths is not getting the algebra wrong. It is getting the algebra right, finding x, and handing in x when the question asked for 2x. The wrong answers are built from this — one of them is always the value of x, sitting there waiting for you. Underlining what is actually asked, before you start, is worth more marks than any technique in this lesson."
   },
+  "modules": [
+   {
+    "title": "Underline the ask",
+    "accent": "sky",
+    "lead": "Read the final clause of the question first and underline exactly what it wants. Then solve.",
+    "concepts": [
+     {
+      "i": "✏️",
+      "t": "Before solving",
+      "d": "Underline the quantity asked for: x, or 2x, or x + 1, or “the value of the expression”."
+     },
+     {
+      "i": "🔁",
+      "t": "After solving",
+      "d": "Go back to the underline. Compare it with what you have written down."
+     },
+     {
+      "i": "🪤",
+      "t": "The decoy",
+      "d": "The value of x is nearly always one of the four options, even when x is not what was asked.",
+      "f": "found x ≠ finished"
+     }
+    ],
+    "examples": [
+     {
+      "ok": true,
+      "t": "5x − 3 = 12 → x = 3 → asked for 10x → <span class=\"hl-ok\">30</span>",
+      "note": "Solved, then went back to the underline."
+     },
+     {
+      "ok": false,
+      "t": "5x − 3 = 12 → x = <span class=\"hl-no\">3</span> → answered 3",
+      "note": "Correct algebra, wrong quantity. Full marks lost."
+     }
+    ],
+    "rule": "Underline the ask before the first line of working, and check against it before you choose.",
+    "trap": "This error feels impossible until it happens under time pressure. It is the single most common avoidable loss on the maths section.",
+    "worked": {
+     "q": "If 5x − 3 = 12, what is the value of 10x?",
+     "steps": [
+      "Underline the ask: <strong>10x</strong> — not x.",
+      "Add 3 to both sides: 5x = 15.",
+      "Divide by 5: x = 3. This is where most people stop and lose the mark.",
+      "Return to the underline. It said 10x, so multiply: 10 × 3."
+     ],
+     "answer": "10x = 30. Note that 3 is offered as an option."
+    }
+   },
+   {
+    "title": "Isolating x, in reverse order",
+    "accent": "teal",
+    "lead": "To undo an equation, reverse the operations and reverse their order — the last thing done to x is the first thing you undo.",
+    "concepts": [
+     {
+      "i": "➕",
+      "t": "Undo add/subtract",
+      "d": "Move constants across first by doing the opposite."
+     },
+     {
+      "i": "✖️",
+      "t": "Undo multiply/divide",
+      "d": "Then deal with the coefficient."
+     },
+     {
+      "i": "🧊",
+      "t": "Brackets",
+      "d": "When x sits inside brackets, dividing by the outside number first is usually faster than expanding.",
+      "f": "4(x − 1) = 20 → x − 1 = 5"
+     }
+    ],
+    "examples": [
+     {
+      "ok": true,
+      "t": "4(x − 1) = 20 → divide by 4 → x − 1 = 5 → <span class=\"hl-ok\">x = 6</span>",
+      "note": "Divide first: one line of working instead of three."
+     },
+     {
+      "ok": false,
+      "t": "4(x − 1) = 20 → 4x − 1 = 20",
+      "note": "The 4 was multiplied into only the first term. Both terms in the bracket must be multiplied."
+     }
+    ],
+    "rule": "Whatever you do to one side, do to the other. Undo in reverse order.",
+    "trap": "Sign errors when moving terms across. Every wrong option in these questions is reachable by exactly one sign slip.",
+    "tip": "When the bracket has a clean factor, divide before expanding. Fewer steps means fewer chances to slip.",
+    "worked": {
+     "q": "If 4(x − 1) = 20, what is x?",
+     "steps": [
+      "The bracket is multiplied by 4, and 20 divides by 4 cleanly — so divide first.",
+      "4(x − 1) ÷ 4 = 20 ÷ 4, giving x − 1 = 5.",
+      "Now undo the subtraction: add 1 to both sides.",
+      "Check by substituting back: 4(6 − 1) = 4 × 5 = 20 ✓"
+     ],
+     "answer": "x = 6."
+    }
+   },
+   {
+    "title": "Slope is a rate, the intercept is a start",
+    "accent": "olive",
+    "lead": "The SAT rarely asks you to compute a slope in isolation. It asks what the slope <em>means</em> in the situation described.",
+    "concepts": [
+     {
+      "i": "📈",
+      "t": "Slope = rate",
+      "d": "How much y changes for each 1 unit of x. In a cost model, the price per hour or per item.",
+      "f": "m = (y₂ − y₁) ÷ (x₂ − x₁)"
+     },
+     {
+      "i": "🏁",
+      "t": "Intercept = start",
+      "d": "The value when x is zero. The fixed fee, the joining charge, the starting amount."
+     },
+     {
+      "i": "📐",
+      "t": "Same order",
+      "d": "Subtract in the same order on top and bottom or the sign flips.",
+      "f": "y = mx + b"
+     }
+    ],
+    "examples": [
+     {
+      "ok": true,
+      "t": "C = 45 + 30h → <span class=\"hl-ok\">30 is the hourly rate</span>, 45 is the call-out fee.",
+      "note": "The number attached to the variable is the rate."
+     },
+     {
+      "ok": false,
+      "t": "C = 45 + 30h → <span class=\"hl-no\">30 is the call-out fee</span>",
+      "note": "Swapped. The constant, not the coefficient, is the fixed charge."
+     }
+    ],
+    "rule": "The number multiplying the variable is the rate; the number standing alone is the starting amount.",
+    "trap": "Both numbers appear in the options with their meanings swapped, and a third option gives their sum — the cost of one hour.",
+    "worked": {
+     "q": "A line passes through (2, 5) and (6, 13). What is its slope?",
+     "steps": [
+      "Slope is change in y over change in x.",
+      "Change in y: 13 − 5 = 8. Keep the order — second point minus first.",
+      "Change in x, in the SAME order: 6 − 2 = 4.",
+      "Divide: 8 ÷ 4. Reversing one subtraction but not the other is what produces the negative decoy."
+     ],
+     "answer": "The slope is 2."
+    }
+   }
+  ],
   "check": {
    "stem": "If 2x = 8, what is 4x?",
    "options": [

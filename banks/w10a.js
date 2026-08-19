@@ -9,30 +9,160 @@ window.LESSON = {
  "sub": "Why a sentence is there, and the notes-to-sentence question type — which is more formulaic than it looks.",
  "stampSet": "rw",
  "present": {
-  "rule": "On these questions most wrong answers are completely true. They just fail to do the job the prompt asked for.",
-  "steps": [
-   "Find the goal — it is always in the final sentence of the prompt",
-   "Underline the exact words of that goal",
-   "Ask of each option: does this do THAT specific job?",
-   "Being true is not enough; it has to serve the stated goal"
-  ],
-  "worked": {
-   "text": "Notes about the Antikythera mechanism. Goal: emphasise its COMPLEXITY.",
-   "lines": [
-    "The goal word is \"complexity\" — underline it.",
-    "\"Recovered from a shipwreck in 1901\" is true, but that is history, not complexity.",
-    "\"Dates from roughly 100 BCE\" is true, but that is age, not complexity.",
-    "\"Contains at least 30 bronze gears\" is the only detail that evidences <em>complexity</em>."
-   ]
+  "hook": {
+   "icon": "🎯",
+   "title": "True is not the same as right",
+   "text": "On these questions almost every wrong answer is a completely true statement, pulled straight from the notes. That is what makes them hard: there is nothing to catch, no error to spot. The only thing separating the right answer from three true ones is whether it does the specific job the prompt asked for — and the prompt always states that job in its final sentence."
   },
+  "modules": [
+   {
+    "title": "The goal is in the last sentence",
+    "accent": "sky",
+    "lead": "Synthesis prompts end with a sentence beginning “The student wants to…”. That sentence decides the answer, and it should be the first thing you read.",
+    "concepts": [
+     {
+      "i": "📍",
+      "t": "Where it is",
+      "d": "Always the final sentence of the prompt, usually in italics."
+     },
+     {
+      "i": "✏️",
+      "t": "Underline it",
+      "d": "Physically underline the goal word — emphasise, introduce, compare, explain."
+     },
+     {
+      "i": "🔁",
+      "t": "Read notes second",
+      "d": "Bullets before goal means you will read them without knowing what you are looking for."
+     }
+    ],
+    "examples": [
+     {
+      "ok": true,
+      "t": "Goal: emphasise <span class=\"hl-y\">complexity</span> → “…contains at least <span class=\"hl-ok\">30 bronze gears</span>.”",
+      "note": "Gear count is direct evidence of complexity."
+     },
+     {
+      "ok": false,
+      "t": "Goal: emphasise complexity → “…was recovered from a shipwreck in <span class=\"hl-no\">1901</span>.”",
+      "note": "True, from the notes, and completely irrelevant to complexity."
+     }
+    ],
+    "rule": "Read the goal first, underline its key word, then test each option against that word alone.",
+    "trap": "The notes are interesting, so students read them top to bottom and form an opinion about what matters — before finding out what the question wants.",
+    "worked": {
+     "q": "Notes about the Antikythera mechanism. Goal: emphasise its complexity.",
+     "steps": [
+      "Find and underline the goal word: <strong>complexity</strong>.",
+      "Test each bullet against it. “Recovered from a shipwreck in 1901” — that is history, not complexity.",
+      "“Dates from roughly 100 BCE” — that is age, not complexity.",
+      "“Contains at least 30 bronze gears” — a count of moving parts. That is complexity, and it is the only one."
+     ],
+     "answer": "The option built around the 30 bronze gears."
+    }
+   },
+   {
+    "title": "Some goals need two bullets",
+    "accent": "teal",
+    "lead": "When the goal involves a contrast, a gap or an unlikelihood, a single fact cannot do the job. The answer must combine two.",
+    "concepts": [
+     {
+      "i": "↔️",
+      "t": "Contrast goals",
+      "d": "“Despite”, “gap between”, “how unlikely” — these always need two facts set against each other."
+     },
+     {
+      "i": "🧩",
+      "t": "Combining",
+      "d": "The right answer usually joins them with a comma or a “despite/although” opener."
+     },
+     {
+      "i": "✂️",
+      "t": "Single-fact answers",
+      "d": "When the goal is a contrast, any option containing only one fact is automatically out."
+     }
+    ],
+    "examples": [
+     {
+      "ok": true,
+      "t": "<span class=\"hl-ok\">With no prior survival training</span>, Ada Blackjack <span class=\"hl-ok\">survived alone for two years</span>.",
+      "note": "Two facts, set against each other. The unlikelihood is visible."
+     },
+     {
+      "ok": false,
+      "t": "Ada Blackjack <span class=\"hl-no\">survived alone for two years</span>.",
+      "note": "True, but nothing here makes it sound unlikely."
+     }
+    ],
+    "rule": "If the goal is about a contrast or a gap, count the facts in each option. Fewer than two cannot do it.",
+    "trap": "The single-fact options are shorter and cleaner, so they read better. The correct answer often looks clumsier.",
+    "worked": {
+     "q": "Notes: the tunnel took 14 years; original estimates allowed 4 years. Goal: emphasise the overrun.",
+     "steps": [
+      "Underline the goal: <strong>the overrun</strong>.",
+      "An overrun is a comparison — how long it took against how long it should have taken.",
+      "So one number alone cannot show it. “Took 14 years” on its own is just a fact.",
+      "The answer must carry both figures in one sentence."
+     ],
+     "answer": "“Estimated at 4 years, the tunnel took 14 to complete.”"
+    }
+   },
+   {
+    "title": "Purpose asks what a sentence DOES",
+    "accent": "olive",
+    "lead": "A purpose question is not asking what the sentence says. It is asking what job it performs in the paragraph.",
+    "concepts": [
+     {
+      "i": "🔨",
+      "t": "Common jobs",
+      "d": "introduces, illustrates, qualifies, contrasts, explains, concedes, sets up an exception."
+     },
+     {
+      "i": "🗣️",
+      "t": "The test",
+      "d": "Say “this sentence is there in order to…” and finish the phrase in your own words."
+     },
+     {
+      "i": "🪞",
+      "t": "The trap answer",
+      "d": "An option that accurately paraphrases the sentence but never names a job."
+     }
+    ],
+    "examples": [
+     {
+      "ok": true,
+      "t": "“…they support a quarter of all marine species.” → <span class=\"hl-ok\">highlights a disproportion</span>",
+      "note": "Names the job: setting a tiny area against a huge share."
+     },
+     {
+      "ok": false,
+      "t": "“…they support a quarter of all marine species.” → <span class=\"hl-no\">explains why reefs occupy little of the floor</span>",
+      "note": "The sentence gives no cause. Wrong job entirely."
+     }
+    ],
+    "rule": "Answer with a verb of function, not a summary of content.",
+    "trap": "The paraphrase option is comforting because you can verify it against the text word by word. That verification tells you nothing about purpose.",
+    "tip": "Look at what came immediately before. Purpose is nearly always defined by the relationship to the previous sentence.",
+    "worked": {
+     "q": "“Coral reefs occupy less than one per cent of the ocean floor. They support around a quarter of all marine species.” Purpose of the second sentence?",
+     "steps": [
+      "What does sentence one establish? A very small area.",
+      "What does sentence two add? A very large share of species.",
+      "Ask what job that does: it is not explaining, and nothing is being corrected.",
+      "It sets a small number against a large one — the job is to show the mismatch."
+     ],
+     "answer": "To highlight the disproportion between the reefs’ size and their importance."
+    }
+   }
+  ],
   "check": {
-   "stem": "Goal: stress how unlikely her survival was. Which does that job?",
+   "stem": "Goal: stress how unlikely her survival was. Which option does that job?",
    "options": [
     "She took part in a 1921 expedition.",
     "With no training, she survived alone for two years."
    ],
    "answer": 1,
-   "explain": "Unlikelihood needs the lack of training set against the length of survival."
+   "explain": "Unlikelihood needs two facts set against each other — the lack of training and the length of survival."
   }
  },
  "forensics": {

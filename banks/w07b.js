@@ -9,22 +9,154 @@ window.LESSON = {
  "sub": "The topic the diagnostic never measured — and roughly a third of the real maths section. Teach it assuming nothing.",
  "stampSet": "math",
  "present": {
-  "rule": "f(x) is an instruction: put this number wherever x appears. And a quadratic usually has two solutions.",
-  "steps": [
-   "f(3) means substitute 3 for every x — it is not multiplication",
-   "To factorise, find two numbers that multiply to the last term and add to the middle one",
-   "Set each bracket to zero to get the roots",
-   "In y = (x − h)² + k the vertex is (h, k) — the sign inside the bracket flips"
-  ],
-  "worked": {
-   "text": "Solve x² − 5x + 6 = 0.",
-   "lines": [
-    "Find two numbers multiplying to +6 and adding to −5: that is −2 and −3.",
-    "So it factorises to (x − 2)(x − 3) = 0.",
-    "Set each bracket to zero in turn: x − 2 = 0 and x − 3 = 0.",
-    "The solutions are <em>x = 2 and x = 3</em>. Giving only one of them loses the mark."
-   ]
+  "hook": {
+   "icon": "🎰",
+   "title": "A machine, not a multiplication",
+   "text": "This is the topic your diagnostic never tested — and on the real exam it is roughly a third of the maths section. So nothing here is assumed. f(x) is not f times x. It is a machine: you feed a number in, the rule inside processes it, and one number comes out. Everything else in this lesson follows from taking that literally."
   },
+  "modules": [
+   {
+    "title": "f(x) is an instruction",
+    "accent": "sky",
+    "lead": "The brackets mean “substitute”. Whatever is inside them goes wherever x appears in the rule.",
+    "concepts": [
+     {
+      "i": "🎰",
+      "t": "Input → output",
+      "d": "f(3) means: put 3 wherever the rule has an x, then simplify."
+     },
+     {
+      "i": "🏷️",
+      "t": "The letter is a name",
+      "d": "f, g, h — just labels. Two functions in one question means two different rules."
+     },
+     {
+      "i": "🔄",
+      "t": "Working backwards",
+      "d": "If f(x) = 13, set the rule equal to 13 and solve for x instead."
+     }
+    ],
+    "examples": [
+     {
+      "ok": true,
+      "t": "f(x) = 2x + 1, so f(3) = 2(3) + 1 = <span class=\"hl-ok\">7</span>",
+      "note": "Substituted 3 for x."
+     },
+     {
+      "ok": false,
+      "t": "f(x) = 2x + 1, so f(3) = <span class=\"hl-no\">6x + 3</span>",
+      "note": "Multiplied the whole function by 3 instead of substituting."
+     }
+    ],
+    "rule": "Brackets mean substitute. Never multiply.",
+    "trap": "With f(g(2)), work from the inside out — find g(2) first, then feed that result into f.",
+    "worked": {
+     "q": "If f(x) = 3x − 2, what is f(4)?",
+     "steps": [
+      "The instruction is: put 4 wherever x appears.",
+      "The rule is 3x − 2, so it becomes 3(4) − 2.",
+      "Multiply first, following order of operations: 12 − 2.",
+      "Adding before multiplying would give 3 × 2 = 6, which is one of the wrong options."
+     ],
+     "answer": "f(4) = 10."
+    }
+   },
+   {
+    "title": "Factorising, and keeping both roots",
+    "accent": "teal",
+    "lead": "Find two numbers that multiply to the last term and add to the middle one. Then set each bracket to zero.",
+    "concepts": [
+     {
+      "i": "✖️",
+      "t": "Multiply to c",
+      "d": "The two numbers multiply to give the constant term."
+     },
+     {
+      "i": "➕",
+      "t": "Add to b",
+      "d": "The same two numbers add to give the middle coefficient.",
+      "f": "x² + bx + c = (x + p)(x + q)"
+     },
+     {
+      "i": "2️⃣",
+      "t": "Two roots",
+      "d": "Set each bracket to zero separately. A quadratic normally has two solutions."
+     }
+    ],
+    "examples": [
+     {
+      "ok": true,
+      "t": "x² − 5x + 6 = (x − 2)(x − 3) → x = <span class=\"hl-ok\">2 and 3</span>",
+      "note": "Both roots given."
+     },
+     {
+      "ok": false,
+      "t": "x² − 5x + 6 → x = <span class=\"hl-no\">2</span> only",
+      "note": "One root found, the other dropped. Half the answer scores nothing."
+     }
+    ],
+    "rule": "Two numbers, multiplying to the constant and adding to the middle. Then both brackets, both roots.",
+    "trap": "Signs. If the constant is positive and the middle is negative, both numbers are negative — as in this example.",
+    "tip": "Always substitute your roots back in to check. It takes ten seconds and catches every sign error.",
+    "worked": {
+     "q": "Solve x² − 5x + 6 = 0.",
+     "steps": [
+      "Look for two numbers multiplying to +6 and adding to −5.",
+      "Both must be negative, since they multiply to a positive and add to a negative: −2 and −3.",
+      "So it factorises as (x − 2)(x − 3) = 0.",
+      "Set each bracket to zero: x − 2 = 0 gives x = 2; x − 3 = 0 gives x = 3. Check: 4 − 10 + 6 = 0 ✓"
+     ],
+     "answer": "x = 2 and x = 3."
+    }
+   },
+   {
+    "title": "Vertex form, and the sign that flips",
+    "accent": "olive",
+    "lead": "Written as y = a(x − h)² + k, the parabola’s turning point is at (h, k) — and the sign inside the bracket inverts.",
+    "concepts": [
+     {
+      "i": "📍",
+      "t": "The vertex",
+      "d": "Read (h, k) straight off. No calculation.",
+      "f": "y = a(x − h)² + k → vertex (h, k)"
+     },
+     {
+      "i": "🔄",
+      "t": "The flip",
+      "d": "The form has a minus, so (x + 1)² means h = −1."
+     },
+     {
+      "i": "↕️",
+      "t": "What a does",
+      "d": "Positive opens upward, negative opens downward. Larger |a| means narrower."
+     }
+    ],
+    "examples": [
+     {
+      "ok": true,
+      "t": "y = (x − 2)² + 3 → vertex <span class=\"hl-ok\">(2, 3)</span>",
+      "note": "Minus two in the bracket gives h = +2."
+     },
+     {
+      "ok": false,
+      "t": "y = (x − 2)² + 3 → vertex <span class=\"hl-no\">(−2, 3)</span>",
+      "note": "Took the sign as written instead of flipping it."
+     }
+    ],
+    "rule": "Inside the bracket, flip the sign. Outside it, keep the sign.",
+    "trap": "The x-coordinate flips and the y-coordinate does not — so options are offered with one flipped, the other flipped, and both flipped.",
+    "worked": {
+     "q": "What are the coordinates of the vertex of y = (x + 1)² − 4?",
+     "steps": [
+      "Compare with the standard form y = a(x − h)² + k.",
+      "The bracket shows (x + 1), and the form expects (x − h), so −h = +1, giving h = −1.",
+      "The constant outside is −4, and that keeps its sign, so k = −4.",
+      "The vertex is (h, k). Note the x flipped and the y did not."
+     ],
+     "answer": "The vertex is (−1, −4)."
+    }
+   }
+  ],
   "check": {
    "stem": "If f(x) = 2x + 1, what is f(3)?",
    "options": [
@@ -32,7 +164,7 @@ window.LESSON = {
     "7"
    ],
    "answer": 1,
-   "explain": "Substitute 3 for x: 2(3) + 1 = 7."
+   "explain": "Substitute 3 for x: 2(3) + 1 = 7. The brackets mean substitute, not multiply."
   }
  },
  "forensics": {

@@ -9,30 +9,161 @@ window.LESSON = {
  "sub": "The longest chapter in the book and the most-tested convention on the exam. Two sessions are budgeted for it.",
  "stampSet": "rw",
  "present": {
-  "rule": "Punctuation is decided by what sits on each side of the mark — never by where you would pause.",
-  "steps": [
-   "A colon needs a complete sentence on its LEFT",
-   "Non-essential information takes a matching pair — two commas or two dashes, never one of each",
-   "Never put a single comma between a subject and its verb",
-   "A semicolon needs a complete sentence on BOTH sides"
-  ],
-  "worked": {
-   "text": "The expedition carried only what was necessary ______ rope, food and a compass.",
-   "lines": [
-    "Look left: \"The expedition carried only what was necessary\" — a complete sentence.",
-    "Look right: a list, not a sentence.",
-    "Complete sentence, then a list, is exactly what a colon is for.",
-    "So the answer is <em>:</em> — a semicolon would be wrong because the right side cannot stand alone."
-   ]
+  "hook": {
+   "icon": "🔌",
+   "title": "Punctuation is wiring, not breathing",
+   "text": "Most students place commas where they would take a breath. That works about half the time, which is exactly why it feels reliable and exactly why it costs marks. Punctuation is wiring: what matters is what is connected on each side of the mark, not how the sentence sounds when read aloud."
   },
+  "modules": [
+   {
+    "title": "The colon needs a complete sentence on its left",
+    "accent": "sky",
+    "lead": "A colon introduces something — a list, an explanation, a single word. Whatever is to its LEFT must be able to stand alone.",
+    "concepts": [
+     {
+      "i": "⬅️",
+      "t": "Left side",
+      "d": "Must be a complete sentence. This is the whole rule."
+     },
+     {
+      "i": "➡️",
+      "t": "Right side",
+      "d": "Can be anything — a list, a phrase, one word, another sentence."
+     },
+     {
+      "i": "🆚",
+      "t": "Versus semicolon",
+      "d": "A semicolon needs a complete sentence on BOTH sides. A colon only needs one on the left.",
+      "f": "colon = 1 side · semicolon = 2 sides"
+     }
+    ],
+    "examples": [
+     {
+      "ok": true,
+      "t": "The expedition carried only what was necessary<span class=\"hl-ok\">:</span> rope, food and a compass.",
+      "note": "Left side is a complete sentence; a list follows."
+     },
+     {
+      "ok": false,
+      "t": "The expedition carried<span class=\"hl-no\">:</span> rope, food and a compass.",
+      "note": "“The expedition carried” cannot stand alone — it is waiting for an object."
+     }
+    ],
+    "rule": "Cover everything to the right of the colon. If what is left is a sentence, the colon is legal.",
+    "trap": "The wrong version often sounds better, because we naturally pause before a list. Ignore the pause and test the left side.",
+    "worked": {
+     "q": "She had one ambition ______ to sail around the world alone.",
+     "steps": [
+      "Cover everything after the blank. What is left: “She had one ambition.”",
+      "Is that a complete sentence? Subject “she”, verb “had”, stands alone. Yes.",
+      "What follows is an explanation, not a second sentence — so a semicolon would be illegal.",
+      "A complete sentence introducing an explanation is exactly what a colon does."
+     ],
+     "answer": "The answer is a colon."
+    }
+   },
+   {
+    "title": "Non-essential information takes a matching pair",
+    "accent": "teal",
+    "lead": "If a phrase can be lifted out of the sentence without breaking it, it must be enclosed — and both ends must use the same mark.",
+    "concepts": [
+     {
+      "i": "✂️",
+      "t": "The lift-out test",
+      "d": "Remove the phrase. Does the sentence still work and mean the same thing? Then it is non-essential."
+     },
+     {
+      "i": "👯",
+      "t": "Pairs must match",
+      "d": "Two commas, or two dashes. Never one comma and one dash."
+     },
+     {
+      "i": "🔒",
+      "t": "Essential = no marks",
+      "d": "If removing it changes which thing you mean, it is essential and takes no punctuation at all."
+     }
+    ],
+    "examples": [
+     {
+      "ok": true,
+      "t": "Ada Lovelace<span class=\"hl-ok\">,</span> whose notes became the first program<span class=\"hl-ok\">,</span> received little recognition.",
+      "note": "Matching pair of commas around removable information."
+     },
+     {
+      "ok": false,
+      "t": "Ada Lovelace<span class=\"hl-no\">,</span> whose notes became the first program <span class=\"hl-no\">—</span> received little recognition.",
+      "note": "A comma at one end and a dash at the other. Never legal."
+     }
+    ],
+    "rule": "Non-essential information is enclosed by a matching pair. One mark on its own is always wrong.",
+    "trap": "The commonest version of this error gives you the opening comma and silently drops the closing one — and the sentence still reads smoothly.",
+    "tip": "Count the marks. If you can see an opening comma around a describing phrase, look for its partner before you accept the answer.",
+    "worked": {
+     "q": "The novel ______ which took eleven years to write ______ was an immediate success.",
+     "steps": [
+      "Test whether the middle phrase can be lifted out: “The novel was an immediate success.” Still works.",
+      "So it is non-essential and must be enclosed on both sides.",
+      "Now check the options: any choice with only one mark, or with two different marks, is out.",
+      "That leaves a matching pair. Commas are the standard choice here."
+     ],
+     "answer": "A matching pair of commas."
+    }
+   },
+   {
+    "title": "Never split a subject from its verb",
+    "accent": "olive",
+    "lead": "A single comma between the subject and the verb is always wrong — no matter how long the subject is.",
+    "concepts": [
+     {
+      "i": "🚫",
+      "t": "The forbidden gap",
+      "d": "One comma sitting between the subject and its verb. Always an error."
+     },
+     {
+      "i": "📏",
+      "t": "Long subjects",
+      "d": "The longer the subject, the more you want to pause. That urge is the trap."
+     },
+     {
+      "i": "👯",
+      "t": "Unless it is a pair",
+      "d": "Two commas enclosing a non-essential phrase are fine — that is a pair, not a split."
+     }
+    ],
+    "examples": [
+     {
+      "ok": true,
+      "t": "The rock samples collected from the crater floor <span class=\"hl-ok\">turned out</span> to be far older than predicted.",
+      "note": "Nothing between the long subject and its verb."
+     },
+     {
+      "ok": false,
+      "t": "The rock samples collected from the crater floor<span class=\"hl-no\">,</span> turned out to be far older.",
+      "note": "A single comma splitting subject from verb."
+     }
+    ],
+    "rule": "Find the subject, find the verb. A lone comma may never sit between them.",
+    "trap": "The subject is deliberately made long — six or eight words — so a pause feels natural right before the verb.",
+    "worked": {
+     "q": "The students who had finished early ______ were allowed to leave.",
+     "steps": [
+      "Identify the subject: “The students who had finished early” — all of it.",
+      "Identify the verb: “were allowed”.",
+      "The blank sits exactly between them.",
+      "A single mark there would split subject from verb, so the answer must be nothing at all."
+     ],
+     "answer": "No punctuation."
+    }
+   }
+  ],
   "check": {
    "stem": "She had one ambition ______ to sail around the world.",
    "options": [
-    ", ",
-    ": "
+    ", (comma)",
+    ": (colon)"
    ],
    "answer": 1,
-   "explain": "Complete sentence on the left, explanation on the right."
+   "explain": "Complete sentence on the left, explanation on the right — that is a colon."
   }
  },
  "forensics": {

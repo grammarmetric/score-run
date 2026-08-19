@@ -9,22 +9,162 @@ window.LESSON = {
  "sub": "Deliberately unallocated. Whatever checkpoint 2 exposed is what gets taught here — this page carries mixed advanced-maths work as the default.",
  "stampSet": "math",
  "present": {
-  "rule": "Exponent rules apply to multiplication and division, never to addition. Graph shifts inside the bracket go the opposite way to the sign.",
-  "steps": [
-   "Multiplying powers of the same base: ADD the exponents",
-   "Dividing: subtract. A power of a power: multiply",
-   "A change inside f( ) moves the graph horizontally, opposite to the sign",
-   "A change outside f( ) moves it vertically, in the direction of the sign"
-  ],
-  "worked": {
-   "text": "The graph of y = f(x) becomes y = f(x − 3). Describe the shift.",
-   "lines": [
-    "The change is INSIDE the bracket, so the movement is horizontal.",
-    "Inside changes always move the graph opposite to the sign.",
-    "The sign is minus, so the graph moves in the positive direction.",
-    "It shifts <em>3 units right</em>. This one feels backwards, which is exactly why it is tested."
-   ]
+  "hook": {
+   "icon": "🔧",
+   "title": "The rules that look like they should apply, and do not",
+   "text": "Exponents and transformations are where confident students lose marks, because both have rules that feel like they ought to extend further than they do. Exponent rules apply to multiplication and division, never to addition. And graph shifts inside the bracket move the opposite way to the sign. Both feel wrong, which is exactly why they are tested."
   },
+  "modules": [
+   {
+    "title": "Exponent rules",
+    "accent": "sky",
+    "lead": "Three rules cover almost everything, and each applies only when the bases are the same and the operation is multiply or divide.",
+    "concepts": [
+     {
+      "i": "✖️",
+      "t": "Multiplying",
+      "d": "Same base multiplied: ADD the exponents.",
+      "f": "xᵃ × xᵇ = xᵃ⁺ᵇ"
+     },
+     {
+      "i": "➗",
+      "t": "Dividing",
+      "d": "Same base divided: subtract the exponents.",
+      "f": "xᵃ ÷ xᵇ = xᵃ⁻ᵇ"
+     },
+     {
+      "i": "🔺",
+      "t": "Power of a power",
+      "d": "Multiply the exponents. Coefficients get raised too.",
+      "f": "(2x³)² = 4x⁶"
+     },
+     {
+      "i": "0️⃣",
+      "t": "Zero power",
+      "d": "Anything non-zero to the power zero is 1."
+     }
+    ],
+    "examples": [
+     {
+      "ok": true,
+      "t": "x³ × x⁴ = x<sup>3+4</sup> = <span class=\"hl-ok\">x⁷</span>",
+      "note": "Multiplication, so the exponents add."
+     },
+     {
+      "ok": false,
+      "t": "x³ × x⁴ = <span class=\"hl-no\">x¹²</span>",
+      "note": "Multiplied the exponents. That is the power-of-a-power rule."
+     }
+    ],
+    "rule": "Multiply → add exponents. Divide → subtract. Power of a power → multiply.",
+    "trap": "These rules never apply to addition. x³ + x⁴ does not simplify at all.",
+    "worked": {
+     "q": "Simplify (2x³)².",
+     "steps": [
+      "Everything inside the bracket is squared, including the coefficient.",
+      "Square the coefficient: 2² = 4.",
+      "Apply power-of-a-power to the variable: (x³)² means multiply the exponents, 3 × 2 = 6.",
+      "Combine. Forgetting to square the 2 gives 2x⁶, which is offered as a trap."
+     ],
+     "answer": "4x⁶."
+    }
+   },
+   {
+    "title": "Roots: when there are two answers and when there is one",
+    "accent": "teal",
+    "lead": "x² = 25 has two solutions. √x = 5 has one. The difference matters and is tested directly.",
+    "concepts": [
+     {
+      "i": "2️⃣",
+      "t": "Squaring undone",
+      "d": "If x² = 25, then x = 5 or x = −5. Both square to 25."
+     },
+     {
+      "i": "1️⃣",
+      "t": "The root symbol",
+      "d": "The √ symbol means the positive root only, so √x = 5 gives x = 25 alone."
+     },
+     {
+      "i": "🔄",
+      "t": "Undoing a root",
+      "d": "Square both sides. √x = 7 becomes x = 49, not 14 or 3.5."
+     }
+    ],
+    "examples": [
+     {
+      "ok": true,
+      "t": "x² = 36 → x = <span class=\"hl-ok\">6 or −6</span>",
+      "note": "Both roots, because squaring destroys the sign."
+     },
+     {
+      "ok": false,
+      "t": "x² = 36 → x = <span class=\"hl-no\">6</span> only",
+      "note": "Lost the negative solution."
+     }
+    ],
+    "rule": "Solving x² = k gives two answers. Evaluating √k gives one.",
+    "trap": "Options include the single positive root, the doubled value, and the halved value — each reachable by one specific wrong operation.",
+    "worked": {
+     "q": "If √x = 7, what is x?",
+     "steps": [
+      "The root symbol is applied to x, so undo it by squaring both sides.",
+      "(√x)² = x, and 7² = 49.",
+      "So x = 49. Doubling would give 14 and halving would give 3.5 — both offered.",
+      "Only one answer here, because the √ symbol denotes the positive root. Contrast x² = 49, which has two."
+     ],
+     "answer": "x = 49."
+    }
+   },
+   {
+    "title": "Graph transformations",
+    "accent": "olive",
+    "lead": "Changes inside the bracket move the graph horizontally and backwards. Changes outside move it vertically and forwards.",
+    "concepts": [
+     {
+      "i": "↔️",
+      "t": "Inside the bracket",
+      "d": "Horizontal movement, opposite to the sign. f(x − 3) moves right.",
+      "f": "f(x − 3) → 3 right"
+     },
+     {
+      "i": "↕️",
+      "t": "Outside the function",
+      "d": "Vertical movement, in the direction of the sign. f(x) + 2 moves up.",
+      "f": "f(x) + 2 → 2 up"
+     },
+     {
+      "i": "🧠",
+      "t": "Why it feels wrong",
+      "d": "To get the same output, x must now be 3 larger — so every point shifts right."
+     }
+    ],
+    "examples": [
+     {
+      "ok": true,
+      "t": "y = f(x − 3) → the graph moves <span class=\"hl-ok\">3 units right</span>",
+      "note": "Inside the bracket, so opposite to the sign."
+     },
+     {
+      "ok": false,
+      "t": "y = f(x − 3) → moves <span class=\"hl-no\">3 units left</span>",
+      "note": "Followed the sign as written."
+     }
+    ],
+    "rule": "Inside → horizontal → opposite. Outside → vertical → same direction.",
+    "trap": "All four options — left, right, up, down — are always offered, so a half-remembered rule has a one-in-four chance.",
+    "tip": "Test it with a point. If f(0) = 5, then for f(x − 3) you need x = 3 to get 5 out. The point moved from 0 to 3: right.",
+    "worked": {
+     "q": "The graph of y = f(x) becomes y = f(x + 4). Describe the shift.",
+     "steps": [
+      "The change is inside the bracket, so the movement is horizontal, not vertical.",
+      "Inside changes go opposite to the sign, and the sign is plus.",
+      "So the graph moves in the negative direction — to the left.",
+      "Check with a point: if f(0) = 7, then f(x + 4) = 7 needs x = −4. The point moved left ✓"
+     ],
+     "answer": "4 units to the left."
+    }
+   }
+  ],
   "check": {
    "stem": "Simplify x³ × x⁴.",
    "options": [

@@ -9,22 +9,158 @@ window.LESSON = {
  "sub": "Systems and inequalities, but the real target is translation — the point where the reading weakness starts costing maths marks.",
  "stampSet": "math",
  "present": {
-  "rule": "Translate the sentence into an equation one clause at a time, then check the direction with a real number.",
-  "steps": [
-   "\"Twice as many A as B\" means A = 2B — the bigger group gets the multiplier",
-   "Test the direction with easy numbers before solving",
-   "\"At least\" is ≥ and \"at most\" is ≤; \"more than\" is > and excludes the value",
-   "After solving, check which variable was actually asked for"
-  ],
-  "worked": {
-   "text": "Three times as many chose biology as chemistry. If c is chemistry, what is biology?",
-   "lines": [
-    "Biology is the larger group — it is three times the other.",
-    "Candidate answer: b = 3c.",
-    "Test it: if c = 4 then b = 12. Is 12 three times as many as 4? Yes.",
-    "So <em>3c</em> is right. Writing c ÷ 3 would make biology the smaller group."
-   ]
+  "hook": {
+   "icon": "🌉",
+   "title": "The bridge from words to symbols",
+   "text": "Most maths marks lost on word problems are not lost in the algebra. They are lost in the first line, translating the sentence into an equation. Once the setup is right the solving is usually routine — which means the time you spend getting the setup right is the best-value time on the whole paper. This is also where the reading weakness shows up in the maths score."
   },
+  "modules": [
+   {
+    "title": "Check the direction with real numbers",
+    "accent": "sky",
+    "lead": "“Three times as many A as B” trips up almost everyone. Do not reason about it — test it with a number.",
+    "concepts": [
+     {
+      "i": "🔢",
+      "t": "Pick a number",
+      "d": "Let the smaller group be 4. Then the larger must be 12. Which formula gives that?"
+     },
+     {
+      "i": "📏",
+      "t": "The bigger group",
+      "d": "gets the multiplier. If A is three times B, then A = 3B."
+     },
+     {
+      "i": "⚠️",
+      "t": "The reversal",
+      "d": "Writing B = 3A instead is the single most common translation error.",
+      "f": "A = 3B, not B = 3A"
+     }
+    ],
+    "examples": [
+     {
+      "ok": true,
+      "t": "Three times as many chose biology as chemistry → <span class=\"hl-ok\">b = 3c</span>",
+      "note": "Test: c = 4 gives b = 12. Twelve is three times four ✓"
+     },
+     {
+      "ok": false,
+      "t": "Three times as many chose biology as chemistry → <span class=\"hl-no\">c = 3b</span>",
+      "note": "Test: b = 4 gives c = 12 — that makes chemistry the bigger group."
+     }
+    ],
+    "rule": "Write your candidate equation, then substitute an easy number to check the direction before solving.",
+    "trap": "Both directions are always offered. Reasoning it out in your head under time pressure is a coin flip; testing takes five seconds and is certain.",
+    "worked": {
+     "q": "Three times as many students chose biology as chose chemistry. If c is chemistry, what is biology?",
+     "steps": [
+      "Identify which group is larger: biology, because it is “three times as many”.",
+      "Write the candidate: b = 3c.",
+      "Test it. Let c = 4, so b = 3 × 4 = 12.",
+      "Is 12 three times as many as 4? Yes. If you had written c = 3b, testing would have given chemistry as the larger group."
+     ],
+     "answer": "b = 3c."
+    }
+   },
+   {
+    "title": "Inequality words",
+    "accent": "teal",
+    "lead": "Four phrases carry all the marks here, and two of them include the boundary value while two exclude it.",
+    "concepts": [
+     {
+      "i": "≥",
+      "t": "At least / no fewer than",
+      "d": "Includes the value itself. “At least 15” means 15 is allowed."
+     },
+     {
+      "i": "≤",
+      "t": "At most / no more than",
+      "d": "Includes the value. “At most 400 kg” means 400 kg is allowed."
+     },
+     {
+      "i": ">",
+      "t": "More than / over",
+      "d": "Excludes the value. “More than 15” means 16 upward."
+     },
+     {
+      "i": "<",
+      "t": "Fewer than / under",
+      "d": "Excludes the value."
+     }
+    ],
+    "examples": [
+     {
+      "ok": true,
+      "t": "A lift carries at most 400 kg → <span class=\"hl-ok\">w ≤ 400</span>",
+      "note": "“At most” caps from above and includes 400."
+     },
+     {
+      "ok": false,
+      "t": "A lift carries at most 400 kg → <span class=\"hl-no\">w < 400</span>",
+      "note": "Right direction, but excludes exactly 400, which is allowed."
+     }
+    ],
+    "rule": "“At least” and “at most” include the boundary. “More than” and “fewer than” do not.",
+    "trap": "The options give you both the right direction with the wrong boundary and the wrong direction with the right boundary — so getting one half right is not enough.",
+    "worked": {
+     "q": "A worker must complete at least 15 units a day. Which inequality shows the acceptable numbers u?",
+     "steps": [
+      "Which direction? “At least” means a minimum, so acceptable values go upward from 15.",
+      "That eliminates anything with < or ≤.",
+      "Does 15 itself count? “At least 15” means 15 is acceptable, so the boundary is included.",
+      "Include the boundary with the line under the sign."
+     ],
+     "answer": "u ≥ 15."
+    }
+   },
+   {
+    "title": "Solving a system, then answering the right part",
+    "accent": "olive",
+    "lead": "Two equations, two unknowns. Substitute or eliminate — then check which of the two the question wanted.",
+    "concepts": [
+     {
+      "i": "🔄",
+      "t": "Substitution",
+      "d": "Best when one equation is already solved for a variable, like y = 2x."
+     },
+     {
+      "i": "➕",
+      "t": "Elimination",
+      "d": "Best when coefficients match: add or subtract to cancel one variable.",
+      "f": "x + y = 10, x − y = 4 → add → 2x = 14"
+     },
+     {
+      "i": "🎯",
+      "t": "Then re-read",
+      "d": "You will have found both values. Only one was asked for."
+     }
+    ],
+    "examples": [
+     {
+      "ok": true,
+      "t": "n + p = 12, 3n + 2p = 31 → <span class=\"hl-ok\">n = 7</span> notebooks (and p = 5 pens)",
+      "note": "Both values found, then the question re-read."
+     },
+     {
+      "ok": false,
+      "t": "…→ answered <span class=\"hl-no\">5</span>",
+      "note": "That is the number of pens. Same working, wrong half."
+     }
+    ],
+    "rule": "Solve fully, write down both values, then go back to the question and pick the one it names.",
+    "trap": "Both values are always offered as options. The working can be perfect and still score zero.",
+    "worked": {
+     "q": "A shop sells notebooks for $3 and pens for $2. Maya buys 12 items and spends $31. How many notebooks?",
+     "steps": [
+      "Two unknowns, so two equations. Items: n + p = 12. Money: 3n + 2p = 31.",
+      "Rearrange the first: p = 12 − n. Substitute into the second.",
+      "3n + 2(12 − n) = 31 → 3n + 24 − 2n = 31 → n + 24 = 31 → n = 7.",
+      "Now p = 12 − 7 = 5. The question asked for notebooks, so the answer is n, not p."
+     ],
+     "answer": "7 notebooks."
+    }
+   }
+  ],
   "check": {
    "stem": "Four times as many chairs as tables. If t is tables, chairs = ?",
    "options": [
@@ -32,7 +168,7 @@ window.LESSON = {
     "4t"
    ],
    "answer": 1,
-   "explain": "Chairs are the larger quantity, so they take the multiplier."
+   "explain": "Chairs are the larger group, so they take the multiplier. Test with t = 3: 12 chairs is four times 3 ✓"
   }
  },
  "forensics": {

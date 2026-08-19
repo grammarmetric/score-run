@@ -9,22 +9,152 @@ window.LESSON = {
  "sub": "Subject-verb agreement is the direct payoff of last week. It is also the densest chapter in the book, and worth the whole session.",
  "stampSet": "rw",
  "present": {
-  "rule": "Some subjects look plural and are not. Each, every, neither and collective nouns all take a singular verb.",
-  "steps": [
-   "Find the true subject first, as in week 1",
-   "If it starts each, every, either or neither — singular, always",
-   "If it is a group word (team, jury, committee) — singular",
-   "In \"there is/are\", the verb matches whatever comes after it"
-  ],
-  "worked": {
-   "text": "The jury, <s>after deliberating for nine hours</s>, ______ unable to reach a verdict.",
-   "lines": [
-    "Cross out the interrupting phrase between the commas.",
-    "What survives: \"The jury ______ unable\".",
-    "\"Jury\" is a group acting as one unit, so it is singular.",
-    "The verb is <em>was</em>."
-   ]
+  "hook": {
+   "icon": "⚖️",
+   "title": "The scales must balance",
+   "text": "Subject and verb are two sides of a scale: one thing takes one kind of verb, many things take another. It sounds trivial — and it is, in a four-word sentence. The SAT never gives you a four-word sentence. It buries fifteen words between the two sides of the scale and waits to see if you can still tell what is being weighed."
   },
+  "modules": [
+   {
+    "title": "Collective nouns are one thing",
+    "accent": "sky",
+    "lead": "A word naming a group of people is treated as a single unit in American English — which is the English the SAT uses.",
+    "concepts": [
+     {
+      "i": "👥",
+      "t": "The group words",
+      "d": "team, jury, committee, family, staff, audience, orchestra, company, government."
+     },
+     {
+      "i": "🇺🇸",
+      "t": "American convention",
+      "d": "British English often treats these as plural. The SAT does not. Singular, always."
+     },
+     {
+      "i": "🧱",
+      "t": "Why",
+      "d": "The group acts as one body making one decision, so it takes one verb."
+     }
+    ],
+    "examples": [
+     {
+      "ok": true,
+      "t": "The <span class=\"hl-s\">jury</span> <span class=\"hl-ok\">was</span> unable to reach a verdict.",
+      "note": "One jury, one verb."
+     },
+     {
+      "ok": false,
+      "t": "The jury <span class=\"hl-no\">were</span> unable to reach a verdict.",
+      "note": "Correct in British English, marked wrong on the SAT."
+     }
+    ],
+    "rule": "Group nouns take singular verbs and singular pronouns: “the committee announced <em>its</em> decision”.",
+    "trap": "A long interrupting phrase is usually dropped in — “the jury, after deliberating for nine hours across two days, ______” — so that by the time you reach the blank you have lost the subject.",
+    "worked": {
+     "q": "The jury, after deliberating for nine hours across two days, ______ unable to reach a unanimous verdict.",
+     "steps": [
+      "Everything between the commas is an interrupter. Cross it out.",
+      "What remains: “The jury ______ unable to reach a verdict.”",
+      "“Jury” is a group acting as one unit, so it is singular.",
+      "The sentence is set in the past, so use the past singular."
+     ],
+     "answer": "The answer is “was”."
+    }
+   },
+   {
+    "title": "“There” is never the subject",
+    "accent": "teal",
+    "lead": "In sentences beginning “there is” or “there are”, the word “there” is a placeholder. The real subject comes after the verb.",
+    "concepts": [
+     {
+      "i": "👉",
+      "t": "Look right",
+      "d": "The subject is whatever noun follows the verb. Match the verb to that."
+     },
+     {
+      "i": "🔁",
+      "t": "Rewrite it",
+      "d": "Flip the sentence: “There are several reasons” → “Several reasons are”. Now it is obvious."
+     },
+     {
+      "i": "🎭",
+      "t": "Other inversions",
+      "d": "Also happens after “here”, and after an opening phrase: “Among the documents was a logbook.”"
+     }
+    ],
+    "examples": [
+     {
+      "ok": true,
+      "t": "There <span class=\"hl-ok\">are</span> <span class=\"hl-s\">several reasons</span> the design was abandoned.",
+      "note": "Flip it: “Several reasons are…” — plural."
+     },
+     {
+      "ok": false,
+      "t": "There <span class=\"hl-no\">is</span> several reasons the design was abandoned.",
+      "note": "Matched to “there”, which is not a subject at all."
+     }
+    ],
+    "rule": "In an inverted sentence, find the noun after the verb and match to that.",
+    "trap": "“There is” sounds natural in speech before almost anything, so your ear gives you no warning at all here.",
+    "tip": "Careful with “number”: <em>the</em> number of X <strong>is</strong> (singular), but <em>a</em> number of X <strong>are</strong> (plural).",
+    "worked": {
+     "q": "Among the documents recovered from the wreck ______ a captain’s logbook dating from 1802.",
+     "steps": [
+      "The sentence opens with a phrase, not a subject — “Among the documents recovered from the wreck”.",
+      "That whole phrase is prepositional. Cross it out.",
+      "What is left after the blank: “a captain’s logbook”. That is the subject, and it follows the verb.",
+      "One logbook, so the verb is singular."
+     ],
+     "answer": "The answer is “was”."
+    }
+   },
+   {
+    "title": "And, or, nor",
+    "accent": "olive",
+    "lead": "Two subjects joined by “and” are plural. Joined by “or” or “nor”, the verb matches whichever subject is nearer to it.",
+    "concepts": [
+     {
+      "i": "➕",
+      "t": "and → plural",
+      "d": "The cat and the dog play. Two things, plural verb, no exceptions."
+     },
+     {
+      "i": "🎯",
+      "t": "or / nor → nearest",
+      "d": "The verb agrees with whichever subject sits closest to it."
+     },
+     {
+      "i": "🔀",
+      "t": "Order matters",
+      "d": "“Neither the students nor the teacher is” but “Neither the teacher nor the students are”."
+     }
+    ],
+    "examples": [
+     {
+      "ok": true,
+      "t": "Either the manager or the two <span class=\"hl-s\">assistants</span> <span class=\"hl-ok\">are</span> responsible.",
+      "note": "“Assistants” is nearer the verb, so plural wins."
+     },
+     {
+      "ok": false,
+      "t": "Either the manager or the two assistants <span class=\"hl-no\">is</span> responsible.",
+      "note": "Matched to the further subject instead of the nearer one."
+     }
+    ],
+    "rule": "With either…or and neither…nor, the verb agrees with the subject closest to it.",
+    "trap": "The test writers flip the order between two otherwise identical questions, so the same-looking sentence has opposite answers.",
+    "worked": {
+     "q": "Neither the director nor the producers ______ willing to comment.",
+     "steps": [
+      "Spot the structure: “neither … nor”, so the nearest-subject rule applies.",
+      "Identify the two subjects: “the director” (singular) and “the producers” (plural).",
+      "Which is nearer the verb? “The producers” — it sits immediately before the blank.",
+      "So the verb is plural. Reverse the two nouns and the answer would flip to “is”."
+     ],
+     "answer": "The answer is “were” (or “are”)."
+    }
+   }
+  ],
   "check": {
    "stem": "Each of the students ______ a different answer.",
    "options": [
@@ -32,7 +162,7 @@ window.LESSON = {
     "gives"
    ],
    "answer": 1,
-   "explain": "\"Each\" is singular, however plural \"students\" looks."
+   "explain": "“Each” is singular, however plural “students” looks. It sits inside a prepositional phrase."
   }
  },
  "forensics": {

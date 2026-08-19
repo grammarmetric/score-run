@@ -9,30 +9,161 @@ window.LESSON = {
  "sub": "Possession, contraction, and making a pronoun point at exactly one thing.",
  "stampSet": "rw",
  "present": {
-  "rule": "An apostrophe means possession or a contraction. It never makes a plural. And a pronoun must point at exactly one noun.",
-  "steps": [
-   "Test its/it's by expanding: if \"it is\" fits, use it's",
-   "For plural possessives, make the noun plural FIRST, then add the apostrophe",
-   "For any pronoun, ask: how many nouns could this point at?",
-   "If the answer is more than one, the sentence is wrong — even if you can guess the meaning"
-  ],
-  "worked": {
-   "text": "The two inspectors' reports contradicted each other.",
-   "lines": [
-    "More than one inspector, so start with the plural: \"inspectors\".",
-    "The reports belong to them, so it needs a possessive.",
-    "A plural already ending in -s takes only the apostrophe: <em>inspectors'</em>.",
-    "Never \"inspectors's\", and never \"inspector's\" when there is more than one."
-   ]
+  "hook": {
+   "icon": "🏷️",
+   "title": "Two jobs, one mark",
+   "text": "The apostrophe has exactly two jobs: it shows ownership, or it marks a missing letter. It has never in the history of English made anything plural. Meanwhile a pronoun has one job: to point at exactly one noun. Both of these look like easy marks — and both appear on every single test, because most students go on ear."
   },
+  "modules": [
+   {
+    "title": "Its and it’s",
+    "accent": "sky",
+    "lead": "This one pair accounts for more apostrophe questions than everything else combined, and there is a two-second test that settles it every time.",
+    "concepts": [
+     {
+      "i": "🔍",
+      "t": "The expansion test",
+      "d": "Read “it’s” as “it is”. If the sentence still makes sense, the apostrophe is right."
+     },
+     {
+      "i": "🏠",
+      "t": "Possessive its",
+      "d": "No apostrophe. Like his and hers, which also take none."
+     },
+     {
+      "i": "🚫",
+      "t": "its’",
+      "d": "This form does not exist in English. Any choice showing it can be eliminated instantly."
+     }
+    ],
+    "examples": [
+     {
+      "ok": true,
+      "t": "The company revised <span class=\"hl-ok\">its</span> safety policy.",
+      "note": "Expansion test: “revised it is safety policy” — nonsense. So the possessive is right."
+     },
+     {
+      "ok": false,
+      "t": "The company revised <span class=\"hl-no\">it’s</span> safety policy.",
+      "note": "Expands to “it is”, which does not fit."
+     }
+    ],
+    "rule": "Expand it to “it is”. Fits → it’s. Does not fit → its.",
+    "trap": "Possessives normally take an apostrophe, so “its” feels wrong. It is the exception, and pronouns as a group follow it: his, hers, ours, yours, theirs all take none.",
+    "worked": {
+     "q": "______ been raining since Tuesday.",
+     "steps": [
+      "Try the expansion: “It is been raining since Tuesday.” That is not English.",
+      "Try the other expansion: “It has been raining since Tuesday.” That works.",
+      "“It’s” contracts both “it is” and “it has”, so the contraction is correct here.",
+      "The possessive “its” would be meaningless — nothing is being owned."
+     ],
+     "answer": "The answer is “It’s”."
+    }
+   },
+   {
+    "title": "Singular and plural possession",
+    "accent": "teal",
+    "lead": "Get the number right first, then add the apostrophe. Doing it in the other order is what produces the errors.",
+    "concepts": [
+     {
+      "i": "1️⃣",
+      "t": "One owner",
+      "d": "Add ’s — the inspector’s report."
+     },
+     {
+      "i": "👥",
+      "t": "Several owners",
+      "d": "Make it plural first (inspectors), then add just the apostrophe: inspectors’."
+     },
+     {
+      "i": "🚫",
+      "t": "Never",
+      "d": "No apostrophe ever makes a plural. “Two inspector’s” is always wrong.",
+      "f": "plural first → then apostrophe"
+     }
+    ],
+    "examples": [
+     {
+      "ok": true,
+      "t": "The two <span class=\"hl-ok\">inspectors’</span> reports contradicted each other.",
+      "note": "Plural “inspectors”, then apostrophe after the s."
+     },
+     {
+      "ok": false,
+      "t": "The two <span class=\"hl-no\">inspector’s</span> reports contradicted each other.",
+      "note": "Singular possessive, but the sentence says there are two."
+     }
+    ],
+    "rule": "Decide how many owners there are, write that plural, then attach the apostrophe.",
+    "trap": "A regular plural already ending in -s takes only the apostrophe — never an extra s. “Inspectors’s” is not a form.",
+    "worked": {
+     "q": "The two ______ reports contradicted each other on almost every point.",
+     "steps": [
+      "How many owners? “The two” tells you: more than one.",
+      "Write the plural noun first: <strong>inspectors</strong>.",
+      "It already ends in s, so add only the apostrophe: inspectors’.",
+      "Check the alternatives — “inspector’s” is one owner, “inspectors” has no possession at all."
+     ],
+     "answer": "The answer is “inspectors’”."
+    }
+   },
+   {
+    "title": "A pronoun must point at one noun",
+    "accent": "olive",
+    "lead": "If a pronoun could refer to more than one thing in the sentence, it is wrong — even when a reader could work out the meaning.",
+    "concepts": [
+     {
+      "i": "👆",
+      "t": "The count test",
+      "d": "Ask: how many nouns could this pronoun be pointing at? More than one means it fails."
+     },
+     {
+      "i": "🤷",
+      "t": "“Guessable” is not enough",
+      "d": "The exam does not care that context makes it recoverable. Ambiguous is wrong."
+     },
+     {
+      "i": "📛",
+      "t": "The fix",
+      "d": "Usually the correct answer simply names the thing instead of using a pronoun."
+     }
+    ],
+    "examples": [
+     {
+      "ok": true,
+      "t": "When Priya met Elena, <span class=\"hl-ok\">Elena</span> had just returned from fieldwork.",
+      "note": "Naming her removes all doubt."
+     },
+     {
+      "ok": false,
+      "t": "When Priya met Elena, <span class=\"hl-no\">she</span> had just returned from fieldwork.",
+      "note": "“She” could be either woman. Ambiguous, therefore wrong."
+     }
+    ],
+    "rule": "Count the possible antecedents. Two or more means the pronoun cannot be used.",
+    "trap": "When the correct answer just repeats a name, it looks clumsy and repetitive — so students reject it in favour of the smoother-sounding pronoun.",
+    "tip": "Also match number: “each”, “every” and “neither” are singular, so they take a singular pronoun.",
+    "worked": {
+     "q": "The editor sent the draft back to the author because ______ contained several factual errors.",
+     "steps": [
+      "List the nouns available: the editor, the draft, the author.",
+      "Try “it” — it could point at the draft, but grammatically it could reach for other things too.",
+      "The safest answer removes the ambiguity entirely by naming the thing.",
+      "Notice that the smoother-sounding option is the wrong one here."
+     ],
+     "answer": "The answer is “the draft”."
+    }
+   }
+  ],
   "check": {
    "stem": "The company revised ______ safety policy.",
    "options": [
-    "it's",
+    "it’s",
     "its"
    ],
    "answer": 1,
-   "explain": "\"It is safety policy\" makes no sense, so it is the possessive \"its\"."
+   "explain": "“It is safety policy” makes no sense, so it is the possessive “its”."
   }
  },
  "forensics": {

@@ -9,30 +9,168 @@ window.LESSON = {
  "sub": "Geometry is a small section and largely formula-driven — a contained fix. There is a purpose-built interactive lesson for the second half.",
  "stampSet": "math",
  "present": {
-  "rule": "Geometry runs on a short list of exact facts. Know them cold and never assume what the picture merely looks like.",
-  "steps": [
-   "Angles on a straight line total 180°; around a point, 360°; in a triangle, 180°",
-   "Pythagoras: square the two legs, add, then square-root",
-   "The formula sheet is provided in the real exam — use it",
-   "Never assume a right angle or equal sides from the drawing alone"
-  ],
-  "worked": {
-   "text": "A right-angled triangle has legs 6 and 8. Find the hypotenuse.",
-   "lines": [
-    "Square each leg: 6² = 36 and 8² = 64.",
-    "Add them: 36 + 64 = 100.",
-    "That gives the SQUARE of the hypotenuse, not the hypotenuse itself.",
-    "Square-root it: <em>10</em>. Stopping at 100 is the most common miss here."
-   ]
+  "hook": {
+   "icon": "📐",
+   "title": "A short list, known cold",
+   "text": "Geometry is the smallest maths domain on the exam and the most finite. There is a short list of exact facts, the formula sheet is provided on the day, and almost every question is one of those facts applied once. The two ways to lose marks are not knowing the list, and trusting what the diagram looks like instead of what it says."
   },
+  "modules": [
+   {
+    "title": "The angle rules",
+    "accent": "sky",
+    "lead": "Four facts. Everything about angles on this exam is built from them.",
+    "concepts": [
+     {
+      "i": "📏",
+      "t": "Straight line",
+      "d": "Angles on a straight line total 180°."
+     },
+     {
+      "i": "🔄",
+      "t": "Around a point",
+      "d": "A full turn totals 360°."
+     },
+     {
+      "i": "🔺",
+      "t": "In a triangle",
+      "d": "The three angles total 180°.",
+      "f": "a + b + c = 180°"
+     },
+     {
+      "i": "⚖️",
+      "t": "Isosceles",
+      "d": "Two equal sides means two equal angles — but only if the question says so."
+     }
+    ],
+    "examples": [
+     {
+      "ok": true,
+      "t": "Two angles on a line, one is 115° → other = 180 − 115 = <span class=\"hl-ok\">65°</span>",
+      "note": "Subtracted from 180."
+     },
+     {
+      "ok": false,
+      "t": "→ 360 − 115 = <span class=\"hl-no\">245°</span>",
+      "note": "Used the around-a-point rule for a straight line."
+     }
+    ],
+    "rule": "Identify which configuration you are in — line, point, or triangle — before subtracting.",
+    "trap": "Never assume a right angle, equal sides, or parallel lines because the picture looks that way. Diagrams are not drawn to scale unless stated.",
+    "worked": {
+     "q": "Two angles of a triangle are 45° and 65°. What is the third?",
+     "steps": [
+      "The configuration is a triangle, so the total is 180°.",
+      "Add the two known angles: 45 + 65 = 110.",
+      "Subtract from the total: 180 − 110.",
+      "Sanity check: all three should add back to 180. 45 + 65 + 70 = 180 ✓"
+     ],
+     "answer": "70°."
+    }
+   },
+   {
+    "title": "Pythagoras, and the triples worth memorising",
+    "accent": "teal",
+    "lead": "Square, add, square-root. The step people forget is the last one.",
+    "concepts": [
+     {
+      "i": "🔢",
+      "t": "The formula",
+      "d": "Square both legs, add them, then take the square root.",
+      "f": "a² + b² = c²"
+     },
+     {
+      "i": "⭐",
+      "t": "Common triples",
+      "d": "3-4-5, 6-8-10, 5-12-13, 9-12-15. Spotting these saves real time."
+     },
+     {
+      "i": "🛑",
+      "t": "The missed step",
+      "d": "a² + b² gives c SQUARED. You still have to root it."
+     }
+    ],
+    "examples": [
+     {
+      "ok": true,
+      "t": "Legs 6 and 8 → 36 + 64 = 100 → √100 = <span class=\"hl-ok\">10</span>",
+      "note": "Rooted at the end."
+     },
+     {
+      "ok": false,
+      "t": "Legs 6 and 8 → 6 + 8 = <span class=\"hl-no\">14</span>",
+      "note": "Added the legs without squaring. Also offered: 100, which stops one step early."
+     }
+    ],
+    "rule": "Square, add, root. Three steps, and the third is the one that gets dropped.",
+    "trap": "Both the un-rooted answer (100) and the simply-added answer (14) appear as options.",
+    "tip": "The formula sheet is on the real exam. Use it — many students forget it exists and try to recall formulas under pressure.",
+    "worked": {
+     "q": "A right-angled triangle has legs of 6 and 8. Find the hypotenuse.",
+     "steps": [
+      "Square each leg: 6² = 36 and 8² = 64.",
+      "Add them: 36 + 64 = 100.",
+      "This is c², not c. Take the square root: √100.",
+      "Recognise it: 6-8-10 is a common triple, double 3-4-5."
+     ],
+     "answer": "The hypotenuse is 10."
+    }
+   },
+   {
+    "title": "The trigonometry worth knowing by heart",
+    "accent": "olive",
+    "lead": "A handful of exact values come up repeatedly. Knowing them removes the calculator from the loop entirely.",
+    "concepts": [
+     {
+      "i": "📊",
+      "t": "SOH CAH TOA",
+      "d": "sin = opposite/hypotenuse, cos = adjacent/hypotenuse, tan = opposite/adjacent."
+     },
+     {
+      "i": "⭐",
+      "t": "Know these",
+      "d": "sin 30° = 0.5, cos 60° = 0.5, sin 90° = 1, cos 0° = 1, sin 0° = 0.",
+      "f": "sin 30° = cos 60° = ½"
+     },
+     {
+      "i": "🔄",
+      "t": "Degrees or radians",
+      "d": "Check which the question uses before touching the calculator."
+     }
+    ],
+    "examples": [
+     {
+      "ok": true,
+      "t": "sin 30° = <span class=\"hl-ok\">0.5</span> exactly",
+      "note": "An exact value, not a decimal approximation."
+     },
+     {
+      "ok": false,
+      "t": "sin 30° = <span class=\"hl-no\">0.866</span>",
+      "note": "That is cos 30°. The pair is swapped."
+     }
+    ],
+    "rule": "Learn the small table of exact values. It converts several questions into instant recall.",
+    "trap": "sin and cos values are offered swapped, so a half-memory produces a confident wrong answer.",
+    "worked": {
+     "q": "What is the value of sin 30°?",
+     "steps": [
+      "This is one of the exact values, so no calculation is needed.",
+      "Picture a 30-60-90 triangle: the side opposite 30° is exactly half the hypotenuse.",
+      "sin is opposite over hypotenuse, so that ratio is ½.",
+      "Note the partner fact: cos 60° is also ½. The trap answer 0.866 is cos 30°."
+     ],
+     "answer": "sin 30° = 0.5."
+    }
+   }
+  ],
   "check": {
-   "stem": "Legs 3 and 4. Hypotenuse?",
+   "stem": "A right-angled triangle has legs 3 and 4. What is the hypotenuse?",
    "options": [
     "7",
     "5"
    ],
    "answer": 1,
-   "explain": "9 + 16 = 25, and √25 = 5. Adding the legs gives 7, which is wrong."
+   "explain": "9 + 16 = 25, and √25 = 5. Adding the legs gives 7, which is the trap."
   }
  },
  "forensics": {

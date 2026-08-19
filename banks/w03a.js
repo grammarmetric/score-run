@@ -9,30 +9,166 @@ window.LESSON = {
  "sub": "The highest-yield grammar topic on the exam. Knowing where a sentence stops decides a large share of every conventions set.",
  "stampSet": "rw",
  "present": {
-  "rule": "Two complete sentences can never be joined by a comma alone. There are exactly four legal joins.",
-  "steps": [
-   "Test each side: does it have a subject and a verb, and could it stand alone?",
-   "If both sides are complete, you may use: a full stop, a semicolon, or a comma plus and/but/or/so/for/nor/yet",
-   "Or make one side dependent with because, although, while, since",
-   "However, therefore and moreover are NOT conjunctions — they cannot do this job"
-  ],
-  "worked": {
-   "text": "The storm damaged power lines ______ thousands of homes lost electricity.",
-   "lines": [
-    "Left side: \"The storm damaged power lines\" — complete.",
-    "Right side: \"thousands of homes lost electricity\" — also complete.",
-    "Two complete sentences, so a comma alone would be a splice.",
-    "Legal fixes: a semicolon, or <em>, and</em>. Not a bare comma, and not \", however\"."
-   ]
+  "hook": {
+   "icon": "🚧",
+   "title": "Where the road ends",
+   "text": "Every sentence is a stretch of road with a definite end. Punctuation is the sign that tells you the road has ended and a new one begins. Put the wrong sign up and traffic crashes. This is the single highest-scoring topic in the whole reading and writing section — more questions turn on it than on any other rule."
   },
+  "modules": [
+   {
+    "title": "The clause test",
+    "accent": "sky",
+    "lead": "Before any punctuation decision, you have to know whether each side can stand alone. There is exactly one test, and it takes two seconds.",
+    "concepts": [
+     {
+      "i": "🧍",
+      "t": "Subject",
+      "d": "Who or what is doing something? If there is no answer, it is not a sentence."
+     },
+     {
+      "i": "🏃",
+      "t": "Finite verb",
+      "d": "A real conjugated verb, not “running” or “to run” on their own."
+     },
+     {
+      "i": "✅",
+      "t": "Stands alone",
+      "d": "Could you say it by itself and be understood? Then it is independent.",
+      "f": "Subject + verb + stands alone = sentence"
+     }
+    ],
+    "examples": [
+     {
+      "ok": true,
+      "t": "<span class=\"hl-ok\">The runner crossed the line.</span>",
+      "note": "Subject “runner”, verb “crossed”, stands alone. A complete sentence."
+     },
+     {
+      "ok": false,
+      "t": "<span class=\"hl-no\">Running through the field behind the old barn.</span>",
+      "note": "Long, but no subject and no finite verb. A fragment."
+     }
+    ],
+    "rule": "Length has nothing to do with it. A ten-word string can be a fragment and a three-word string can be a complete sentence.",
+    "trap": "Words like “although”, “because”, “while”, “since” and “when” at the front make an otherwise complete sentence dependent. “She won” is a sentence; “Although she won” is not.",
+    "worked": {
+     "q": "Is “Because the samples had been stored incorrectly” a complete sentence?",
+     "steps": [
+      "Subject? Yes — “the samples”.",
+      "Finite verb? Yes — “had been stored”.",
+      "Can it stand alone? Say it out loud. It leaves you waiting for the rest — because of that, <em>what</em>?",
+      "The word “because” is what makes it dependent. Remove it and “The samples had been stored incorrectly” is complete."
+     ],
+     "answer": "No — it is a dependent clause, and it needs a main clause attached."
+    }
+   },
+   {
+    "title": "The four legal joins",
+    "accent": "teal",
+    "lead": "When both sides are complete sentences, you have exactly four ways to join them. Nothing else is allowed.",
+    "concepts": [
+     {
+      "i": ".",
+      "t": "A full stop",
+      "d": "Always legal. Two separate sentences."
+     },
+     {
+      "i": ";",
+      "t": "A semicolon",
+      "d": "Legal when the two ideas are closely related."
+     },
+     {
+      "i": ",+",
+      "t": "Comma + FANBOYS",
+      "d": "for, and, nor, but, or, yet, so — the comma comes BEFORE the conjunction."
+     },
+     {
+      "i": "↘️",
+      "t": "Make one dependent",
+      "d": "Add because, although, while, since to one side."
+     }
+    ],
+    "examples": [
+     {
+      "ok": true,
+      "t": "The storm damaged power lines<span class=\"hl-ok\">, and</span> thousands of homes lost electricity.",
+      "note": "Comma plus a FANBOYS conjunction. Legal."
+     },
+     {
+      "ok": false,
+      "t": "The storm damaged power lines<span class=\"hl-no\">,</span> thousands of homes lost electricity.",
+      "note": "A comma splice — the most commonly tested error on the exam."
+     }
+    ],
+    "rule": "Two complete sentences may never be joined by a comma alone. That error has a name — a comma splice — and it appears on every test.",
+    "trap": "A comma splice sounds completely natural when read aloud, because a comma is where you would pause. You cannot hear this error; you have to test for it.",
+    "worked": {
+     "q": "The results were surprising ______ they contradicted three decades of accepted theory.",
+     "steps": [
+      "Test the left side: “The results were surprising.” Subject, verb, stands alone. Complete.",
+      "Test the right side: “They contradicted three decades of accepted theory.” Also complete.",
+      "Two complete sentences, so a bare comma is illegal — that would be a splice.",
+      "Legal options here: a full stop, a semicolon, or “, and”. The two ideas are closely linked, so the semicolon fits best."
+     ],
+     "answer": "The answer is a semicolon."
+    }
+   },
+   {
+    "title": "“However” is not a conjunction",
+    "accent": "olive",
+    "lead": "This is the trap the exam returns to most often. Words that feel like joining words are, grammatically, just adverbs — and they cannot hold two sentences together.",
+    "concepts": [
+     {
+      "i": "🚫",
+      "t": "Not conjunctions",
+      "d": "however, therefore, moreover, nevertheless, consequently, furthermore, thus, instead."
+     },
+     {
+      "i": "✅",
+      "t": "Real conjunctions",
+      "d": "Only the seven FANBOYS words can join two sentences with a comma."
+     },
+     {
+      "i": "🔧",
+      "t": "How to use them",
+      "d": "Semicolon before, comma after: “…was rejected; therefore, the architect resubmitted.”"
+     }
+    ],
+    "examples": [
+     {
+      "ok": true,
+      "t": "The design was rejected twice<span class=\"hl-ok\">; therefore,</span> the architect submitted a third version.",
+      "note": "Semicolon before, comma after. Correct."
+     },
+     {
+      "ok": false,
+      "t": "The design was rejected twice<span class=\"hl-no\">, therefore,</span> the architect submitted a third version.",
+      "note": "Still a comma splice — “therefore” cannot do the joining."
+     }
+    ],
+    "rule": "If you can replace the word with “but” or “and” and the punctuation still needs changing, it was never a conjunction.",
+    "trap": "These words look formal and academic, so students trust them more. The exam knows that.",
+    "tip": "Quick check: a real conjunction cannot be moved. You can say “The results, however, were poor” — moving it proves it is an adverb. You could never say “The results, but, were poor”.",
+    "worked": {
+     "q": "The bridge opened in 1937 ______ it remains one of the most photographed structures in the country.",
+     "steps": [
+      "Both sides are complete sentences — check them individually first.",
+      "So the only legal joins are: full stop, semicolon, or comma + FANBOYS.",
+      "A bare comma would be a splice. “, however” would also be a splice, because “however” is an adverb.",
+      "The two ideas are closely related and there is no contrast word offered, so the semicolon is right."
+     ],
+     "answer": "The answer is a semicolon."
+    }
+   }
+  ],
   "check": {
    "stem": "The bridge opened in 1937 ______ it is still in use.",
    "options": [
-    ", ",
-    "; "
+    ", (comma alone)",
+    "; (semicolon)"
    ],
    "answer": 1,
-   "explain": "Both sides stand alone, so a semicolon is legal and a bare comma is not."
+   "explain": "Both sides stand alone, so a semicolon is legal and a bare comma is a splice."
   }
  },
  "forensics": {

@@ -1,8 +1,6 @@
-/* Plays an actual run end to end and asserts the game rules hold:
-   the PPP order, that the briefing costs nothing, that the commit gate
-   locks the options, that overcharging costs 2 HP, that shields absorb,
-   that a miss cannot be skipped, and that zero HP ends the run.        */
-
+/* Drives a quest lesson to prove the PPP mechanics work: the warm-up
+   costs no life, practice awards XP and takes a life on a miss, the
+   boss HP bar falls, and clearing it shows the certificate.          */
 import { spawn } from 'node:child_process';
 import { createServer } from 'node:http';
 import { readFileSync, existsSync } from 'node:fs';
@@ -10,224 +8,84 @@ import { fileURLToPath } from 'node:url';
 import { dirname, join, extname } from 'node:path';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
-const PORT = 8793;
 const CHROME = ['C:/Program Files/Google/Chrome/Application/chrome.exe',
   'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe'].find((p) => existsSync(p));
-
 const MIME = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css' };
-const server = createServer((req, res) => {
-  const f = join(ROOT, req.url === '/' ? 'index.html' : decodeURIComponent(req.url.split('?')[0]));
-  if (!existsSync(f) || !extname(f)) { res.writeHead(404); return res.end(); }
-  res.writeHead(200, { 'Content-Type': MIME[extname(f)] || 'text/plain' });
-  res.end(readFileSync(f));
+const server = createServer((q, s) => {
+  const f = join(ROOT, q.url === '/' ? 'index.html' : decodeURIComponent(q.url.split('?')[0]));
+  if (!existsSync(f) || !extname(f)) { s.writeHead(404); return s.end(); }
+  s.writeHead(200, { 'Content-Type': MIME[extname(f)] || 'text/plain' }); s.end(readFileSync(f));
 });
-await new Promise((r) => server.listen(PORT, r));
-
-const chrome = spawn(CHROME, ['--headless=new', '--disable-gpu', '--no-first-run', '--mute-audio',
-  '--remote-debugging-port=9335', '--user-data-dir=' + join(ROOT, '.verify-profile3'), 'about:blank'], { stdio: 'ignore' });
-
-let wsUrl;
-for (let i = 0; i < 40 && !wsUrl; i++) {
-  try { const r = await fetch('http://127.0.0.1:9335/json/version'); if (r.ok) { wsUrl = (await r.json()).webSocketDebuggerUrl; } } catch (e) {}
-  if (!wsUrl) { await new Promise((r) => setTimeout(r, 300)); }
+await new Promise((r) => server.listen(8797, r));
+const chrome = spawn(CHROME, ['--headless=new', '--disable-gpu', '--mute-audio',
+  '--remote-debugging-port=9339', '--user-data-dir=' + join(ROOT, '.verify-profile7'), 'about:blank'], { stdio: 'ignore' });
+let u; for (let i = 0; i < 40 && !u; i++) {
+  try { const r = await fetch('http://127.0.0.1:9339/json/version'); if (r.ok) { u = (await r.json()).webSocketDebuggerUrl; } } catch (e) {}
+  if (!u) { await new Promise((r) => setTimeout(r, 300)); }
 }
-const ws = new WebSocket(wsUrl);
-await new Promise((r) => { ws.onopen = r; });
-let id = 0; const pending = new Map(); const errs = [];
-ws.onmessage = (m) => {
-  const d = JSON.parse(m.data);
-  if (d.id && pending.has(d.id)) { pending.get(d.id)(d); pending.delete(d.id); }
-  else if (d.method === 'Runtime.exceptionThrown') { errs.push(d.params.exceptionDetails); }
-};
-const send = (method, params = {}, sessionId) => new Promise((res) => {
-  const i = ++id; pending.set(i, res); ws.send(JSON.stringify({ id: i, method, params, sessionId }));
-});
-
+const ws = new WebSocket(u); await new Promise((r) => { ws.onopen = r; });
+let id = 0; const pend = new Map(); const errs = [];
+ws.onmessage = (m) => { const d = JSON.parse(m.data);
+  if (d.id && pend.has(d.id)) { pend.get(d.id)(d); pend.delete(d.id); }
+  else if (d.method === 'Runtime.exceptionThrown') { errs.push(d.params.exceptionDetails); } };
+const send = (me, pa = {}, si) => new Promise((r) => { const i = ++id; pend.set(i, r); ws.send(JSON.stringify({ id: i, method: me, params: pa, sessionId: si })); });
 const { result: { targetId } } = await send('Target.createTarget', { url: 'about:blank' });
 const { result: { sessionId } } = await send('Target.attachToTarget', { targetId, flatten: true });
 await send('Runtime.enable', {}, sessionId);
-
-const ev = async (expr) => {
-  const { result } = await send('Runtime.evaluate', { expression: expr, returnByValue: true, awaitPromise: true }, sessionId);
+const ev = async (e) => { const { result } = await send('Runtime.evaluate', { expression: e, returnByValue: true }, sessionId);
   if (result.exceptionDetails) { throw new Error(result.exceptionDetails.exception.description.split('\n')[0]); }
-  return result.result.value;
-};
+  return result.result.value; };
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+const cks = []; const ck = (n, p, d = '') => cks.push({ n, p, d });
 
-const checks = [];
-const check = (n, pass, d = '') => checks.push({ n, pass, d });
+await send('Page.navigate', { url: 'http://127.0.0.1:8797/lessons/w01a.html' }, sessionId);
+await wait(900);
 
-await send('Page.navigate', { url: `http://127.0.0.1:${PORT}/lessons/w01a.html` }, sessionId);
-await wait(700);
+ck('warm-up section exists', await ev(`!!document.querySelector('#warmup')`));
+ck('presentation section exists', await ev(`!!document.querySelector('#learn')`));
+ck('teaching modules rendered', (await ev(`document.querySelectorAll('#learn .card').length`)) >= 3, String(await ev(`document.querySelectorAll('#learn .card').length`)));
+ck('modules carry concept cards', (await ev(`document.querySelectorAll('#learn .concept').length`)) >= 6);
+ck('modules carry right/wrong examples', (await ev(`document.querySelectorAll('#learn .ex').length`)) >= 4);
+ck('modules carry rule + trap boxes', (await ev(`document.querySelectorAll('#learn .box.rule').length`)) >= 3 && (await ev(`document.querySelectorAll('#learn .box.trap').length`)) >= 3);
+ck('worked examples with numbered steps', (await ev(`document.querySelectorAll('#learn .worked .step').length`)) >= 9);
+ck('presentation comes before practice',
+  await ev(`document.querySelector('#learn').compareDocumentPosition(document.querySelector('#practice')) === 4`));
 
-/* ── PRESENTATION ─────────────────────────────────────── */
-check('run opens on the Presentation briefing',
-  /Presentation/.test(await ev(`document.querySelector('.tag').textContent`)));
-check('briefing shows the rule before any question',
-  (await ev(`document.querySelector('.q').textContent.length`)) > 20);
-check('no answer options are on screen during the rule',
-  (await ev(`document.querySelectorAll('.act').length`)) === 0);
-
-const hp0 = await ev(`document.querySelectorAll('#hearts .hp:not(.empty)').length`);
-check('run starts on 5 HP', hp0 === 5, String(hp0));
-
-/* walk the worked example */
-let guard = 0;
-while (await ev(`!!document.querySelector('.btn') && /Decrypt/.test(document.querySelector('.btn').textContent)`) && guard++ < 12) {
-  await ev(`document.querySelector('.btn').click()`);
-  await wait(90);
-}
-check('worked example reveals step by step',
-  (await ev(`document.querySelectorAll('.exp').length`)) >= 3);
-check('free shot appears after the walkthrough',
-  (await ev(`document.querySelectorAll('.act').length`)) >= 2);
-
-/* answer the free shot WRONG — must not cost HP */
-await ev(`(() => {
-  const want = window.LESSON.present.check.answer;
-  const a = document.querySelectorAll('.act');
-  a[(want + 1) % a.length].click();
-})()`);
-await wait(200);
-const hpAfterFree = await ev(`document.querySelectorAll('#hearts .hp:not(.empty)').length`);
-check('a wrong answer in the briefing costs no HP', hpAfterFree === 5, String(hpAfterFree));
-
-/* ── PRACTICE · recon ─────────────────────────────────── */
-await ev(`[...document.querySelectorAll('.btn')].find(b => /Enter the field/.test(b.textContent)).click()`);
-await wait(300);
-check('briefing leads into Practice · recon',
-  /Practice/.test(await ev(`[...document.querySelectorAll('.tag')].map(t=>t.textContent).join(' ')`)));
-check('an enemy is on screen', (await ev(`document.querySelectorAll('.foe svg').length`)) === 1);
-
-const stampScore = await ev(`(() => {
-  const before = document.querySelector('#v-score').textContent;
-  const o = window.LESSON.forensics.items[0].options.find(x => !x.correct);
-  const rows = [...document.querySelectorAll('.stamps')];
-  const labels = { broad:'Too broad', narrow:'Too narrow', contradicts:'Contradicts',
-                   unsupported:'Not in text', halfright:'Half right' };
-  const btn = [...rows[0].querySelectorAll('.stamp')].find(b => b.textContent === labels[o.trap]);
-  btn.click();
-  return before + '->' + document.querySelector('#v-score').textContent;
-})()`);
-check('correct trap call scores points', /0->60/.test(stampScore), stampScore);
-
-/* ── PRACTICE · waves ─────────────────────────────────── */
-/* clear the rest of recon — driven from Node, because the "next" button
-   only appears after the enemy's 420ms death animation finishes */
-const step = `(() => {
-  const s = document.querySelector('.stamps .stamp:not(:disabled)');
-  if (s) { s.click(); return 'stamp'; }
-  const n = [...document.querySelectorAll('.btn')].find(b => /Next anomaly|Stage clear/.test(b.textContent));
-  if (n) { n.click(); return 'next'; }
-  if (document.querySelector('.perk')) { return 'draft'; }
-  return 'none';
-})()`;
-let idle = 0;
-for (let i = 0; i < 60; i++) {
-  const did = await ev(step);
-  if (did === 'draft') { break; }
-  if (did === 'none') {
-    /* the next button only appears after the enemy's 420ms death anim */
-    if (++idle > 4) { break; }
-    await wait(500);
-    continue;
-  }
-  idle = 0;
-  await wait(did === 'next' ? 300 : 140);
-}
-await wait(500);
-
-/* a perk draft sits between practice stages */
-const drafted = await ev(`document.querySelectorAll('.perk').length`);
-check('a perk draft is offered between stages', drafted === 3, String(drafted));
-await ev(`document.querySelectorAll('.perk')[0].click()`);
-await wait(300);
-
-check('waves stage reached', /waves/i.test(await ev(`[...document.querySelectorAll('.tag')].map(t=>t.textContent).join(' ')`)));
-check('options stay hidden until you commit',
-  (await ev(`getComputedStyle(document.querySelector('.acts')).display`)) === 'none');
-check('commit gate offers strike and overcharge',
-  (await ev(`document.querySelectorAll('.cbtn').length`)) === 2);
-
-/* overcharge, then answer wrong — must cost 2 HP */
-const hpBefore = await ev(`document.querySelectorAll('#hearts .hp:not(.empty)').length`);
-const shieldsBefore = await ev(`document.querySelectorAll('#hearts .shield').length`);
-await ev(`document.querySelector('.cbtn.over').click()`);
-await wait(150);
-check('committing reveals the options',
-  (await ev(`getComputedStyle(document.querySelector('.acts')).display`)) !== 'none');
-
-await ev(`(() => {
-  const want = window.LESSON.speed.items[0].answer;
-  const a = document.querySelectorAll('.acts .act');
-  a[(want + 1) % a.length].click();
-})()`);
+const lives0 = await ev(`document.querySelector('#c-lives').textContent`);
+await ev(`(()=>{const q=document.querySelector('#warmup .choices');const w=window.LESSON.present.check.answer;
+  q.children[(w+1)%q.children.length].click();})()`);
 await wait(250);
-const hpAfter = await ev(`document.querySelectorAll('#hearts .hp:not(.empty)').length`);
-const expected = hpBefore - Math.max(0, 2 - shieldsBefore);
-check('overcharged miss costs 2 HP (less any shields)', hpAfter === expected,
-  `before=${hpBefore} shields=${shieldsBefore} after=${hpAfter} expected=${expected}`);
+ck('a wrong warm-up answer costs no life',
+  (await ev(`document.querySelector('#c-lives').textContent`)) === lives0,
+  lives0 + ' -> ' + await ev(`document.querySelector('#c-lives').textContent`));
 
-check('a miss opens the Socratic panel',
-  (await ev(`document.querySelectorAll('.tag.boss').length`)) > 0);
-check('cannot advance before naming the error',
-  (await ev(`[...document.querySelectorAll('.btn')].filter(b => /Next|Run over/.test(b.textContent)).length`)) === 0);
-await ev(`[...document.querySelectorAll('.act')].filter(b => b.textContent.includes('Guessed'))[0].click()`);
-await wait(200);
-check('naming the error unlocks the advance',
-  (await ev(`[...document.querySelectorAll('.btn')].filter(b => /Next|Run over/.test(b.textContent)).length`)) > 0);
+/* practice: one right, one wrong */
+await ev(`(()=>{const q=document.querySelectorAll('#practice .quiz')[0];
+  q.querySelectorAll('.choice')[window.LESSON.speed.items[0].answer].click();})()`);
+await wait(250);
+ck('a correct practice answer awards XP',
+  parseInt((await ev(`document.querySelector('#c-xp').textContent`)).replace(/\D/g, ''), 10) > 0);
+await ev(`(()=>{const q=document.querySelectorAll('#practice .quiz')[1];const w=window.LESSON.speed.items[1].answer;
+  q.querySelectorAll('.choice')[(w+1)%4].click();})()`);
+await wait(250);
+ck('a wrong practice answer costs a life',
+  (await ev(`document.querySelector('#c-lives').textContent`)) !== lives0);
+ck('every answered question shows an explanation',
+  (await ev(`document.querySelectorAll('#practice .fb.show').length`)) === 2);
 
-/* ── death ────────────────────────────────────────────── */
-/* Play recklessly — always overcharge, always answer wrong — so the run
-   must die. Driven from Node so async transitions are respected.       */
-const reckless = `(() => {
-  if (document.querySelector('.big')) { return 'end'; }
-  const over = document.querySelector('.cbtn.over');
-  if (over) { over.click(); return 'commit'; }
-  const acts = [...document.querySelectorAll('.acts .act:not(:disabled)')];
-  if (acts.length) {
-    const st = window.__stage || 'speed';
-    const set = document.querySelector('.tag.boss') && /boss/i.test(document.querySelector('.tag').textContent)
-      ? window.LESSON.sim : window.LESSON.speed;
-    acts[0].click();
-    return 'answer';
-  }
-  const why = [...document.querySelectorAll('.act:not(:disabled)')].filter(b => /Guessed|Ran out/.test(b.textContent))[0];
-  if (why) { why.click(); return 'why'; }
-  const nxt = [...document.querySelectorAll('.btn')].find(b => /Next|Run over|Stage clear|Finish/.test(b.textContent));
-  if (nxt) { nxt.click(); return 'next'; }
-  const perk = document.querySelector('.perk');
-  if (perk) { perk.click(); return 'perk'; }
-  return 'stuck';
-})()`;
-let stuck = 0;
-for (let i = 0; i < 160; i++) {
-  const did = await ev(reckless);
-  if (did === 'end') { break; }
-  if (did === 'stuck') { if (++stuck > 4) { break; } await wait(500); continue; }
-  stuck = 0;
-  await wait(180);
-}
-await wait(700);
-
-const ended = await ev(`(() => {
-  const b = document.querySelector('.big');
-  return b ? b.textContent.trim() : 'none';
-})()`);
-check('the run reaches an end screen', /Run failed|Signal clear/.test(ended), ended);
-check('the end screen carries a damage report',
-  (await ev(`document.querySelectorAll('.logr').length`)) > 0);
-check('replay is offered',
-  (await ev(`[...document.querySelectorAll('.btn')].some(b => /Run it again/.test(b.textContent))`)) === true);
-
-check('no uncaught exceptions during the whole run', errs.length === 0,
+/* boss: clear it */
+const hp0 = await ev(`document.querySelector('#hpfill').style.width || '100%'`);
+await ev(`(()=>{const qs=document.querySelectorAll('#boss .quiz');
+  window.LESSON.sim.items.forEach((it,i)=>{ if(qs[i]) qs[i].querySelectorAll('.choice')[it.answer].click(); });})()`);
+await wait(1200);
+ck('boss HP falls to zero', (await ev(`document.querySelector('#hpfill').style.width`)) === '0%',
+  hp0 + ' -> ' + await ev(`document.querySelector('#hpfill').style.width`));
+ck('certificate appears on clearing the boss', await ev(`document.querySelector('#cert').classList.contains('show')`));
+ck('badges were unlocked', (await ev(`document.querySelectorAll('.ach.got').length`)) >= 2);
+ck('no uncaught exceptions', errs.length === 0,
   errs.slice(0, 2).map((e) => (e.exception && e.exception.description || '').split('\n')[0]).join(' | '));
 
 let bad = 0;
-for (const c of checks) {
-  console.log(`${c.pass ? 'ok  ' : 'FAIL'} ${c.n}${c.pass ? '' : '  → ' + c.d}`);
-  if (!c.pass) { bad++; }
-}
-console.log(bad ? `\n${bad} of ${checks.length} playtest checks FAILED` : `\nall ${checks.length} playtest checks passed`);
-ws.close(); chrome.kill(); server.close();
-process.exit(bad ? 1 : 0);
+for (const c of cks) { console.log(`${c.p ? 'ok  ' : 'FAIL'} ${c.n}${c.p ? '' : '  → ' + c.d}`); if (!c.p) { bad++; } }
+console.log(bad ? `\n${bad} of ${cks.length} checks FAILED` : `\nall ${cks.length} quest checks passed`);
+ws.close(); chrome.kill(); server.close(); process.exit(bad ? 1 : 0);

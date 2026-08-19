@@ -9,30 +9,170 @@ window.LESSON = {
  "sub": "Transitions are heavily tested and entirely learnable — the highest-return topic left in the reading and writing section.",
  "stampSet": "rw",
  "present": {
-  "rule": "Name the relationship between the two sentences BEFORE you look at a single answer choice.",
-  "steps": [
-   "Cover the choices completely",
-   "Read both sentences and say the link out loud",
-   "It will be one of five: same direction, opposite, cause, example, or sequence",
-   "Only then uncover, and pick the word that matches what you already said"
-  ],
-  "worked": {
-   "text": "The filtration system removed 98% in the lab. ______ , its field performance was far poorer.",
-   "lines": [
-    "First sentence: the result was excellent.",
-    "Second sentence: the result was poor.",
-    "Good then poor — the relationship is opposite.",
-    "So the transition is <em>However</em>. \"Therefore\" would claim the good result caused the bad one."
-   ]
+  "hook": {
+   "icon": "🧭",
+   "title": "Name the turn before you take it",
+   "text": "A transition is a road sign telling the reader which way the argument is about to turn. There are only five directions it can go. If you name the direction before you look at the answer choices, these questions become almost automatic — and if you look at the choices first, you will pick whichever word sounds most academic."
   },
+  "modules": [
+   {
+    "title": "The five relationships",
+    "accent": "sky",
+    "lead": "Every transition question is one of five relationships. Learn the five and the whole topic collapses into a matching exercise.",
+    "concepts": [
+     {
+      "i": "➡️",
+      "t": "Same direction",
+      "d": "moreover, in addition, furthermore, also — the second point agrees and adds."
+     },
+     {
+      "i": "↔️",
+      "t": "Opposite",
+      "d": "however, by contrast, nevertheless, nonetheless — the second point pushes back."
+     },
+     {
+      "i": "⚡",
+      "t": "Cause and effect",
+      "d": "therefore, consequently, as a result, accordingly — the second follows from the first."
+     },
+     {
+      "i": "🔎",
+      "t": "Example",
+      "d": "for example, for instance — the second is one case of the first."
+     },
+     {
+      "i": "🔢",
+      "t": "Sequence",
+      "d": "first, secondly, finally, meanwhile — ordering in time or in a list."
+     }
+    ],
+    "examples": [
+     {
+      "ok": true,
+      "t": "Soil here is unusually rich. <span class=\"hl-ok\">Consequently,</span> farms produce two harvests a year.",
+      "note": "Rich soil causes the double harvest. Cause and effect."
+     },
+     {
+      "ok": false,
+      "t": "Soil here is unusually rich. <span class=\"hl-no\">Nevertheless,</span> farms produce two harvests a year.",
+      "note": "Signals contrast where the two ideas agree."
+     }
+    ],
+    "rule": "Decide which of the five relationships holds, then pick the word that names it.",
+    "trap": "Several options will belong to the same family. Once you have named the relationship, the family narrows to one or two and the rest are instantly gone.",
+    "worked": {
+     "q": "The new filtration system removed 98% in the laboratory. ______, its performance in the field was substantially poorer.",
+     "steps": [
+      "Read the first sentence and summarise it in one word: <strong>good</strong>.",
+      "Read the second and summarise it: <strong>poor</strong>.",
+      "Good then poor — the argument turns. That is the opposite relationship.",
+      "Now look at the choices and take the one from the opposite family."
+     ],
+     "answer": "The answer is “However”."
+    }
+   },
+   {
+    "title": "Cover the choices first",
+    "accent": "teal",
+    "lead": "This is a procedure, not a piece of advice. Physically cover the answers before reading the two sentences.",
+    "concepts": [
+     {
+      "i": "🙈",
+      "t": "Cover",
+      "d": "Hand or finger over the four options."
+     },
+     {
+      "i": "🗣️",
+      "t": "Say it aloud",
+      "d": "State the relationship in your own words: “this one disagrees with that one”."
+     },
+     {
+      "i": "👀",
+      "t": "Then uncover",
+      "d": "Match your own words to a choice. Do not reconsider."
+     }
+    ],
+    "examples": [
+     {
+      "ok": true,
+      "t": "Predict first, then match. <span class=\"hl-ok\">One option survives.</span>",
+      "note": "You are choosing against your own prediction, not against four plausible words."
+     },
+     {
+      "ok": false,
+      "t": "Read the options first, then decide. <span class=\"hl-no\">Three sound reasonable.</span>",
+      "note": "Each option makes its own relationship seem plausible in hindsight."
+     }
+    ],
+    "rule": "Predict, then match. Never read the options before you have named the relationship.",
+    "trap": "Reading the choices first plants the relationship in your mind. Every transition sounds like it could work once you have read it in place.",
+    "tip": "If you cannot name the relationship at all, the problem is that you have not understood one of the two sentences. Re-read them before touching the options.",
+    "worked": {
+     "q": "Many early mapmakers filled unknown regions with illustrations. ______, the 1502 Cantino chart shows sea creatures across the southern ocean.",
+     "steps": [
+      "Cover the choices completely.",
+      "Sentence one is a general statement about mapmakers as a group.",
+      "Sentence two is one specific chart. General, then one case of it.",
+      "That is exemplification — say “for example” before you uncover anything."
+     ],
+     "answer": "The answer is “For instance”."
+    }
+   },
+   {
+    "title": "The two most-tested traps",
+    "accent": "olive",
+    "lead": "“However” and “therefore” account for most wrong answers on this topic, because they sound authoritative in almost any sentence.",
+    "concepts": [
+     {
+      "i": "🚫",
+      "t": "“However” misuse",
+      "d": "Used where the two ideas actually agree. Check for real contrast."
+     },
+     {
+      "i": "🚫",
+      "t": "“Therefore” misuse",
+      "d": "Used where the second sentence is an example, not a consequence."
+     },
+     {
+      "i": "🎓",
+      "t": "Sophistication ≠ correct",
+      "d": "The fancier-sounding word is not more likely to be right."
+     }
+    ],
+    "examples": [
+     {
+      "ok": true,
+      "t": "Rainfall declined for a decade. <span class=\"hl-ok\">Nonetheless,</span> the reservoir was never at risk.",
+      "note": "The expected consequence did not follow — that is concession."
+     },
+     {
+      "ok": false,
+      "t": "Rainfall declined for a decade. <span class=\"hl-no\">Therefore,</span> the reservoir was never at risk.",
+      "note": "Claims declining rainfall caused the reservoir to be safe. It did not."
+     }
+    ],
+    "rule": "Before accepting “therefore”, check that the second sentence really is caused by the first. Before accepting “however”, check that the two really do disagree.",
+    "trap": "Concession — “this happened, but the expected result did not follow” — is the relationship students miss most. It looks like contrast but sits between two facts that are both true.",
+    "worked": {
+     "q": "The survey covered only urban households. ______, its conclusions cannot be applied to rural areas.",
+     "steps": [
+      "Sentence one states a limitation of the survey.",
+      "Sentence two states what follows from that limitation.",
+      "Ask directly: does the first cause the second? Yes — the narrow sample is why the conclusions do not generalise.",
+      "That is cause and effect, so “however” and “for instance” are both eliminated."
+     ],
+     "answer": "The answer is “Therefore”."
+    }
+   }
+  ],
   "check": {
-   "stem": "The soil is very rich. ______ , farms there get two harvests a year.",
+   "stem": "The soil is very rich. ______, farms there get two harvests a year.",
    "options": [
     "However",
     "Consequently"
    ],
    "answer": 1,
-   "explain": "Rich soil causes the double harvest — that is cause, not contrast."
+   "explain": "Rich soil causes the double harvest — cause and effect, not contrast."
   }
  },
  "forensics": {
