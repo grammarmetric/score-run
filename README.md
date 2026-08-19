@@ -97,11 +97,11 @@ are spent at the checkpoints; test 3 is broken up for the week 11 drills.
 All three harnesses pass at the time of committing:
 
 - `verify.mjs` — all **66 pages** in headless Chrome, zero console errors.
-- `playtest.mjs` — **16 checks**: modules render with concept cards, examples,
+- `playtest.mjs` — **21 checks**: modules render with concept cards, examples,
   rule and trap boxes and numbered worked steps; Presentation precedes Practice
   in the document; a wrong warm-up answer costs no life; a correct practice
   answer awards XP and a wrong one costs a life; the boss HP reaches zero and
-  the certificate appears.
+  the certificate appears; the Desmos graph actually builds; and reading lessons load no Desmos at all.
 - `interact.mjs` — **11 checks** on the plain drill engine and the proctor sheet.
 
 ## Desmos
